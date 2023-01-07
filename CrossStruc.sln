@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossStruc", "CrossStruc.csproj", "{DAAB5DDC-B3D2-4D3F-9CB4-3B72C6A4C837}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DAAB5DDC-B3D2-4D3F-9CB4-3B72C6A4C837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAAB5DDC-B3D2-4D3F-9CB4-3B72C6A4C837}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAAB5DDC-B3D2-4D3F-9CB4-3B72C6A4C837}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAAB5DDC-B3D2-4D3F-9CB4-3B72C6A4C837}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B7A3A61-FEE2-4EBA-A029-925588BB0795}
+	EndGlobalSection
+EndGlobal
