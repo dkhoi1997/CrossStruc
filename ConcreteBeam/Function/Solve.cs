@@ -138,7 +138,6 @@ namespace CrossStruc.ConcreteBeam.Function
                 {
                     breakOut = true;
                     break;
-
                 }
             }
 
