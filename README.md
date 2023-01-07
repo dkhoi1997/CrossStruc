@@ -8,8 +8,8 @@
 - RC Beam module (75 %) <br />
 - RC Slab module (Not yet) <br />
 - RC Wall module (Not yet) <br />
-- Steel beam module (Not yet) <br />
-- Steel column module (Not yet) <br />
+- Steel Beam module (Not yet) <br />
+- Steel Column module (Not yet) <br />
 
 ![rc beam](https://user-images.githubusercontent.com/6324007/211158810-e6c2205b-1925-453f-9765-1d9bc54e6f77.png)
 ![rc column](https://user-images.githubusercontent.com/6324007/211158816-f66db2cc-c981-4485-8bb1-82e08d87dbe1.png)
