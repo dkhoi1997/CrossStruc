@@ -464,7 +464,7 @@
                     <Label Name="LtopPer_lbl" Content="0.00 %" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="1" Grid.Row="2" Width="154" Height="26"/>
                     <Label Name="LbotPer_lbl" Content="0.00 %" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="1" Grid.Row="4" Width="154" Height="26"/>
 
-                    <oxy:PlotView x:Name="SectL_Plot" Model="{Binding PlotSect}" Grid.Row="3" Grid.Column="0" Height="248" IsEnabled="False"/>
+                    <oxy:PlotView x:Name="SectL_Plot" Model="{Binding PlotSect}" Grid.Row="3" Grid.Column="0" Width="244" Height="248" IsEnabled="False"/>
 
                     <Grid Grid.Column="0" Grid.Row="0">
                         <Grid.RowDefinitions>

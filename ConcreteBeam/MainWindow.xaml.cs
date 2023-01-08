@@ -100,12 +100,7 @@ namespace CrossStruc.ConcreteBeam
 
         private void DataGridCellMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //DataRowView dataRowView = (DataRowView)dataGrid.SelectedItem;
-            //string barname = Convert.ToString(dataRowView.Row[0]);
-            //double vedlimit = Convert.ToDouble(limitACR_txt.Text);
-           // List<(double[], double[,], double[,])> listsend = listResult.FirstOrDefault(t => t.Item1[0] == barname).Item2;
-            DetailWindow mywindow = new();
-            mywindow.ShowDialog();
+
         }
 
 
@@ -473,8 +468,7 @@ namespace CrossStruc.ConcreteBeam
 
         private void LoadClick(object sender, RoutedEventArgs e)
         {
-            DetailWindow mywindow = new();
-            mywindow.ShowDialog();
+
         }
     }
 }
