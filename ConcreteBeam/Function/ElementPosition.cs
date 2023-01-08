@@ -9,7 +9,7 @@ namespace CrossStruc.ConcreteBeam.Function
     public class ElementPosition
     {
 
-        public static List<double[]> Concrete(double b, double h, double hs, double bs, bool secT, bool secTrevert) // Mesh concrete column section (Rec, T, Inverted-T)
+        public static List<double[]> Concrete(double b, double h, double tf, double bs, bool secT, bool secTrevert) // Mesh concrete column section (Rec, T, Inverted-T)
         {
             List<double[]> listconc = new List<double[]>();
             Dictionary<string, double[]> dicconc = new Dictionary<string, double[]>();
@@ -42,7 +42,7 @@ namespace CrossStruc.ConcreteBeam.Function
                 {
                     k = -1;
                 }
-                for (int i = 0; i < hs / di; i++)
+                for (int i = 0; i < tf / di; i++)
                 {
                     for (int j = 0; j < bf / di; j++)
                     {

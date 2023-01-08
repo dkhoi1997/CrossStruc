@@ -9,14 +9,14 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
         Title="RC Beam Detail" Height="654" Width="1095">
-    <Grid ShowGridLines="False">
+    <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="320"/>
             <ColumnDefinition Width="315"/>
             <ColumnDefinition Width="455"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" ShowGridLines="False">
+        <Grid Grid.Row="0" Grid.Column="0" ShowGridLines="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="113"/>
                 <RowDefinition Height="26"/>
@@ -24,7 +24,7 @@
                 <RowDefinition Height="474"/>
             </Grid.RowDefinitions>
             <GroupBox Header="MATERIAL" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Column="0" Grid.Row="0">
-                <Grid ShowGridLines="False" Margin="5,0,5,0" Grid.Row="0">
+                <Grid ShowGridLines="True" Margin="5,0,5,0" Grid.Row="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -43,37 +43,60 @@
                 </Grid>
             </GroupBox>
 
-            <CheckBox x:Name="compRebar_cb" Content="Consider compression rebar" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="1" Width="300" IsEnabled="False"/>
-            <CheckBox x:Name="Tsect_cb" Content="Consider T-section" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="2" Width="300" IsEnabled="False"/>
+            <CheckBox x:Name="compRebar_cb" Content="Consider compression rebar" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="1" Width="280" IsEnabled="False"/>
+            <CheckBox x:Name="Tsect_cb" Content="Consider T-section" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="2" Width="280" IsEnabled="False"/>
 
-            <Grid Grid.Row="3" Grid.Column="0" ShowGridLines="False">
-                <Grid ShowGridLines="False">
+            <Grid Grid.Row="3" Grid.Column="0" ShowGridLines="True">
+                <Grid ShowGridLines="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="220"/>
-                        <RowDefinition Height="140"/>
-                        <RowDefinition Height="36"/>
+                        <RowDefinition Height="176"/>
                     </Grid.RowDefinitions>
                     <Label Content="REBAR ARRANGEMENT SUPPORT" Foreground="Blue" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Height="26"/>
                     <Label x:Name="topSup_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Height="26"/>
                     <Label x:Name="stirSup_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Height="26"/>
-                    <Label x:Name="botSup_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="5" Height="26" Margin="0,0,0,10"/>
 
                     <oxy:PlotView x:Name="SectL_Plot" Model="{Binding PlotSect}" Grid.Row="3" Margin="50,0,50,0" Height="220" IsEnabled="False"/>
+
+                    <Grid Grid.Row="4" Grid.Column="0" ShowGridLines="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="165"/>
+                            <ColumnDefinition Width="155"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" ShowGridLines="True">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="150"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="STRAIN" Foreground="Blue" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Width="120" Height="26"/>
+                            <oxy:PlotView x:Name="StrainL_Plot" Model="{Binding PlotStrain}" Grid.Row="2" Margin="10,5,5,10" Height="135" IsEnabled="False"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1" ShowGridLines="True">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="150"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="STRESS" Foreground="Blue" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Width="120" Height="26"/>
+                            <oxy:PlotView x:Name="StressL_Plot" Model="{Binding PlotStrain}" Grid.Row="2" Margin="5,5,5,10" Height="135" IsEnabled="False"/>
+                        </Grid>
+                    </Grid>
+                    
                 </Grid>
             </Grid>
 
         </Grid>
 
-        <Grid Grid.Row="0" Grid.Column="1" ShowGridLines="False">
+        <Grid Grid.Row="0" Grid.Column="1" ShowGridLines="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="165"/>
                 <RowDefinition Height="474"/>
             </Grid.RowDefinitions>
             <GroupBox Header="BEAM SECTION" Foreground="Blue" FontWeight="Bold" Margin="5,5,5,5" Grid.Column="0" Grid.Row="0">
-                <Grid ShowGridLines="False" Margin="5,0,5,0">
+                <Grid ShowGridLines="True" Margin="5,0,5,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -125,27 +148,49 @@
                 </Grid>
             </GroupBox>
 
-            <Grid Grid.Row="1" Grid.Column="0" ShowGridLines="False">
-                <Grid ShowGridLines="False">
+            <Grid Grid.Row="1" Grid.Column="0" ShowGridLines="True">
+                <Grid ShowGridLines="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="220"/>
-                        <RowDefinition Height="140"/>
-                        <RowDefinition Height="36"/>
+                        <RowDefinition Height="176"/>
                     </Grid.RowDefinitions>
                     <Label Content="REBAR ARRANGEMENT MID-SPAN" Foreground="Blue" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Height="26"/>
                     <Label x:Name="topMid_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Height="26"/>
                     <Label x:Name="stirMid_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Height="26"/>
-                    <Label x:Name="botMid_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="5" Height="26" Margin="0,0,0,10"/>
 
-                    <oxy:PlotView x:Name="Sect_Plot" Model="{Binding PlotSect}" Grid.Row="3" Margin="50,0,50,0" Height="220" IsEnabled="False"/>
+                    <oxy:PlotView x:Name="Sect_Plot" Model="{Binding PlotSect}" Grid.Row="3" Margin="47.5,0,47.5,0" Height="220" IsEnabled="False"/>
+
+                    <Grid Grid.Row="4" Grid.Column="0" ShowGridLines="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="157.5"/>
+                            <ColumnDefinition Width="157.5"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" ShowGridLines="True">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="150"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="STRAIN" Foreground="Blue" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Width="120" Height="26"/>
+                            <oxy:PlotView x:Name="StrainM_Plot" Model="{Binding PlotStrain}" Grid.Row="2" Margin="5,5,5,10" Height="135" IsEnabled="False"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1" ShowGridLines="True">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="150"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="STRESS" Foreground="Blue" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Width="120" Height="26"/>
+                            <oxy:PlotView x:Name="StressM_Plot" Model="{Binding PlotStrain}" Grid.Row="2" Margin="5,5,5,10" Height="135" IsEnabled="False"/>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="0" Grid.Column="2" ShowGridLines="False">
+        <Grid Grid.Row="0" Grid.Column="2" ShowGridLines="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="26"/>
                 <RowDefinition Height="26"/>
@@ -154,7 +199,7 @@
                 <RowDefinition Height="113"/>
                 <RowDefinition Height="217"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" ShowGridLines="False">
+            <Grid Grid.Row="0" ShowGridLines="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="165"/>
                     <ColumnDefinition Width="45"/>
@@ -167,7 +212,7 @@
                 <Label Content="MID-SPAN" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="3" Height="26"/>
             </Grid>
 
-            <Grid Grid.Row="1" ShowGridLines="False">
+            <Grid Grid.Row="1" ShowGridLines="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="165"/>
                     <ColumnDefinition Width="45"/>
@@ -185,7 +230,7 @@
             </Grid>
 
             <GroupBox Header="FLEXURAL STRENGTH" Foreground="Blue" FontWeight="Bold" Margin="5,5,10,5" Grid.Column="0" Grid.Row="2">
-                <Grid ShowGridLines="False" Margin="5,0,5,0">
+                <Grid ShowGridLines="True" Margin="5,0,5,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -215,7 +260,7 @@
                         x<Run FontSize="10" BaselineAlignment="Subscript">d</Run>
                     </TextBlock>
                     <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="2" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,0,5">
-                        M<Run FontSize="10" BaselineAlignment="Subscript">u</Run>
+                        M<Run FontSize="10" BaselineAlignment="Subscript">n</Run>
                     </TextBlock>
                     <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="3" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,0,5">
                         DC<Run FontSize="10" BaselineAlignment="Subscript"></Run>
@@ -234,10 +279,10 @@
                     <Label x:Name="botMidNA_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Grid.Column="5" Width="45" Height="26"/>
 
 
-                    <Label x:Name="topSupMu_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="2" Width="45" Height="26"/>
-                    <Label x:Name="botSupMu_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="3" Width="45" Height="26"/>
-                    <Label x:Name="topMidMu_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="4" Width="45" Height="26"/>
-                    <Label x:Name="botMidMu_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="5" Width="45" Height="26"/>
+                    <Label x:Name="topSupMn_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="2" Width="45" Height="26"/>
+                    <Label x:Name="botSupMn_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="3" Width="45" Height="26"/>
+                    <Label x:Name="topMidMn_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="4" Width="45" Height="26"/>
+                    <Label x:Name="botMidMn_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="5" Width="45" Height="26"/>
 
 
                     <Label x:Name="topSupBendDC_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="3" Grid.Column="2" Width="45" Height="26"/>
@@ -252,7 +297,7 @@
             </GroupBox>
 
             <GroupBox Header="SHEAR STRENGTH" Foreground="Blue" FontWeight="Bold" Margin="5,5,10,5" Grid.Column="0" Grid.Row="3">
-                <Grid ShowGridLines="False" Margin="5,0,5,0">
+                <Grid ShowGridLines="True" Margin="5,0,5,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -275,7 +320,7 @@
                         Q<Run FontSize="10" BaselineAlignment="Subscript"></Run>
                     </TextBlock>
                     <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="1" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,0,5">
-                        Q<Run FontSize="10" BaselineAlignment="Subscript">u</Run>
+                        Q<Run FontSize="10" BaselineAlignment="Subscript">n</Run>
                     </TextBlock>
                     <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="2" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,0,5">
                         DC<Run FontSize="10" BaselineAlignment="Subscript"></Run>
@@ -284,8 +329,8 @@
                     <Label x:Name="SupQ_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="0" Grid.Column="2" Width="45" Height="26"/>
                     <Label x:Name="MidQ_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="0" Grid.Column="3" Width="45" Height="26"/>
 
-                    <Label x:Name="SupQu_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Grid.Column="2" Width="45" Height="26"/>
-                    <Label x:Name="MidQu_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Grid.Column="3" Width="45" Height="26"/>
+                    <Label x:Name="SupQn_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Grid.Column="2" Width="45" Height="26"/>
+                    <Label x:Name="MidQn_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Grid.Column="3" Width="45" Height="26"/>
 
                     <Label x:Name="SupShearDC_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="2" Width="45" Height="26"/>
                     <Label x:Name="MidShearDC_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="3" Width="45" Height="26"/>
@@ -297,7 +342,7 @@
             </GroupBox>
 
             <GroupBox Header="TORSION STRENGTH" Foreground="Blue" FontWeight="Bold" Margin="5,5,10,5" Grid.Column="0" Grid.Row="4">
-                <Grid ShowGridLines="False" Margin="5,0,5,0">
+                <Grid ShowGridLines="True" Margin="5,0,5,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -317,10 +362,10 @@
                     <Label Content="Torsional capacity ratio" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="3" Grid.Column="0" Width="150" Height="26"/>
 
                     <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="0" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,0,5">
-                        Q<Run FontSize="10" BaselineAlignment="Subscript"></Run>
+                        T<Run FontSize="10" BaselineAlignment="Subscript"></Run>
                     </TextBlock>
                     <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="1" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,0,5">
-                        Q<Run FontSize="10" BaselineAlignment="Subscript">u</Run>
+                        T<Run FontSize="10" BaselineAlignment="Subscript">n</Run>
                     </TextBlock>
                     <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="2" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,0,5">
                         DC<Run FontSize="10" BaselineAlignment="Subscript"></Run>
@@ -329,8 +374,8 @@
                     <Label x:Name="SupT_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="0" Grid.Column="2" Width="45" Height="26"/>
                     <Label x:Name="MidT_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="0" Grid.Column="3" Width="45" Height="26"/>
 
-                    <Label x:Name="SupTu_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Grid.Column="2" Width="45" Height="26"/>
-                    <Label x:Name="MidTu_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Grid.Column="3" Width="45" Height="26"/>
+                    <Label x:Name="SupTn_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Grid.Column="2" Width="45" Height="26"/>
+                    <Label x:Name="MidTn_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Grid.Column="3" Width="45" Height="26"/>
 
                     <Label x:Name="SupTorDC_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="2" Width="45" Height="26"/>
                     <Label x:Name="MidTorDC_lbl" Content="N/A" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="3" Width="45" Height="26"/>
@@ -341,7 +386,7 @@
             </GroupBox>
 
             <GroupBox Header="CRACK WIDTH" Foreground="Blue" FontWeight="Bold" Margin="5,5,10,10" Grid.Column="0" Grid.Row="5">
-                <Grid ShowGridLines="False" Margin="5,0,5,0">
+                <Grid ShowGridLines="True" Margin="5,0,5,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>

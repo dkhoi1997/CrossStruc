@@ -10,7 +10,7 @@ namespace CrossStruc.ConcreteBeam.Function
     public class Solve
     {
         public static List<(string[], List<double[]>)> GetResultBeam(List<(string[], List<int[]>)> listbeamforce,
-            string concgrade, string lRebargrade, string sRebargrade, string hmClass, double b, double h, double hs, double bs,
+            string concgrade, string lRebargrade, string sRebargrade, string hmClass, double b, double h, double tf, double bs,
             bool Tsect, bool Tsectrevert, bool compressbar, double acv, double tw, double acrcSlim, double acrcLlim,
             int[] arrrebar, int[] arrLrebar, int[] arrMrebar) // Solve function for all input data
         {
@@ -67,7 +67,7 @@ namespace CrossStruc.ConcreteBeam.Function
                 ElementPosition.Rebar(b, h, acv, tw, Mds, n1top, d1top, Mn2top, Md2top, Mn3top, Md3top, n1bot, d1bot, Mn2bot, Md2bot, Mn3bot, Md3bot);
 
             List<double[]> listconc =
-                ElementPosition.Concrete(b, h, hs, bs, Tsect, Tsectrevert);
+                ElementPosition.Concrete(b, h, tf, bs, Tsect, Tsectrevert);
 
             int tolerance = 5;
 

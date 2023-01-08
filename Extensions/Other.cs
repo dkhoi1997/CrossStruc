@@ -44,7 +44,7 @@ namespace CrossStruc.Extensions
 
         public static double ConvertRebar(int dmain) // Optimize rebar size for drawing chart
         {
-            double dmainconvert = Convert.ToInt32(0.63 * dmain + 3.08);
+            double dmainconvert = Convert.ToInt32(0.6 * dmain + 3.08);
             return dmainconvert;
         }
     }

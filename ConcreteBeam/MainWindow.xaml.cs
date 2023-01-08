@@ -36,7 +36,7 @@ namespace CrossStruc.ConcreteBeam
             Loaded += DynamicChange;
             Tsect_cb.Click += DynamicChange;
             TsectRev_cb.Click += DynamicChange;
-            hs_txt.SelectionChanged += DynamicChange;
+            tf_txt.SelectionChanged += DynamicChange;
             b_txt.TextChanged += DynamicChange;
             h_txt.TextChanged += DynamicChange;
             tw_txt.TextChanged += DynamicChange;
@@ -128,10 +128,10 @@ namespace CrossStruc.ConcreteBeam
             if (Tsect_cb.IsChecked == true)
             {
                 Tsect = true;
-                hs_txt.IsEnabled = true;
+                tf_txt.IsEnabled = true;
                 TsectRev_cb.IsEnabled = true;
                 bs_txt.IsEnabled = true;
-                hs = Convert.ToInt32(hs_txt.Text);
+                hs = Convert.ToInt32(tf_txt.Text);
                 if (TsectRev_cb.IsChecked == true)
                 {
                     revertTsect = true;
@@ -140,7 +140,7 @@ namespace CrossStruc.ConcreteBeam
             }
             else
             {
-                hs_txt.IsEnabled = false;
+                tf_txt.IsEnabled = false;
                 TsectRev_cb.IsEnabled = false;
                 bs_txt.IsEnabled = false;
             }
@@ -330,7 +330,7 @@ namespace CrossStruc.ConcreteBeam
             // Section property
             double b = Convert.ToInt32(b_txt.Text);
             double h = Convert.ToInt32(h_txt.Text);
-            double hs = 0;
+            double tf = 0;
             double bs = 0;
             double tw = Convert.ToDouble(tw_txt.Text);
             double acv = Convert.ToDouble(acv_txt.Text);
@@ -345,7 +345,7 @@ namespace CrossStruc.ConcreteBeam
             if (Tsect_cb.IsChecked == true)
             {
                 Tsect = true;
-                hs = Convert.ToInt32(hs_txt.Text);
+                tf = Convert.ToInt32(tf_txt.Text);
                 bs = Convert.ToInt32(bs_txt.Text);
                 if (TsectRev_cb.IsChecked == true)
                 {
@@ -369,7 +369,7 @@ namespace CrossStruc.ConcreteBeam
                 enveDesign = true;
             }
             listSub = SubExtensions.FilterBeamForce(listBeam, enveDesign, listULScomb, listSLScomb);
-            listResult = Solve.GetResultBeam(listSub, concgrade, lRebargrade, sRebargrade, hmClass, b, h, hs, bs, Tsect,
+            listResult = Solve.GetResultBeam(listSub, concgrade, lRebargrade, sRebargrade, hmClass, b, h, tf, bs, Tsect,
                 revertTsect, compressBar, acv, tw, acrcSlim, acrcLlim, arrCTrebar, arrLrebar, arrMrebar);
 
             DataTable dtcol = new DataTable();
@@ -468,7 +468,8 @@ namespace CrossStruc.ConcreteBeam
 
         private void LoadClick(object sender, RoutedEventArgs e)
         {
-
+            DetailWindow mywindow = new();
+            mywindow.ShowDialog();
         }
     }
 }
