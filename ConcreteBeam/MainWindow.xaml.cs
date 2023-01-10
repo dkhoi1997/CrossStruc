@@ -100,7 +100,8 @@ namespace CrossStruc.ConcreteBeam
 
         private void DataGridCellMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            DetailWindow mywindow = new();
+            mywindow.ShowDialog();
         }
 
 
@@ -468,8 +469,7 @@ namespace CrossStruc.ConcreteBeam
 
         private void LoadClick(object sender, RoutedEventArgs e)
         {
-            DetailWindow mywindow = new();
-            mywindow.ShowDialog();
+
         }
     }
 }

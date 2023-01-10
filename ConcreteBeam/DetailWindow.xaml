@@ -361,7 +361,7 @@
                     <Label Content="Bending moment (SLS)" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="0" Grid.Column="0" Width="150" Height="26"/>
                     <Label Content="Cracking moment" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="0" Width="150" Height="26"/>
                     <Label Content="Crack width" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="3" Grid.Column="0" Width="150" Height="26"/>
-                    <Label Content="Crack capacity" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="6" Grid.Column="0" Width="150" Height="26"/>
+                    <Label Content="Crack check ratio" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="6" Grid.Column="0" Width="150" Height="26"/>
 
                     <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="0" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,0,5">
                         M<Run FontSize="10" BaselineAlignment="Subscript">s</Run>

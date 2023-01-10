@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ExtOther = CrossStruc.Extensions.Other;
 
 namespace CrossStruc.ConcreteBeam.Function
 {
@@ -15,7 +13,7 @@ namespace CrossStruc.ConcreteBeam.Function
             Dictionary<string, double[]> dicconc = new Dictionary<string, double[]>();
 
             // Rectangle section
-            int di = 10;
+            int di = Math.Min(ExtOther.DeterMesh(b), ExtOther.DeterMesh(h));
             int du = di * di;
             for (int i = 0; i < h / di; i++)
             {
