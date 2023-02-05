@@ -75,11 +75,14 @@ namespace CrossStruc.ConcreteColumn.Function
             return (Pnxy, Mnxy, DC, outputPMxy, outputMxMy);
         }
 
-        public static (int, int, double, double) ShearCheck(string shape, double Cx, double Cy, int P, int Qx, int Qy, int dmain, int dstir,
+        public static (double, double, double, double, double, double, double, double, double) ShearCheck(string shape, double Cx, double Cy, int P, int Qx, int Qy, int dmain, int dstir,
             int nsx, int nsy, int sw, double acv, double Rb, double Rbt, double Rsw) // Shear force check
         {
-            double att; double DC; double sigma; double phin;
-            int Qnx; int Qny;
+            double att; double DC; 
+            double sigma; double phin;
+            double cx; double cy;
+            double Qbx; double Qsx;
+            double Qby; double Qsy;
 
             // Unit converted
             // Cx, Cy - (mm)
@@ -95,31 +98,32 @@ namespace CrossStruc.ConcreteColumn.Function
             }
 
             att = (acv + dstir + dmain / 2);
-            sigma = Math.Abs(P) * 1000 / (1.3 * Cx * Cy); // Theo sách Nga ngố
-            if (P > 0)
+            sigma = Math.Round(P * 1000 / (1.3 * Cx * Cy), 2); // (Average stress force whole section included rebar - from Russia book)
+            double sigma_abs = Math.Abs(sigma);
+            if (P > 0) // Compression stress
             {
-                if (sigma <= 0.25 * Rb)
+                if (sigma_abs <= 0.25 * Rb)
                 {
-                    phin = 1 + sigma / Rb;
+                    phin = 1 + sigma_abs / Rb;
                 }
-                else if ((0.25 * Rb < sigma) && (sigma <= 0.75 * Rb))
+                else if ((0.25 * Rb < sigma_abs) && (sigma_abs <= 0.75 * Rb))
                 {
                     phin = 1.25;
                 }
-                else if ((0.75 * Rb < sigma) && (sigma <= Rb))
+                else if ((0.75 * Rb < sigma_abs) && (sigma_abs <= Rb))
                 {
-                    phin = 5 * (1 - sigma / Rb);
+                    phin = 5 * (1 - sigma_abs / Rb);
                 }
                 else
                 {
                     goto endstep;
                 }
             }
-            else
+            else // Tension stress
             {
-                if (sigma <= Rbt)
+                if (sigma_abs <= Rbt)
                 {
-                    phin = 1 - sigma / (2 * Rbt);
+                    phin = 1 - sigma_abs / (2 * Rbt);
                 }
                 else
                 {
@@ -133,15 +137,19 @@ namespace CrossStruc.ConcreteColumn.Function
             goto nextstep;
         endstep:
             {
+                phin = 0;
+                cx = 0;
+                cy = 0;
+                Qbx = 0;
+                Qsx = 0;
+                Qby = 0;
+                Qsy = 0;
                 DC = ushort.MaxValue;
-                phin = ushort.MaxValue;
-                Qnx = 0;
-                Qny = 0;
-                return (Qnx, Qny, phin, DC);
+                return (sigma, phin, cx, cy, Qbx, Qsx, Qby, Qsy, DC);
             }
         nextstep:
             {
-                double Qswx; double Qswy; double cx; double cy;
+                double Qswx; double Qswy;
                 Qswx = Rsw * nsx * Math.PI * Math.Pow(dstir, 2) / 4 / sw;
                 Qswy = Rsw * nsy * Math.PI * Math.Pow(dstir, 2) / 4 / sw;
                 cx = Math.Sqrt(phin * 1.5 * Rbt * Cy * Math.Pow(Cx - att, 2) / (0.75 * Qswx));
@@ -162,9 +170,9 @@ namespace CrossStruc.ConcreteColumn.Function
                 {
                     cy = 2 * (Cy - att);
                 }
-                double Qbx; double Qby;
                 Qbx = phin * 1.5 * Rbt * Cy * Math.Pow(Cx - att, 2) / cx;
                 Qby = phin * 1.5 * Rbt * Cx * Math.Pow(Cy - att, 2) / cy;
+
                 if (Qbx < 0.5 * Rbt * Cy * (Cx - att))
                 {
                     Qbx = 0.5 * Rbt * Cy * (Cx - att);
@@ -181,21 +189,25 @@ namespace CrossStruc.ConcreteColumn.Function
                 {
                     Qby = 2.5 * Rbt * Cx * (Cy - att);
                 }
-                double Qsx; double Qsy;
                 Qsx = 0.75 * Qswx * cx;
                 Qsy = 0.75 * Qswy * cy;
-                Qnx = Convert.ToInt32((Qbx + Qsx) / 1000);
-                Qny = Convert.ToInt32((Qby + Qsy) / 1000);
-                DC = Math.Round(Math.Max((double)Math.Abs(Qx) / Qnx, (double)Math.Abs(Qy) / Qny), 2);
+
+                Qbx = Math.Round(Qbx / 1000, 0);
+                Qby = Math.Round(Qby / 1000, 0);
+                Qsx = Math.Round(Qsx / 1000, 0);
+                Qsy = Math.Round(Qsy / 1000, 0);
+
+                DC = Math.Round(Math.Abs(Qx) / (Qbx + Qsx) + Math.Abs(Qy) / (Qby + Qsy), 2);
                 phin = Math.Round(phin, 2);
-                return (Qnx, Qny, phin, DC);
+                return (sigma, phin, cx, cy, Qbx, Qsx, Qby, Qsy, DC);
             }
         }
 
-        public static double AxialCompressionCheck(string shape, double Cx, double Cy, int P, double Rb) // Axial compression check
+        public static (double, double) AxialCompressionCheck(string shape, double Cx, double Cy, int P, double Rb) // Axial compression check
         {
             double ved = 0;
             double fck = 1.53 * Rb - 1.67;
+            double fcd = Math.Round(fck / 1.2, 2);
 
             if (shape == "Cir")
             {
@@ -204,15 +216,9 @@ namespace CrossStruc.ConcreteColumn.Function
                 Cy = Math.Sqrt(equalArea);
             }
 
-            Cx /= 1000;
-            Cy /= 1000;
+            if (P > 0) ved = Math.Round(P * 1000 / (Cx * Cy * fcd), 2);
 
-            if (P > 0)
-            {
-                double fcd = 1000 * fck / 1.2;
-                ved = Math.Round(P / (Cx * Cy * fcd), 2);
-            }
-            return ved;
+            return (fcd, ved);
         }
     }
 }

@@ -11,7 +11,6 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
 
 
 namespace CrossStruc.ConcreteBeam
@@ -21,7 +20,7 @@ namespace CrossStruc.ConcreteBeam
         public static List<(string[], List<int[]>)> listBeam;
         public static List<(string[], List<int[]>)> listSub;
         public static List<(string[], List<double[]>)> listResult;
-        public static string[] arrbeam = new string[24];
+        public static string[] arrBeam = new string[39];
         public static int[] arrCTrebar = new int[4];
         public static int[] arrLrebar = new int[11];
         public static int[] arrMrebar = new int[11];
@@ -100,7 +99,10 @@ namespace CrossStruc.ConcreteBeam
 
         private void DataGridCellMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DetailWindow mywindow = new();
+            DataRowView dataRowView = (DataRowView)dataGrid.SelectedItem;
+            string barname = Convert.ToString(dataRowView.Row[0]);
+            List<double[]> listsend = listResult.FirstOrDefault(t => t.Item1[0] == barname).Item2;
+            DetailWindow mywindow = new(listsend, arrBeam);
             mywindow.ShowDialog();
         }
 
@@ -323,9 +325,9 @@ namespace CrossStruc.ConcreteBeam
 
         private void Recalculate()
         {
-            string concgrade = (concGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
-            string lRebargrade = (longituGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
-            string sRebargrade = (stirrupGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
+            string concGrade = (concGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
+            string lRebarGrade = (longituGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
+            string sRebarGrade = (stirrupGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
             string hmClass = (Humidity_cbb.SelectedItem as ComboBoxItem).Content.ToString();
 
             // Section property
@@ -370,7 +372,7 @@ namespace CrossStruc.ConcreteBeam
                 enveDesign = true;
             }
             listSub = SubExtensions.FilterBeamForce(listBeam, enveDesign, listULScomb, listSLScomb);
-            listResult = Solve.GetResultBeam(listSub, concgrade, lRebargrade, sRebargrade, hmClass, b, h, tf, bs, Tsect,
+            listResult = Solve.GetResultBeam(listSub, concGrade, lRebarGrade, sRebarGrade, hmClass, b, h, tf, bs, Tsect,
                 revertTsect, compressBar, acv, tw, acrcSlim, acrcLlim, arrCTrebar, arrLrebar, arrMrebar);
 
             DataTable dtcol = new DataTable();
@@ -420,6 +422,51 @@ namespace CrossStruc.ConcreteBeam
 
                 dataGrid.DataContext = dtcol.DefaultView;
             }
+
+            // Save data for detail form
+            arrBeam[0] = concGrade;
+            arrBeam[1] = lRebarGrade;
+            arrBeam[2] = sRebarGrade;
+            arrBeam[3] = sRebarGrade;
+            arrBeam[4] = Convert.ToString(Tsect);
+            arrBeam[5] = Convert.ToString(compressBar);
+            arrBeam[6] = Convert.ToString(bs);
+            arrBeam[7] = Convert.ToString(tf);
+            arrBeam[8] = Convert.ToString(b);
+            arrBeam[9] = Convert.ToString(h);
+            arrBeam[10] = Convert.ToString(acv);
+            arrBeam[11] = Convert.ToString(acrcSlim);
+            arrBeam[12] = Convert.ToString(acrcLlim);
+
+            arrBeam[13] = Convert.ToString(arrCTrebar[0]);
+            arrBeam[14] = Convert.ToString(arrCTrebar[1]);
+            arrBeam[15] = Convert.ToString(arrCTrebar[2]);
+            arrBeam[16] = Convert.ToString(arrCTrebar[3]);
+
+            arrBeam[17] = Convert.ToString(arrLrebar[0]);
+            arrBeam[18] = Convert.ToString(arrLrebar[1]);
+            arrBeam[19] = Convert.ToString(arrLrebar[2]);
+            arrBeam[20] = Convert.ToString(arrLrebar[3]);
+            arrBeam[21] = Convert.ToString(arrLrebar[4]);
+            arrBeam[22] = Convert.ToString(arrLrebar[5]);
+            arrBeam[23] = Convert.ToString(arrLrebar[6]);
+            arrBeam[24] = Convert.ToString(arrLrebar[7]);
+            arrBeam[25] = Convert.ToString(arrLrebar[8]);
+            arrBeam[26] = Convert.ToString(arrLrebar[9]);
+            arrBeam[27] = Convert.ToString(arrLrebar[10]);
+
+            arrBeam[28] = Convert.ToString(arrMrebar[0]);
+            arrBeam[29] = Convert.ToString(arrMrebar[1]);
+            arrBeam[30] = Convert.ToString(arrMrebar[2]);
+            arrBeam[31] = Convert.ToString(arrMrebar[3]);
+            arrBeam[32] = Convert.ToString(arrMrebar[4]);
+            arrBeam[33] = Convert.ToString(arrMrebar[5]);
+            arrBeam[34] = Convert.ToString(arrMrebar[6]);
+            arrBeam[35] = Convert.ToString(arrMrebar[7]);
+            arrBeam[36] = Convert.ToString(arrMrebar[8]);
+            arrBeam[37] = Convert.ToString(arrMrebar[9]);
+            arrBeam[38] = Convert.ToString(arrMrebar[10]);
+
         }
 
         private void GetForceClick(object sender, RoutedEventArgs e)

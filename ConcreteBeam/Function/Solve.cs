@@ -21,7 +21,7 @@ namespace CrossStruc.ConcreteBeam.Function
 
             // Design strength
             double Rb = Rbn / 1.3;
-            double Rbt = Rbtn / 1.3;
+            double Rbt = Rbtn / 1.5;
             double Rs = Rsn / 1.15;
             double Rsc = Rscn / 1.15;
             double Rsw = Rswn / 1.15;

@@ -8,21 +8,10 @@ namespace CrossStruc.ConcreteColumn.Function
     public class Solve
     {
         public static List<(string[], List<(double[], double[,], double[,])>)> GetResultColumn(List<(string[], List<int[]>)> listCol,
-            string concgrade, string lRebargrade, string sRebargrade,
+            double Rb, double Rbt, double Eb, double Rs, double Rsc, double Es, double Rsw,
             string shape, string mLayer, double Cx, double Cy, double Lx, double Ly, double kx, double ky, double acv,
             int nx, int ny, int dmain, int dstir, int tw, int sw, int nsx, int nsy, string combACR, bool localAxis) // Solve function for all input data
         {
-            // Material
-            (double Rbn, double Rbtn, double Eb) = ExtMaterial.GetConcrete(concgrade);
-            (double Rsn, double Rscn, double foo, double Es) = ExtMaterial.GetRebar(lRebargrade);
-            double Rswn = ExtMaterial.GetRebar(sRebargrade).Item3;
-
-            // Design strength
-            double Rb = Rbn / 1.3;
-            double Rbt = Rbtn / 1.3;
-            double Rs = Rsn / 1.15;
-            double Rsc = Rscn / 1.15;
-            double Rsw = Rswn / 1.15;
 
             // Input parameter
             int nver = 20;
@@ -71,13 +60,15 @@ namespace CrossStruc.ConcreteColumn.Function
                     }
 
                     int Mxup; int Myup;
+                    double e0x; double e0y;
+                    double etax; double etay;
                     if (shape == "Rec")
                     {
-                        (Mxup, Myup) = UpperMoment.RecSect(P, Mx, My, Cx, Cy, Lx, Ly, Eb, kx, ky);
+                        (e0x, e0y, etax, etay, Mxup, Myup) = UpperMoment.RecSect(P, Mx, My, Cx, Cy, Lx, Ly, Eb, kx, ky);
                     }
                     else
                     {
-                        (Mxup, Myup) = UpperMoment.CirSect(P, Mx, My, Cx, Lx, Ly, Eb, kx, ky);
+                        (e0x, e0y, etax, etay, Mxup, Myup) = UpperMoment.CirSect(P, Mx, My, Cx, Lx, Ly, Eb, kx, ky);
                     }
                     // Flexural
                     int Muxy = Convert.ToInt32(Math.Sqrt(Math.Pow(Mxup, 2) + Math.Pow(Myup, 2)));
@@ -85,11 +76,12 @@ namespace CrossStruc.ConcreteColumn.Function
                         ULSCheck.InteractionDiagramCheck(P, Mxup, Myup, nver, nhoz, vervalue, hozvalue);
 
                     // Shear
-                    (int Qnx, int Qny, double phin, double DCs) =
+                    (double sigma, double phin, double cx, double cy, double Qbx, double Qsx, double Qby, double Qsy, double DCs) =
                         ULSCheck.ShearCheck(shape, Cx, Cy, P, Qx, Qy, dmain, dstir, nsx, nsy, sw, acv, Rb, Rbt, Rsw);
 
                     // ACR
                     double ved = 0;
+                    double fcd = 0;
                     if (string.IsNullOrEmpty(combACR) == false)
                     {
                         List<int> listComb = ExtOther.ExtractCombRobot(combACR);
@@ -97,31 +89,41 @@ namespace CrossStruc.ConcreteColumn.Function
                         {
                             if (Convert.ToString(cd[i][0]) == Convert.ToString(listComb[k]))
                             {
-                                ved = ULSCheck.AxialCompressionCheck(shape, Cx, Cy, P, Rb);
+                                (fcd, ved) = ULSCheck.AxialCompressionCheck(shape, Cx, Cy, P, Rb);
                                 break;
                             }
                         }
                     }
 
                     // Paste result into array
-                    double[] calData = new double[17];
+                    double[] calData = new double[27];
                     calData[0] = comb;
                     calData[1] = P;
                     calData[2] = Qx;
                     calData[3] = Qy;
                     calData[4] = Mx;
                     calData[5] = My;
-                    calData[6] = Mxup;
-                    calData[7] = Myup;
-                    calData[8] = Muxy;
-                    calData[9] = Pnxy;
-                    calData[10] = Mnxy;
-                    calData[11] = Qnx;
-                    calData[12] = Qny;
-                    calData[13] = phin;
-                    calData[14] = DC;
-                    calData[15] = DCs;
-                    calData[16] = ved;
+                    calData[6] = e0x;
+                    calData[7] = e0y;
+                    calData[8] = etax;
+                    calData[9] = etay;
+                    calData[10] = Mxup;
+                    calData[11] = Myup;
+                    calData[12] = Muxy;
+                    calData[13] = Pnxy;
+                    calData[14] = Mnxy;
+                    calData[15] = DC;
+                    calData[16] = sigma;
+                    calData[17] = phin;
+                    calData[18] = cx;
+                    calData[19] = cy;
+                    calData[20] = Qbx;
+                    calData[21] = Qsx;
+                    calData[22] = Qby;
+                    calData[23] = Qsy;
+                    calData[24] = DCs;
+                    calData[25] = fcd;
+                    calData[26] = ved;
 
                     listTemp.Add((calData, vercheck, hozcheck));
                 }

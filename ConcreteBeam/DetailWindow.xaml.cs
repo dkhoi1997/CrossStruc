@@ -19,7 +19,7 @@ namespace CrossStruc.ConcreteBeam
     /// </summary>
     public partial class DetailWindow : Window
     {
-        public DetailWindow()
+        public DetailWindow(List<double[]> listSend, string[] arrBeam)
         {
             InitializeComponent();
         }

@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ExtRobot = CrossStruc.Extensions.RobotInteractive;
+using ExtMaterial = CrossStruc.Extensions.Material;
 
 namespace CrossStruc.ConcreteColumn
 {
@@ -17,7 +18,7 @@ namespace CrossStruc.ConcreteColumn
     {
         public static List<(string[], List<int[]>)> listCol;
         public static List<(string[], List<(double[], double[,], double[,])>)> listResult;
-        public static string[] arrCol = new string[24];
+        public static string[] arrCol = new string[31];
 
         public MainWindow()
         {
@@ -118,6 +119,18 @@ namespace CrossStruc.ConcreteColumn
             string lRebargrade = (longituGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
             string sRebargrade = (stirrupGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
 
+            // Material
+            (double Rbn, double Rbtn, double Eb) = ExtMaterial.GetConcrete(concgrade);
+            (double Rsn, double Rscn, double foo, double Es) = ExtMaterial.GetRebar(lRebargrade);
+            double Rswn = ExtMaterial.GetRebar(sRebargrade).Item3;
+
+            // Design strength
+            double Rb = Math.Round(Rbn / 1.3, 2);
+            double Rbt = Math.Round(Rbtn / 1.5, 2);
+            double Rs = Math.Round(Rsn / 1.15, 0);
+            double Rsc = Math.Round(Rscn / 1.15, 0);
+            double Rsw = Math.Round(Rswn / 1.15, 0);
+
             string secShape = (shapeSect_cbb.SelectedItem as ComboBoxItem).Content.ToString();
             string mLayer = (mLayer_cbb.SelectedItem as ComboBoxItem).Content.ToString();
             bool localAxis = false;
@@ -144,7 +157,7 @@ namespace CrossStruc.ConcreteColumn
             string vedlimit = limitACR_txt.Text;
             string combACR = combACR_txt.Text.Replace(" q", "");
 
-            listResult = Solve.GetResultColumn(listCol, concgrade, lRebargrade, sRebargrade,
+            listResult = Solve.GetResultColumn(listCol, Rb, Rbt, Eb, Rs, Rsc, Es, Rsw,
                 secShape, mLayer, Cx, Cy, Lx, Ly, kx, ky, acv, nx, ny, dmain, dstir, tw, sw, nsx, nsy, combACR, localAxis);
 
             DataTable dtcol = new DataTable();
@@ -163,12 +176,12 @@ namespace CrossStruc.ConcreteColumn
                 add[1] = item.Item1[1]; // Section
                 add[2] = item.Item1[2]; // Shape
 
-                double maxDC = item.Item2.Max(t => t.Item1[14]);
-                double maxDCs = item.Item2.Max(t => t.Item1[15]);
-                double maxved = item.Item2.Max(t => t.Item1[16]);
-                string caseDC = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[14] == maxDC).Item1[0]);
-                string caseDCs = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[15] == maxDCs).Item1[0]);
-                string caseved = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[16] == maxved).Item1[0]);
+                double maxDC = item.Item2.Max(t => t.Item1[15]); // Position in array
+                double maxDCs = item.Item2.Max(t => t.Item1[24]); // Position in array
+                double maxved = item.Item2.Max(t => t.Item1[26]); // Position in array
+                string caseDC = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[15] == maxDC).Item1[0]);
+                string caseDCs = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[24] == maxDCs).Item1[0]);
+                string caseved = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[26] == maxved).Item1[0]);
 
                 add[4] = Convert.ToString(maxDC);
                 add[5] = Convert.ToString(maxDCs);
@@ -188,29 +201,36 @@ namespace CrossStruc.ConcreteColumn
 
             // Save data for detail form
             arrCol[0] = concgrade;
-            arrCol[1] = lRebargrade;
-            arrCol[2] = sRebargrade;
-            arrCol[3] = secShape;
-            arrCol[4] = mLayer;
-            arrCol[5] = Convert.ToString(Cx);
-            arrCol[6] = Convert.ToString(Cy);
-            arrCol[7] = Convert.ToString(Lx);
-            arrCol[8] = Convert.ToString(Ly);
-            arrCol[9] = Convert.ToString(kx);
-            arrCol[10] = Convert.ToString(ky);
-            arrCol[11] = Convert.ToString(acv);
-            arrCol[12] = Convert.ToString(nx);
-            arrCol[13] = Convert.ToString(ny);
-            arrCol[14] = Convert.ToString(dmain);
-            arrCol[15] = Convert.ToString(dstir);
-            arrCol[16] = Convert.ToString(tw);
-            arrCol[17] = Convert.ToString(sw);
-            arrCol[18] = Convert.ToString(nsx);
-            arrCol[19] = Convert.ToString(nsy);
-            arrCol[20] = Convert.ToString(ElementPosition.Rebar(secShape, mLayer, tw, Cx, Cy, nx, ny, acv, dmain, dstir).Count);
-            arrCol[21] = combACR;
-            arrCol[22] = vedlimit;
-            arrCol[23] = Convert.ToString(localAxis);
+            arrCol[1] = Convert.ToString(Rb);
+            arrCol[2] = Convert.ToString(Rbt);
+            arrCol[3] = Convert.ToString(Eb);
+            arrCol[4] = lRebargrade;
+            arrCol[5] = Convert.ToString(Rs);
+            arrCol[6] = Convert.ToString(Rsc);
+            arrCol[7] = Convert.ToString(Es);
+            arrCol[8] = sRebargrade;
+            arrCol[9] = Convert.ToString(Rsw);
+            arrCol[10] = secShape;
+            arrCol[11] = mLayer;
+            arrCol[12] = Convert.ToString(Cx);
+            arrCol[13] = Convert.ToString(Cy);
+            arrCol[14] = Convert.ToString(Lx);
+            arrCol[15] = Convert.ToString(Ly);
+            arrCol[16] = Convert.ToString(kx);
+            arrCol[17] = Convert.ToString(ky);
+            arrCol[18] = Convert.ToString(acv);
+            arrCol[19] = Convert.ToString(nx);
+            arrCol[20] = Convert.ToString(ny);
+            arrCol[21] = Convert.ToString(dmain);
+            arrCol[22] = Convert.ToString(dstir);
+            arrCol[23] = Convert.ToString(tw);
+            arrCol[24] = Convert.ToString(sw);
+            arrCol[25] = Convert.ToString(nsx);
+            arrCol[26] = Convert.ToString(nsy);
+            arrCol[27] = Convert.ToString(ElementPosition.Rebar(secShape, mLayer, tw, Cx, Cy, nx, ny, acv, dmain, dstir).Count);
+            arrCol[28] = combACR;
+            arrCol[29] = vedlimit;
+            arrCol[30] = Convert.ToString(localAxis);
         }
 
         private void OnlyNumber(object sender, TextCompositionEventArgs e)
@@ -258,31 +278,31 @@ namespace CrossStruc.ConcreteColumn
             if (listCol.Count > 0)
             {
                 concGrade_cbb.Text = arrCol[0];
-                longituGrade_cbb.Text = arrCol[1];
-                stirrupGrade_cbb.Text = arrCol[2];
+                longituGrade_cbb.Text = arrCol[5];
+                stirrupGrade_cbb.Text = arrCol[8];
 
-                shapeSect_cbb.Text = arrCol[3];
-                mLayer_cbb.Text = arrCol[4];
-                Cx_txt.Text = arrCol[5];
-                Cy_txt.Text = arrCol[6];
-                Lx_txt.Text = arrCol[7];
-                Ly_txt.Text = arrCol[8];
-                kx_txt.Text = arrCol[9];
-                ky_txt.Text = arrCol[10];
-                acv_txt.Text = arrCol[11];
+                shapeSect_cbb.Text = arrCol[10];
+                mLayer_cbb.Text = arrCol[11];
+                Cx_txt.Text = arrCol[12];
+                Cy_txt.Text = arrCol[13];
+                Lx_txt.Text = arrCol[14];
+                Ly_txt.Text = arrCol[15];
+                kx_txt.Text = arrCol[16];
+                ky_txt.Text = arrCol[17];
+                acv_txt.Text = arrCol[18];
 
-                nx_txt.Text = arrCol[12];
-                ny_txt.Text = arrCol[13];
-                dmain_cbb.Text = "Ø" + arrCol[14];
-                dstir_cbb.Text = "Ø" + arrCol[15];
-                tw_txt.Text = arrCol[16];
-                sw_txt.Text = arrCol[17];
-                nsx_txt.Text = arrCol[18];
-                nsy_txt.Text = arrCol[19];
+                nx_txt.Text = arrCol[19];
+                ny_txt.Text = arrCol[20];
+                dmain_cbb.Text = "Ø" + arrCol[21];
+                dstir_cbb.Text = "Ø" + arrCol[22];
+                tw_txt.Text = arrCol[23];
+                sw_txt.Text = arrCol[24];
+                nsx_txt.Text = arrCol[25];
+                nsy_txt.Text = arrCol[26];
 
-                combACR_txt.Text = arrCol[21];
-                limitACR_txt.Text = arrCol[22];
-                if (arrCol[23] == "TRUE")
+                combACR_txt.Text = arrCol[28];
+                limitACR_txt.Text = arrCol[29];
+                if (arrCol[30] == "TRUE")
                 {
                     rotateAxis_cb.IsChecked = true;
                 }
