@@ -74,7 +74,7 @@ namespace CrossStruc.ConcreteColumn
             material_tb.Inlines.Add(" = " + Rbt + " (MPa)");
             material_tb.Inlines.Add(new LineBreak());
 
-            material_tb.Inlines.Add("Longit. " + lRebarGrade + ", ");
+            material_tb.Inlines.Add("Longitudinal " + lRebarGrade + ", ");
             material_tb.Inlines.Add("R");
             material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "s" });
             material_tb.Inlines.Add(" = " + Rs + " (MPa), ");
@@ -170,7 +170,7 @@ namespace CrossStruc.ConcreteColumn
             flexural_tb.Inlines.Add(" = " + Mx + " (kNm), ");
             flexural_tb.Inlines.Add("M");
             flexural_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "y" });
-            flexural_tb.Inlines.Add(" = " + My + " (kNm), ");
+            flexural_tb.Inlines.Add(" = " + My + " (kNm)");
             flexural_tb.Inlines.Add(new LineBreak());
 
             flexural_tb.Inlines.Add("e");
@@ -235,11 +235,11 @@ namespace CrossStruc.ConcreteColumn
             flexural_tb.Inlines.Add(") = ");
             if (DC <= 1)
             {
-                flexural_tb.Inlines.Add(new Run() { FontWeight = FontWeights.Bold, Foreground = Brushes.Green, Text = Convert.ToString(DC) });
+                flexural_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(DC) });
             }
             else
             {
-                flexural_tb.Inlines.Add(new Run() { FontWeight = FontWeights.Bold, Foreground = Brushes.Red, Text = Convert.ToString(DC) });
+                flexural_tb.Inlines.Add(new Run() { Foreground = Brushes.Red, Text = Convert.ToString(DC) });
             }
             
 
@@ -315,11 +315,11 @@ namespace CrossStruc.ConcreteColumn
             shear_tb.Inlines.Add(") = ");
             if (DCs <= 1)
             {
-                shear_tb.Inlines.Add(new Run() { FontWeight = FontWeights.Bold, Foreground = Brushes.Green, Text = Convert.ToString(DCs) });
+                shear_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(DCs) });
             }
             else
             {
-                shear_tb.Inlines.Add(new Run() { FontWeight = FontWeights.Bold, Foreground = Brushes.Red, Text = Convert.ToString(DCs) });
+                shear_tb.Inlines.Add(new Run() { Foreground = Brushes.Red, Text = Convert.ToString(DCs) });
             }
 
             // ACR check
@@ -350,16 +350,16 @@ namespace CrossStruc.ConcreteColumn
                 acr_tb.Inlines.Add(") = ");
                 if (ved <= ved_limit)
                 {
-                    acr_tb.Inlines.Add(new Run() { FontWeight = FontWeights.Bold, Foreground = Brushes.Green, Text = Convert.ToString(ved) });
+                    acr_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(ved) });
                 }
                 else
                 {
-                    acr_tb.Inlines.Add(new Run() { FontWeight = FontWeights.Bold, Foreground = Brushes.Red, Text = Convert.ToString(ved) });
+                    acr_tb.Inlines.Add(new Run() { Foreground = Brushes.Red, Text = Convert.ToString(ved) });
                 }
             }
             else
             {
-                acr_tb.Inlines.Add(new Run() { FontWeight = FontWeights.Bold, Foreground = Brushes.Green, Text = "Not applicable" });
+                acr_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = "Not applicable" });
             }
 
             // Section chart

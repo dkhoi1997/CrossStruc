@@ -98,8 +98,8 @@
                     <RowDefinition Height="266"/>
                 </Grid.RowDefinitions>
                 <oxy:PlotView x:Name="Sect_Plot" Model="{Binding PlotSect}" Grid.Row="0" Height="239" Margin="42.5,0,42.5,0" IsEnabled="False"/>
-                <oxy:PlotView x:Name="IDChartPM_Plot" Model="{Binding PlotIDCut}" Grid.Row="1" Height="251" Margin="15,0,15,15" IsEnabled="False"/>
-                <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="1" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Margin="20,240,0,5">
+                <oxy:PlotView x:Name="IDChartPM_Plot" Model="{Binding PlotIDCut}" Grid.Row="1" Height="251" Margin="20,0,15,15" IsEnabled="False"/>
+                <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="1" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Margin="20,245,0,5">
                         M<Run FontSize="10" BaselineAlignment="Subscript">xy</Run> (kNm)
                 </TextBlock>
                 <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="1" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Margin="0,0,300,5" >
@@ -108,8 +108,8 @@
                     </TextBlock.LayoutTransform>
                 P<Run FontSize="10" BaselineAlignment="Subscript">xy</Run> (kN)
                 </TextBlock>
-                <oxy:PlotView x:Name="IDChartMM_Plot" Model="{Binding PlotIDCut}" Grid.Row="2" Height="251" Margin="15,0,15,15" IsEnabled="False"/>
-                <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="2" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Margin="20,240,0,5">
+                <oxy:PlotView x:Name="IDChartMM_Plot" Model="{Binding PlotIDCut}" Grid.Row="2" Height="251" Margin="20,0,15,15" IsEnabled="False"/>
+                <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="2" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Margin="20,245,0,5">
                         M<Run FontSize="10" BaselineAlignment="Subscript">x</Run> (kNm)
                 </TextBlock>
                 <TextBlock TextWrapping="Wrap" Foreground="Black" Grid.Row="2" Grid.Column="1" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Margin="0,0,300,5" >
