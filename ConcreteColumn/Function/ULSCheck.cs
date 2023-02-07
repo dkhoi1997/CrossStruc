@@ -197,7 +197,10 @@ namespace CrossStruc.ConcreteColumn.Function
                 Qsx = Math.Round(Qsx / 1000, 0);
                 Qsy = Math.Round(Qsy / 1000, 0);
 
-                DC = Math.Round(Math.Abs(Qx) / (Qbx + Qsx) + Math.Abs(Qy) / (Qby + Qsy), 2);
+                double Qnx = Qbx + Qsx;
+                double Qny = Qby + Qsy;
+
+                DC = Math.Round(Math.Pow(Math.Abs(Qx) / Qnx,2) + Math.Pow(Math.Abs(Qy) / Qny,2), 2); // Ellipse function interaction (since TCVN not provide, use JSCE for reference)
                 phin = Math.Round(phin, 2);
                 return (sigma, phin, cx, cy, Qbx, Qsx, Qby, Qsy, DC);
             }

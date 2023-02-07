@@ -299,20 +299,24 @@ namespace CrossStruc.ConcreteColumn
             shear_tb.Inlines.Add(new LineBreak());
 
             shear_tb.Inlines.Add("DC");
-            shear_tb.Inlines.Add(" = Q");
+            shear_tb.Inlines.Add(" = (Q");
             shear_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "x" });
             shear_tb.Inlines.Add(" / (Q");
             shear_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "bx" });
             shear_tb.Inlines.Add(" + Q");
             shear_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "sx" });
-            shear_tb.Inlines.Add(") + ");
-            shear_tb.Inlines.Add("Q");
+            shear_tb.Inlines.Add("))");
+            shear_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Top, FontSize = 10, Text = "2" });
+            shear_tb.Inlines.Add(" + ");
+            shear_tb.Inlines.Add("(Q");
             shear_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "y" });
             shear_tb.Inlines.Add(" / (Q");
             shear_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "by" });
             shear_tb.Inlines.Add(" + Q");
             shear_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "sy" });
-            shear_tb.Inlines.Add(") = ");
+            shear_tb.Inlines.Add("))");
+            shear_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Top, FontSize = 10, Text = "2" });
+            shear_tb.Inlines.Add(" = ");
             if (DCs <= 1)
             {
                 shear_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(DCs) });
