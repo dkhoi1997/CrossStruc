@@ -94,10 +94,10 @@ namespace CrossStruc.ConcreteColumn
                 Ab = Math.Round(Cx * Cy, 0);
                 sect_tb.Inlines.Add("C");
                 sect_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "x" });
-                sect_tb.Inlines.Add(" = " + Cx + " (mm), ");
+                sect_tb.Inlines.Add(" × ");
                 sect_tb.Inlines.Add("C");
                 sect_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "y" });
-                sect_tb.Inlines.Add(" = " + Cy + " (mm), ");
+                sect_tb.Inlines.Add(" = " + Cx + " × " + Cy + " (mm), ");
             }
             else
             {
