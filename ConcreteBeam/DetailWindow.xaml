@@ -8,16 +8,16 @@
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
-        Title="RC Beam Detail"  Height="775" Width="660">
-    <Grid ShowGridLines="True">
+        Title="RC Beam Detail"  Height="791" Width="660">
+    <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="118"/>
-            <RowDefinition Height="226"/>
-            <RowDefinition Height="111"/>
+            <RowDefinition Height="216"/>
+            <RowDefinition Height="137"/>
             <RowDefinition Height="137"/>
             <RowDefinition Height="168"/>
         </Grid.RowDefinitions>
-        <Grid ShowGridLines="True">
+        <Grid ShowGridLines="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="330"/>
                 <ColumnDefinition Width="330"/>
@@ -28,17 +28,11 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="85"/>
                     </Grid.RowDefinitions>
-                    <TextBlock x:Name="material_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,0,5">
-                    Concrete B25, Rb = 14.5 (MPa), Rbt = 1.15 (MPa)
-                    <LineBreak />
-                    Longitudial CB400-V, Rs = 350 (MPa), Rsc = 350 (MPa)
-                    <LineBreak />
-                    Stirrup CB240-T, Rsw = 170 (MPa)
-                    </TextBlock>
+                    <TextBlock x:Name="material_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,0,5"/>
                 </Grid>
             </GroupBox>
 
-            <Grid ShowGridLines="True">
+            <Grid ShowGridLines="False">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="59"/>
                     <RowDefinition Height="59"/>
@@ -58,16 +52,14 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="26"/>
                         </Grid.RowDefinitions>
-                        <TextBlock x:Name="sect_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                        b x h = 300 x 500 (mm), tf = 200 (mm), bf = 2010 (mm)
-                        </TextBlock>
+                        <TextBlock x:Name="sect_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
                     </Grid>
                 </GroupBox>
 
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="1" ShowGridLines="True">
+        <Grid Grid.Row="1" ShowGridLines="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="330"/>
                 <ColumnDefinition Width="330"/>
@@ -105,7 +97,7 @@
         <GroupBox Header="FLEXURAL UTILIZATION" Foreground="Blue" FontWeight="Bold" Margin="10,5,10,5" Grid.Column="0" Grid.Row="2">
             <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="78"/>
+                    <RowDefinition Height="104"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="157"/>
@@ -115,35 +107,43 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock x:Name="flexuralSupTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                        Mtop = 123 (kNm)
-                        <LineBreak />
-                        Mntop = 123 (kNm)
-                        <LineBreak />
-                        DCtop = M/Mn = 1
+                    Mtop = 123 (kNm)
+                    <LineBreak />
+                    xd = 123 (mm)
+                    <LineBreak />
+                    Mntop = 123 (kNm)
+                    <LineBreak />
+                    DCtop = M/Mn = 1
                 </TextBlock>
 
                 <TextBlock x:Name="flexuralSupBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="1" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                        Mtop = 123 (kNm)
-                        <LineBreak />
-                        Mntop = 123 (kNm)
-                        <LineBreak />
-                        DCtop = M/Mn = 1
+                    Mtop = 123 (kNm)
+                    <LineBreak />
+                    xd = 123 (mm)
+                    <LineBreak />
+                    Mntop = 123 (kNm)
+                    <LineBreak />
+                    DCtop = M/Mn = 1
                 </TextBlock>
 
                 <TextBlock x:Name="flexuralMidTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="2" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                        Mtop = 123 (kNm)
-                        <LineBreak />
-                        Mntop = 123 (kNm)
-                        <LineBreak />
-                        DCtop = M/Mn = 1
+                    Mtop = 123 (kNm)
+                    <LineBreak />
+                    xd = 123 (mm)
+                    <LineBreak />
+                    Mntop = 123 (kNm)
+                    <LineBreak />
+                    DCtop = M/Mn = 1
                 </TextBlock>
 
                 <TextBlock x:Name="flexuralMidBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="3" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                        Mtop = 123 (kNm)
-                        <LineBreak />
-                        Mntop = 123 (kNm)
-                        <LineBreak />
-                        DCtop = M/Mn = 1
+                    Mtop = 123 (kNm)
+                    <LineBreak />
+                    xd = 123 (mm)
+                    <LineBreak />
+                    Mntop = 123 (kNm)
+                    <LineBreak />
+                    DCtop = M/Mn = 1
                 </TextBlock>
 
             </Grid>

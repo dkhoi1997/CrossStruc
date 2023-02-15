@@ -2,16 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ExtMaterial = CrossStruc.Extensions.Material;
 
 namespace CrossStruc.ConcreteColumn
@@ -34,59 +27,58 @@ namespace CrossStruc.ConcreteColumn
             // Get data from main form which sent
 
             string concGrade = arrCol[0];
-            string Rb = arrCol[1];
-            string Rbt = arrCol[2];
-            string lRebarGrade = arrCol[4];
-            string Rs = arrCol[5];
-            string Rsc = arrCol[6];
-            string sRebarGrade = arrCol[8];
-            string Rsw = arrCol[9];
+            string lRebarGrade = arrCol[1];
+            string sRebarGrade = arrCol[2];
 
-            string secShape = arrCol[10];
-            string mLayer = arrCol[11];
-            double Cx = Convert.ToDouble(arrCol[12]);
-            double Cy = Convert.ToDouble(arrCol[13]);
-            string Lx = arrCol[14];
-            string Ly = arrCol[15];
-            string kx = arrCol[16];
-            string ky = arrCol[17];
-            double acv = Convert.ToDouble(arrCol[18]);
-            int nx = Convert.ToInt32(arrCol[19]);
-            int ny = Convert.ToInt32(arrCol[20]);
-            int dmain = Convert.ToInt32(arrCol[21]);
-            int dstir = Convert.ToInt32(arrCol[22]);
-            int tw = Convert.ToInt32(arrCol[23]);
-            string sw = arrCol[24];
-            string nsx = arrCol[25];
-            string nsy = arrCol[26];
-            int sumn = Convert.ToInt32(arrCol[27]);
-            double ved_limit = Convert.ToDouble(arrCol[29]);
+            (double Rbn, double Rbtn, double Eb) = ExtMaterial.GetConcrete(concGrade);
+            (double Rsn, double Rscn, double foo, double Es) = ExtMaterial.GetRebar(lRebarGrade);
+            double Rswn = ExtMaterial.GetRebar(sRebarGrade).Item3;
+
+            string secShape = arrCol[3];
+            string mLayer = arrCol[4];
+            double Cx = Convert.ToDouble(arrCol[5]);
+            double Cy = Convert.ToDouble(arrCol[6]);
+            string Lx = arrCol[7];
+            string Ly = arrCol[8];
+            string kx = arrCol[9];
+            string ky = arrCol[10];
+            double acv = Convert.ToDouble(arrCol[11]);
+            int nx = Convert.ToInt32(arrCol[12]);
+            int ny = Convert.ToInt32(arrCol[13]);
+            int dmain = Convert.ToInt32(arrCol[14]);
+            int dstir = Convert.ToInt32(arrCol[15]);
+            int tw = Convert.ToInt32(arrCol[16]);
+            string sw = arrCol[17];
+            string nsx = arrCol[18];
+            string nsy = arrCol[19];
+            int sumn = Convert.ToInt32(arrCol[20]);
+            double ved_limit = Convert.ToDouble(arrCol[22]);
 
             double Ab; double As; double u;
 
             // Material data
             material_tb.Inlines.Add("Concrete " + concGrade + ", ");
             material_tb.Inlines.Add("R");
-            material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "b" });
-            material_tb.Inlines.Add(" = " + Rb + " (MPa), ");
+            material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "bn" });
+            material_tb.Inlines.Add(" = " + Rbn + " (MPa), ");
             material_tb.Inlines.Add("R");
-            material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "bt" });
-            material_tb.Inlines.Add(" = " + Rbt + " (MPa)");
+            material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "btn" });
+            material_tb.Inlines.Add(" = " + Rbtn + " (MPa)");
             material_tb.Inlines.Add(new LineBreak());
 
-            material_tb.Inlines.Add("Longitudinal " + lRebarGrade + ", ");
+            material_tb.Inlines.Add("Main bars " + lRebarGrade + ", ");
             material_tb.Inlines.Add("R");
-            material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "s" });
-            material_tb.Inlines.Add(" = " + Rs + " (MPa), ");
+            material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "sn" });
+            material_tb.Inlines.Add(" = " + Rsn + " (MPa), ");
             material_tb.Inlines.Add("R");
-            material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "sc" });
-            material_tb.Inlines.Add(" = " + Rsc + " (MPa)");
+            material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "scn" });
+            material_tb.Inlines.Add(" = " + Rscn + " (MPa)");
             material_tb.Inlines.Add(new LineBreak());
 
-            material_tb.Inlines.Add("Stirrup " + sRebarGrade + ", ");
+            material_tb.Inlines.Add("Ties " + sRebarGrade + ", ");
             material_tb.Inlines.Add("R");
-            material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "sw" });
-            material_tb.Inlines.Add(" = " + Rsw + " (MPa)");
+            material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "swn" });
+            material_tb.Inlines.Add(" = " + Rswn + " (MPa)");
 
             // Section parameter
             if (secShape == "Rec")

@@ -8,10 +8,21 @@ namespace CrossStruc.ConcreteColumn.Function
     public class Solve
     {
         public static List<(string[], List<(double[], double[,], double[,])>)> GetResultColumn(List<(string[], List<int[]>)> listCol,
-            double Rb, double Rbt, double Eb, double Rs, double Rsc, double Es, double Rsw,
+            string concGrade, string lRebarGrade, string sRebarGrade,
             string shape, string mLayer, double Cx, double Cy, double Lx, double Ly, double kx, double ky, double acv,
             int nx, int ny, int dmain, int dstir, int tw, int sw, int nsx, int nsy, string combACR, bool localAxis) // Solve function for all input data
         {
+            // Material
+            (double Rbn, double Rbtn, double Eb) = ExtMaterial.GetConcrete(concGrade);
+            (double Rsn, double Rscn, double foo, double Es) = ExtMaterial.GetRebar(lRebarGrade);
+            double Rswn = ExtMaterial.GetRebar(sRebarGrade).Item3;
+
+            // Design strength
+            double Rb = Math.Round(Rbn / 1.3, 2);
+            double Rbt = Math.Round(Rbtn / 1.5, 2);
+            double Rs = Math.Round(Rsn / 1.15, 0);
+            double Rsc = Math.Round(Rscn / 1.15, 0);
+            double Rsw = Math.Round(Rswn / 1.15, 0);
 
             // Input parameter
             int nver = 20;

@@ -111,7 +111,7 @@ namespace CrossStruc.ConcreteBeam
         private void OnlyNumber(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
-            if (regex.IsMatch(e.Text) && !(e.Text == "." && ((TextBox)sender).Text.Contains(e.Text)))
+            if (regex.IsMatch(e.Text) && !(e.Text == "-" && ((TextBox)sender).Text.Contains(e.Text)))
                 e.Handled = false;
 
             else
@@ -381,16 +381,15 @@ namespace CrossStruc.ConcreteBeam
             dtcol.Columns.Add("Shape");
             dtcol.Columns.Add("Position");
             dtcol.Columns.Add("Flexural");
-            dtcol.Columns.Add("Shear");
-            dtcol.Columns.Add("Torsional");
-            dtcol.Columns.Add("CrW-S");
-            dtcol.Columns.Add("CrW-L");
+            dtcol.Columns.Add("Shear + Tor");
+            dtcol.Columns.Add("CrWidth-S");
+            dtcol.Columns.Add("CrWidth-L");
 
             foreach (var item in listResult)
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    string[] add = new string[9];
+                    string[] add = new string[8];
                     add[0] = item.Item1[0]; // Name
                     add[1] = item.Item1[1]; // Section
                     add[2] = item.Item1[2]; // Shape
@@ -404,18 +403,16 @@ namespace CrossStruc.ConcreteBeam
                         add[3] = "Mid";
                     }
 
-                    double maxDC = Math.Max(item.Item2[i][44], item.Item2[i][45]);
-                    double maxDCs = item.Item2[i][46];
-                    double maxDCtor = item.Item2[i][47];
+                    double maxDC = Math.Max(item.Item2[i][48], item.Item2[i][49]);
+                    double maxDCs = item.Item2[i][50];
 
-                    double maxDCacrcS = Math.Max(item.Item2[i][48], item.Item2[i][49]);
-                    double maxDCacrcL = Math.Max(item.Item2[i][50], item.Item2[i][51]);
+                    double maxDCacrcS = Math.Max(item.Item2[i][51], item.Item2[i][52]);
+                    double maxDCacrcL = Math.Max(item.Item2[i][53], item.Item2[i][54]);
 
                     add[4] = Convert.ToString(maxDC);
                     add[5] = Convert.ToString(maxDCs);
-                    add[6] = Convert.ToString(maxDCtor);
-                    add[7] = Convert.ToString(maxDCacrcS);
-                    add[8] = Convert.ToString(maxDCacrcL);
+                    add[6] = Convert.ToString(maxDCacrcS);
+                    add[7] = Convert.ToString(maxDCacrcL);
 
                     dtcol.Rows.Add(add);
                 }
@@ -427,14 +424,14 @@ namespace CrossStruc.ConcreteBeam
             arrBeam[0] = concGrade;
             arrBeam[1] = lRebarGrade;
             arrBeam[2] = sRebarGrade;
-            arrBeam[3] = sRebarGrade;
-            arrBeam[4] = Convert.ToString(Tsect);
-            arrBeam[5] = Convert.ToString(compressBar);
-            arrBeam[6] = Convert.ToString(bs);
-            arrBeam[7] = Convert.ToString(tf);
-            arrBeam[8] = Convert.ToString(b);
-            arrBeam[9] = Convert.ToString(h);
-            arrBeam[10] = Convert.ToString(acv);
+            arrBeam[3] = Convert.ToString(b);
+            arrBeam[4] = Convert.ToString(h);
+            arrBeam[5] = Convert.ToString(Tsect);
+            arrBeam[6] = Convert.ToString(compressBar);
+            arrBeam[7] = Convert.ToString(bs);
+            arrBeam[8] = Convert.ToString(tf);
+            arrBeam[9] = Convert.ToString(acv);
+            arrBeam[10] = Convert.ToString(tw);
             arrBeam[11] = Convert.ToString(acrcSlim);
             arrBeam[12] = Convert.ToString(acrcLlim);
 

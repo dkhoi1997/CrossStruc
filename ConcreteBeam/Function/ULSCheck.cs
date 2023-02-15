@@ -128,11 +128,11 @@ namespace CrossStruc.ConcreteBeam.Function
             goto nextstep;
         endstep:
             {
-                DC = ushort.MaxValue;
+                c = 0;
                 Qb = 0;
                 Qs = 0;
-                Qn = 0;
-                return (Qb, Qs, Qn, DC);
+                DC = ushort.MaxValue;
+                return (c, Qb, Qs, DC);
             }
         nextstep:
             {
@@ -160,12 +160,12 @@ namespace CrossStruc.ConcreteBeam.Function
                 Qs = Convert.ToInt32(0.75 * Qsw * c / 1000);
                 Qn = Convert.ToInt32(Qb + Qs);
                 DC = Math.Round((double)(Math.Abs(Q) / Qn), 2);
-                return (Qb, Qs, Qn, DC);
+                return (c, Qb, Qs, DC);
             }
         }
 
-        public static  (double, double) TorsionalCheck(double b, double h, int T, int dstir, int ns, int sw, double sideAs,
-            double Rb, double Rs, double Rsw) // Torsional check for beam
+        public static  (double, double, double) TorsionCheck(double b, double h, int T, int dstir, int ns, int sw, double sideAs,
+            double Rb, double Rs, double Rsw) // Torsion check for beam
         {
             double DC;
             double Tn; double Qsw; double deltaZ; double torCap;
@@ -184,9 +184,10 @@ namespace CrossStruc.ConcreteBeam.Function
             goto nextstep;
         endstep:
             {
-                DC = ushort.MaxValue;
+                deltaZ = 0;
                 Tn = 0;
-                return (Tn, DC);
+                DC = ushort.MaxValue;
+                return (deltaZ, Tn, DC);
             }
         nextstep:
             {
@@ -207,7 +208,7 @@ namespace CrossStruc.ConcreteBeam.Function
                 }
                 Tn = Math.Round(Tn / 1000000, 2);
                 DC = Math.Round(Math.Abs(T) / Tn, 2);
-                return (Tn, DC);
+                return (deltaZ, Tn, DC);
             }
         }
     }

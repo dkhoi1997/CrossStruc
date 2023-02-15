@@ -18,7 +18,7 @@ namespace CrossStruc.ConcreteColumn
     {
         public static List<(string[], List<int[]>)> listCol;
         public static List<(string[], List<(double[], double[,], double[,])>)> listResult;
-        public static string[] arrCol = new string[31];
+        public static string[] arrCol = new string[24];
 
         public MainWindow()
         {
@@ -115,21 +115,9 @@ namespace CrossStruc.ConcreteColumn
 
         private void ReCalculate()
         {
-            string concgrade = (concGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
-            string lRebargrade = (longituGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
-            string sRebargrade = (stirrupGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
-
-            // Material
-            (double Rbn, double Rbtn, double Eb) = ExtMaterial.GetConcrete(concgrade);
-            (double Rsn, double Rscn, double foo, double Es) = ExtMaterial.GetRebar(lRebargrade);
-            double Rswn = ExtMaterial.GetRebar(sRebargrade).Item3;
-
-            // Design strength
-            double Rb = Math.Round(Rbn / 1.3, 2);
-            double Rbt = Math.Round(Rbtn / 1.5, 2);
-            double Rs = Math.Round(Rsn / 1.15, 0);
-            double Rsc = Math.Round(Rscn / 1.15, 0);
-            double Rsw = Math.Round(Rswn / 1.15, 0);
+            string concGrade = (concGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
+            string lRebarGrade = (longituGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
+            string sRebarGrade = (stirrupGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
 
             string secShape = (shapeSect_cbb.SelectedItem as ComboBoxItem).Content.ToString();
             string mLayer = (mLayer_cbb.SelectedItem as ComboBoxItem).Content.ToString();
@@ -157,7 +145,7 @@ namespace CrossStruc.ConcreteColumn
             string vedlimit = limitACR_txt.Text;
             string combACR = combACR_txt.Text.Replace(" q", "");
 
-            listResult = Solve.GetResultColumn(listCol, Rb, Rbt, Eb, Rs, Rsc, Es, Rsw,
+            listResult = Solve.GetResultColumn(listCol, concGrade, lRebarGrade, sRebarGrade,
                 secShape, mLayer, Cx, Cy, Lx, Ly, kx, ky, acv, nx, ny, dmain, dstir, tw, sw, nsx, nsy, combACR, localAxis);
 
             DataTable dtcol = new DataTable();
@@ -200,37 +188,30 @@ namespace CrossStruc.ConcreteColumn
             }
 
             // Save data for detail form
-            arrCol[0] = concgrade;
-            arrCol[1] = Convert.ToString(Rb);
-            arrCol[2] = Convert.ToString(Rbt);
-            arrCol[3] = Convert.ToString(Eb);
-            arrCol[4] = lRebargrade;
-            arrCol[5] = Convert.ToString(Rs);
-            arrCol[6] = Convert.ToString(Rsc);
-            arrCol[7] = Convert.ToString(Es);
-            arrCol[8] = sRebargrade;
-            arrCol[9] = Convert.ToString(Rsw);
-            arrCol[10] = secShape;
-            arrCol[11] = mLayer;
-            arrCol[12] = Convert.ToString(Cx);
-            arrCol[13] = Convert.ToString(Cy);
-            arrCol[14] = Convert.ToString(Lx);
-            arrCol[15] = Convert.ToString(Ly);
-            arrCol[16] = Convert.ToString(kx);
-            arrCol[17] = Convert.ToString(ky);
-            arrCol[18] = Convert.ToString(acv);
-            arrCol[19] = Convert.ToString(nx);
-            arrCol[20] = Convert.ToString(ny);
-            arrCol[21] = Convert.ToString(dmain);
-            arrCol[22] = Convert.ToString(dstir);
-            arrCol[23] = Convert.ToString(tw);
-            arrCol[24] = Convert.ToString(sw);
-            arrCol[25] = Convert.ToString(nsx);
-            arrCol[26] = Convert.ToString(nsy);
-            arrCol[27] = Convert.ToString(ElementPosition.Rebar(secShape, mLayer, tw, Cx, Cy, nx, ny, acv, dmain, dstir).Count);
-            arrCol[28] = combACR;
-            arrCol[29] = vedlimit;
-            arrCol[30] = Convert.ToString(localAxis);
+            arrCol[0] = concGrade;
+            arrCol[1] = lRebarGrade;
+            arrCol[2] = sRebarGrade;
+            arrCol[3] = secShape;
+            arrCol[4] = mLayer;
+            arrCol[5] = Convert.ToString(Cx);
+            arrCol[6] = Convert.ToString(Cy);
+            arrCol[7] = Convert.ToString(Lx);
+            arrCol[8] = Convert.ToString(Ly);
+            arrCol[9] = Convert.ToString(kx);
+            arrCol[10] = Convert.ToString(ky);
+            arrCol[11] = Convert.ToString(acv);
+            arrCol[12] = Convert.ToString(nx);
+            arrCol[13] = Convert.ToString(ny);
+            arrCol[14] = Convert.ToString(dmain);
+            arrCol[15] = Convert.ToString(dstir);
+            arrCol[16] = Convert.ToString(tw);
+            arrCol[17] = Convert.ToString(sw);
+            arrCol[18] = Convert.ToString(nsx);
+            arrCol[19] = Convert.ToString(nsy);
+            arrCol[20] = Convert.ToString(ElementPosition.Rebar(secShape, mLayer, tw, Cx, Cy, nx, ny, acv, dmain, dstir).Count);
+            arrCol[21] = combACR;
+            arrCol[22] = vedlimit;
+            arrCol[23] = Convert.ToString(localAxis);
         }
 
         private void OnlyNumber(object sender, TextCompositionEventArgs e)

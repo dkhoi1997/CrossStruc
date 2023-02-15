@@ -25,7 +25,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="285"/>
             <ColumnDefinition Width="488"/>
-            <ColumnDefinition Width="595"/>
+            <ColumnDefinition Width="637"/>
         </Grid.ColumnDefinitions>
         <DataGrid
             x:Name="dataGrid" Grid.Column="2" ItemsSource="{Binding}" Grid.Row="0" Margin="5,5,10,10" CanUserAddRows="False" CanUserResizeRows="False" ColumnWidth="*" RowHeight="25" IsReadOnly="True" GridLinesVisibility="None">
@@ -60,10 +60,9 @@
                                     <Condition.Binding>
                                         <MultiBinding Converter="{StaticResource ConvertDC}">
                                             <Binding Path="Flexural" />
-                                            <Binding Path="Shear" />
-                                            <Binding Path="Torsional" />
-                                            <Binding Path="CrW-S" />
-                                            <Binding Path="CrW-L" />
+                                            <Binding Path="Shear + Tor" />
+                                            <Binding Path="CrWidth-S" />
+                                            <Binding Path="CrWidth-L" />
                                         </MultiBinding>
                                     </Condition.Binding>
                                 </Condition>
@@ -76,10 +75,9 @@
                                     <Condition.Binding>
                                         <MultiBinding Converter="{StaticResource ConvertDC}">
                                             <Binding Path="Flexural" />
-                                            <Binding Path="Shear" />
-                                            <Binding Path="Torsional" />
-                                            <Binding Path="CrW-S" />
-                                            <Binding Path="CrW-L" />
+                                            <Binding Path="Shear + Tor" />
+                                            <Binding Path="CrWidth-S" />
+                                            <Binding Path="CrWidth-L" />
                                         </MultiBinding>
                                     </Condition.Binding>
                                 </Condition>
@@ -92,10 +90,9 @@
                                     <Condition.Binding>
                                         <MultiBinding Converter="{StaticResource ConvertDC}">
                                             <Binding Path="Flexural" />
-                                            <Binding Path="Shear" />
-                                            <Binding Path="Torsional" />
-                                            <Binding Path="CrW-S" />
-                                            <Binding Path="CrW-L" />
+                                            <Binding Path="Shear + Tor" />
+                                            <Binding Path="CrWidth-S" />
+                                            <Binding Path="CrWidth-L" />
                                         </MultiBinding>
                                     </Condition.Binding>
                                 </Condition>

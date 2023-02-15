@@ -31,7 +31,7 @@ namespace CrossStruc.ConcreteBeam.Function
                     {
                         if (comb == ULScomb[j])
                         {
-                            if (pos < 2 || pos > 3) // Support position
+                            if (pos < 8 || pos > 15) // Support position
                             {
                                 if (force[0, 0] > Mcurrent) force[0, 0] = Mcurrent;
                                 if (force[0, 1] < Mcurrent) force[0, 1] = Mcurrent;
@@ -53,7 +53,7 @@ namespace CrossStruc.ConcreteBeam.Function
                     {
                         if (comb == SLScomb[j])
                         {
-                            if (pos < 2 || pos > 3)
+                            if (pos < 8 || pos > 15)
                             {
                                 if (force[0, 2] > Mcurrent) force[0, 2] = Mcurrent;
                                 if (force[0, 3] < Mcurrent) force[0, 3] = Mcurrent;
@@ -66,7 +66,7 @@ namespace CrossStruc.ConcreteBeam.Function
                         }
                     }
 
-                    if (pos < 5) pos++;
+                    if (pos < 23) pos++;
                     else pos = 0;
                 }
 

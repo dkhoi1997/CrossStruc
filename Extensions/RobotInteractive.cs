@@ -20,7 +20,7 @@ namespace CrossStruc.Extensions
 
             // Use query method
             RobotResultRowSet RobResRowSet = new RobotResultRowSet();
-            byte point = 6;
+            byte point = 24;
 
             RobotResultQueryParams RobResQueryParams = myRobot.CmpntFactory.Create(IRobotComponentType.I_CT_RESULT_QUERY_PARAMS);
             RobResQueryParams.SetParam(IRobotResultParamType.I_RPT_MULTI_THREADS, true);

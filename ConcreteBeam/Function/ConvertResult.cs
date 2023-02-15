@@ -12,8 +12,7 @@ namespace CrossStruc.ConcreteBeam.Function
             double.TryParse((string)values[1], out double val1);
             double.TryParse((string)values[2], out double val2);
             double.TryParse((string)values[3], out double val3);
-            double.TryParse((string)values[4], out double val4);
-            double max_val = Math.Max(Math.Max(Math.Max(Math.Max(val0, val1), val2), val3), val4);
+            double max_val = Math.Max(Math.Max(Math.Max(val0, val1), val2), val3);
             if (max_val < 0.95)
             {
                 return 0;

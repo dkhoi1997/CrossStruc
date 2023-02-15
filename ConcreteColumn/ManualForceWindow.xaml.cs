@@ -38,12 +38,8 @@ namespace CrossStruc.ConcreteColumn
 
         private void OnlyNumber(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
-            if (regex.IsMatch(e.Text) && !(e.Text == "." && ((TextBox)sender).Text.Contains(e.Text)))
-                e.Handled = false;
-
-            else
-                e.Handled = true;
+            Regex regex = new Regex("[^0-9-]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
