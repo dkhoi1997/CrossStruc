@@ -4,7 +4,7 @@ namespace CrossStruc.ConcreteColumn.Function
 {
     public class UpperMoment
     {
-        public static (double, double, double, double, int, int) RecSect(int P, int Mx, int My, double Cx,
+        public static (double, double, double, double, double, double, int, int) RecSect(int P, int Mx, int My, double Cx,
             double Cy, double Lx, double Ly, double Eb, double kx, double ky) // Design moment for rectangle section
         {
             int Mxup; int Myup;
@@ -17,6 +17,11 @@ namespace CrossStruc.ConcreteColumn.Function
             Lx /= 1000;
             Ly /= 1000;
 
+            double Ibx = Cy * Math.Pow(Cx, 3) / 12;
+            double Iby = Cx * Math.Pow(Cy, 3) / 12;
+            double Ncrx = Math.Round(2.5 * Eb * Ibx / Math.Pow(Lx * kx, 2), 0);
+            double Ncry = Math.Round(2.5 * Eb * Iby / Math.Pow(Ly * ky, 2), 0);
+
             if (P <= 0)
             {
                 e0x = 0;
@@ -25,7 +30,7 @@ namespace CrossStruc.ConcreteColumn.Function
                 etay = 0;
                 Mxup = Math.Max(Math.Abs(Mx), 1);
                 Myup = Math.Max(Math.Abs(My), 1);
-                return (e0x, e0y, etax, etay, Mxup, Myup);
+                return (e0x, e0y, Ncrx, Ncry, etax, etay, Mxup, Myup);
             }
             else
             {
@@ -35,10 +40,6 @@ namespace CrossStruc.ConcreteColumn.Function
                 double ea1y = Math.Max(Math.Max(Ly / 600, Cy / 30), 0.01);
                 e0x = Math.Round(Math.Max(e1x, ea1x),3);
                 e0y = Math.Round(Math.Max(e1y, ea1y),3);
-                double Ibx = Cy * Math.Pow(Cx, 3) / 12;
-                double Iby = Cx * Math.Pow(Cy, 3) / 12;
-                double Ncrx = 2.5 * Eb * Ibx / Math.Pow(Lx * kx, 2);
-                double Ncry = 2.5 * Eb * Iby / Math.Pow(Ly * ky, 2);
 
                 if (Ncrx < P)
                 {
@@ -66,11 +67,11 @@ namespace CrossStruc.ConcreteColumn.Function
                 etax = Math.Round(etax, 2);
                 etay = Math.Round(etay, 2);
 
-                return (e0x, e0y, etax, etay, Mxup, Myup);
+                return (e0x, e0y, Ncrx, Ncry, etax, etay, Mxup, Myup);
             }
         }
 
-        public static (double, double, double, double, int, int) CirSect(int P, int Mx, int My, double D,
+        public static (double, double, double, double, double, double, int, int) CirSect(int P, int Mx, int My, double D,
             double Lx, double Ly, double Eb, double kx, double ky) // Design moment for circle section
         {
             int Mxup; int Myup;
@@ -82,6 +83,10 @@ namespace CrossStruc.ConcreteColumn.Function
             Lx /= 1000;
             Ly /= 1000;
 
+            double Ib = Math.PI / 4 * Math.Pow(D / 2, 4);
+            double Ncrx = Math.Round(2.5 * Eb * Ib / Math.Pow(Lx * kx, 2), 0);
+            double Ncry = Math.Round(2.5 * Eb * Ib / Math.Pow(Ly * ky, 2), 0);
+
             if (P <= 0)
             {
                 e0x = 0;
@@ -90,7 +95,7 @@ namespace CrossStruc.ConcreteColumn.Function
                 etay = 0;
                 Mxup = Math.Max(Math.Abs(Mx), 1);
                 Myup = Math.Max(Math.Abs(My), 1);
-                return (e0x, e0y, etax, etay, Mxup, Myup);
+                return (e0x, e0y, Ncrx, Ncry, etax, etay, Mxup, Myup);
             }
             else
             {
@@ -100,9 +105,7 @@ namespace CrossStruc.ConcreteColumn.Function
                 double ea1y = Math.Max(Math.Max(Ly / 600, D / 30), 0.01);
                 e0x = Math.Round(Math.Max(e1x, ea1x), 3);
                 e0y = Math.Round(Math.Max(e1y, ea1y), 3);
-                double Ib = Math.PI / 4 * Math.Pow(D / 2, 4);
-                double Ncrx = 2.5 * Eb * Ib / Math.Pow(Lx * kx, 2);
-                double Ncry = 2.5 * Eb * Ib / Math.Pow(Ly * ky, 2);
+
                 if (Ncrx < P)
                 {
                     etax = ushort.MaxValue;
@@ -129,7 +132,7 @@ namespace CrossStruc.ConcreteColumn.Function
                 etax = Math.Round(etax, 2);
                 etay = Math.Round(etay, 2);
 
-                return (e0x, e0y, etax, etay, Mxup, Myup);
+                return (e0x, e0y, Ncrx, Ncry, etax, etay, Mxup, Myup);
             }
         }
     }

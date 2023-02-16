@@ -19,11 +19,11 @@
             <Grid ShowGridLines="False" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="59"/>
-                    <RowDefinition Height="111"/>
-                    <RowDefinition Height="85"/>
-                    <RowDefinition Height="85"/>
-                    <RowDefinition Height="188"/>
-                    <RowDefinition Height="163"/>
+                    <RowDefinition Height="106"/>
+                    <RowDefinition Height="106"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="183"/>
+                    <RowDefinition Height="158"/>
                     <RowDefinition Height="85"/>
                 </Grid.RowDefinitions>
                 <GroupBox Header="DESIGN CODE" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Column="0" Grid.Row="0">
@@ -35,7 +35,7 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Header="MATERIAL" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Column="0" Grid.Row="1">
+                <GroupBox Header="MATERIAL" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Column="0" Grid.Row="1">
                     <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="78"/>
@@ -45,16 +45,16 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Header="SECTION PARAMETER" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Column="0" Grid.Row="2">
+                <GroupBox Header="SECTION PARAMETER" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Column="0" Grid.Row="2">
                     <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="52"/>
+                            <RowDefinition Height="78"/>
                         </Grid.RowDefinitions>
                         <TextBlock x:Name="sect_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Header="REBAR ARRANGEMENT" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Column="0" Grid.Row="3">
+                <GroupBox Header="REBAR ARRANGEMENT" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Column="0" Grid.Row="3">
                     <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="52"/>
@@ -63,7 +63,7 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Header="FLEXURAL UTILIZATION" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Column="0" Grid.Row="4">
+                <GroupBox Header="FLEXURAL UTILIZATION" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Column="0" Grid.Row="4">
                     <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="156"/>
@@ -72,7 +72,7 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Header="SHEAR UTILIZATION" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Column="0" Grid.Row="5">
+                <GroupBox Header="SHEAR UTILIZATION" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Column="0" Grid.Row="5">
                     <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="130"/>
@@ -81,7 +81,7 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Header="AXIAL COMPRESSION RATIO" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,10" Grid.Column="0" Grid.Row="6">
+                <GroupBox Header="AXIAL COMPRESSION RATIO" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,10" Grid.Column="0" Grid.Row="6">
                     <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="52"/>

@@ -11,11 +11,11 @@
         Title="RC Beam Detail"  Height="791" Width="660">
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
-            <RowDefinition Height="118"/>
-            <RowDefinition Height="216"/>
-            <RowDefinition Height="137"/>
-            <RowDefinition Height="137"/>
-            <RowDefinition Height="168"/>
+            <RowDefinition Height="113"/>
+            <RowDefinition Height="235"/>
+            <RowDefinition Height="132"/>
+            <RowDefinition Height="132"/>
+            <RowDefinition Height="163"/>
         </Grid.RowDefinitions>
         <Grid ShowGridLines="False">
             <Grid.ColumnDefinitions>
@@ -35,7 +35,7 @@
             <Grid ShowGridLines="False">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="59"/>
-                    <RowDefinition Height="59"/>
+                    <RowDefinition Height="54"/>
                 </Grid.RowDefinitions>
 
                 <GroupBox Header="DESIGN CODE" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Column="0" Grid.Row="0">
@@ -47,7 +47,7 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Header="SECTION PARAMETER" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Column="0" Grid.Row="1">
+                <GroupBox Header="SECTION PARAMETER" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Column="0" Grid.Row="1">
                     <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="26"/>
@@ -65,36 +65,55 @@
                 <ColumnDefinition Width="330"/>
             </Grid.ColumnDefinitions>
 
-            <GroupBox Header="REBAR ARRANGEMENT AT SUPPORT" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Column="0" Grid.Row="1">
-                <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="78"/>
-                    </Grid.RowDefinitions>
+            <GroupBox Header="REBAR ARRANGEMENT AT SUPPORT" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Column="0" Grid.Row="1">
+                <Grid Margin="0,0,0,0" Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        
+                        <ColumnDefinition Width="207"/>
+                        <ColumnDefinition Width="102"/>
                     </Grid.ColumnDefinitions>
-
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="207"/>
+                    </Grid.RowDefinitions>
+                    <oxy:PlotView x:Name="SectL_Plot" Model="{Binding PlotSect}" Grid.Row="0" Grid.Column="0" Width="207" Height="207" IsEnabled="False"/>
+                    <Grid ShowGridLines="False" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="78"/>
+                            <RowDefinition Height="51"/>
+                            <RowDefinition Height="78"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="rebarTopSup_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="23" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5"/>
+                        <TextBlock x:Name="rebarStirSup_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="23" Foreground="Black" Grid.Column="0" Grid.Row="1" FontWeight="Normal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,5,5,0"/>
+                        <TextBlock x:Name="rebarBotSup_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="23" Foreground="Black" Grid.Column="0" Grid.Row="2" FontWeight="Normal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,5,5,0"/>
+                    </Grid>
                 </Grid>
             </GroupBox>
 
-            <GroupBox Header="REBAR ARRANGEMENT AT MID - SPAN" Foreground="Blue" FontWeight="Bold" Margin="5,5,10,5" Grid.Column="1" Grid.Row="1">
-                <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="78"/>
-                    </Grid.RowDefinitions>
+            <GroupBox Header="REBAR ARRANGEMENT AT MID - SPAN" Foreground="Blue" FontWeight="Bold" Margin="5,0,10,5" Grid.Column="1" Grid.Row="1">
+                <Grid Margin="0,0,0,0" Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="157"/>
-                        <ColumnDefinition Width="157"/>
-                        <ColumnDefinition Width="157"/>
-                        <ColumnDefinition Width="157"/>
+                        <ColumnDefinition Width="207"/>
+                        <ColumnDefinition Width="102"/>
                     </Grid.ColumnDefinitions>
-
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="207"/>
+                    </Grid.RowDefinitions>
+                    <oxy:PlotView x:Name="SectM_Plot" Model="{Binding PlotSect}" Grid.Row="0" Grid.Column="0" Width="207" Height="207" IsEnabled="False"/>
+                    <Grid ShowGridLines="False" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="79"/>
+                            <RowDefinition Height="49"/>
+                            <RowDefinition Height="79"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="rebarTopMid_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5"/>
+                        <TextBlock x:Name="rebarStirMid_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="1" FontWeight="Normal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,5,5,0"/>
+                        <TextBlock x:Name="rebarBotMid_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="2" FontWeight="Normal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,5,5,0"/>
+                    </Grid>
                 </Grid>
             </GroupBox>
 
         </Grid>
 
-        <GroupBox Header="FLEXURAL UTILIZATION" Foreground="Blue" FontWeight="Bold" Margin="10,5,10,5" Grid.Column="0" Grid.Row="2">
+        <GroupBox Header="FLEXURAL UTILIZATION" Foreground="Blue" FontWeight="Bold" Margin="10,0,10,5" Grid.Column="0" Grid.Row="2">
             <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="104"/>
@@ -106,35 +125,9 @@
                     <ColumnDefinition Width="157"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock x:Name="flexuralSupTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                    Mtop = 123 (kNm)
-                    <LineBreak />
-                    xd = 123 (mm)
-                    <LineBreak />
-                    Mntop = 123 (kNm)
-                    <LineBreak />
-                    DCtop = M/Mn = 1
-                </TextBlock>
-
-                <TextBlock x:Name="flexuralSupBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="1" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                    Mtop = 123 (kNm)
-                    <LineBreak />
-                    xd = 123 (mm)
-                    <LineBreak />
-                    Mntop = 123 (kNm)
-                    <LineBreak />
-                    DCtop = M/Mn = 1
-                </TextBlock>
-
-                <TextBlock x:Name="flexuralMidTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="2" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                    Mtop = 123 (kNm)
-                    <LineBreak />
-                    xd = 123 (mm)
-                    <LineBreak />
-                    Mntop = 123 (kNm)
-                    <LineBreak />
-                    DCtop = M/Mn = 1
-                </TextBlock>
+                <TextBlock x:Name="flexuralSupTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
+                <TextBlock x:Name="flexuralSupBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="1" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
+                <TextBlock x:Name="flexuralMidTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="2" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
 
                 <TextBlock x:Name="flexuralMidBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="3" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
                     Mtop = 123 (kNm)
@@ -149,7 +142,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="SHEAR AND TORSION UTILIZATION" Foreground="Blue" FontWeight="Bold" Margin="10,5,10,5" Grid.Column="0" Grid.Row="3">
+        <GroupBox Header="SHEAR AND TORSION UTILIZATION" Foreground="Blue" FontWeight="Bold" Margin="10,0,10,5" Grid.Column="0" Grid.Row="3">
             <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="104"/>
@@ -181,7 +174,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="CRACK WIDTH" Foreground="Blue" FontWeight="Bold" Margin="10,5,10,10" Grid.Column="0" Grid.Row="4">
+        <GroupBox Header="CRACK WIDTH" Foreground="Blue" FontWeight="Bold" Margin="10,0,10,10" Grid.Column="0" Grid.Row="4">
             <Grid ShowGridLines="False" Margin="0,0,0,0" Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="130"/>

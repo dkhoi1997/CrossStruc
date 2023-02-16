@@ -20,7 +20,7 @@ namespace CrossStruc.ConcreteBeam
         public static List<(string[], List<int[]>)> listBeam;
         public static List<(string[], List<int[]>)> listSub;
         public static List<(string[], List<double[]>)> listResult;
-        public static string[] arrBeam = new string[39];
+        public static string[] arrBeam = new string[40];
         public static int[] arrCTrebar = new int[4];
         public static int[] arrLrebar = new int[11];
         public static int[] arrMrebar = new int[11];
@@ -427,42 +427,43 @@ namespace CrossStruc.ConcreteBeam
             arrBeam[3] = Convert.ToString(b);
             arrBeam[4] = Convert.ToString(h);
             arrBeam[5] = Convert.ToString(Tsect);
-            arrBeam[6] = Convert.ToString(compressBar);
-            arrBeam[7] = Convert.ToString(bs);
-            arrBeam[8] = Convert.ToString(tf);
-            arrBeam[9] = Convert.ToString(acv);
-            arrBeam[10] = Convert.ToString(tw);
-            arrBeam[11] = Convert.ToString(acrcSlim);
-            arrBeam[12] = Convert.ToString(acrcLlim);
+            arrBeam[6] = Convert.ToString(revertTsect);
+            arrBeam[7] = Convert.ToString(compressBar);
+            arrBeam[8] = Convert.ToString(bs);
+            arrBeam[9] = Convert.ToString(tf);
+            arrBeam[10] = Convert.ToString(acv);
+            arrBeam[11] = Convert.ToString(tw);
+            arrBeam[12] = Convert.ToString(acrcSlim);
+            arrBeam[13] = Convert.ToString(acrcLlim);
 
-            arrBeam[13] = Convert.ToString(arrCTrebar[0]);
-            arrBeam[14] = Convert.ToString(arrCTrebar[1]);
-            arrBeam[15] = Convert.ToString(arrCTrebar[2]);
-            arrBeam[16] = Convert.ToString(arrCTrebar[3]);
+            arrBeam[14] = Convert.ToString(arrCTrebar[0]);
+            arrBeam[15] = Convert.ToString(arrCTrebar[1]);
+            arrBeam[16] = Convert.ToString(arrCTrebar[2]);
+            arrBeam[17] = Convert.ToString(arrCTrebar[3]);
 
-            arrBeam[17] = Convert.ToString(arrLrebar[0]);
-            arrBeam[18] = Convert.ToString(arrLrebar[1]);
-            arrBeam[19] = Convert.ToString(arrLrebar[2]);
-            arrBeam[20] = Convert.ToString(arrLrebar[3]);
-            arrBeam[21] = Convert.ToString(arrLrebar[4]);
-            arrBeam[22] = Convert.ToString(arrLrebar[5]);
-            arrBeam[23] = Convert.ToString(arrLrebar[6]);
-            arrBeam[24] = Convert.ToString(arrLrebar[7]);
-            arrBeam[25] = Convert.ToString(arrLrebar[8]);
-            arrBeam[26] = Convert.ToString(arrLrebar[9]);
-            arrBeam[27] = Convert.ToString(arrLrebar[10]);
+            arrBeam[18] = Convert.ToString(arrLrebar[0]);
+            arrBeam[19] = Convert.ToString(arrLrebar[1]);
+            arrBeam[20] = Convert.ToString(arrLrebar[2]);
+            arrBeam[21] = Convert.ToString(arrLrebar[3]);
+            arrBeam[22] = Convert.ToString(arrLrebar[4]);
+            arrBeam[23] = Convert.ToString(arrLrebar[5]);
+            arrBeam[24] = Convert.ToString(arrLrebar[6]);
+            arrBeam[25] = Convert.ToString(arrLrebar[7]);
+            arrBeam[26] = Convert.ToString(arrLrebar[8]);
+            arrBeam[27] = Convert.ToString(arrLrebar[9]);
+            arrBeam[28] = Convert.ToString(arrLrebar[10]);
 
-            arrBeam[28] = Convert.ToString(arrMrebar[0]);
-            arrBeam[29] = Convert.ToString(arrMrebar[1]);
-            arrBeam[30] = Convert.ToString(arrMrebar[2]);
-            arrBeam[31] = Convert.ToString(arrMrebar[3]);
-            arrBeam[32] = Convert.ToString(arrMrebar[4]);
-            arrBeam[33] = Convert.ToString(arrMrebar[5]);
-            arrBeam[34] = Convert.ToString(arrMrebar[6]);
-            arrBeam[35] = Convert.ToString(arrMrebar[7]);
-            arrBeam[36] = Convert.ToString(arrMrebar[8]);
-            arrBeam[37] = Convert.ToString(arrMrebar[9]);
-            arrBeam[38] = Convert.ToString(arrMrebar[10]);
+            arrBeam[29] = Convert.ToString(arrMrebar[0]);
+            arrBeam[30] = Convert.ToString(arrMrebar[1]);
+            arrBeam[31] = Convert.ToString(arrMrebar[2]);
+            arrBeam[32] = Convert.ToString(arrMrebar[3]);
+            arrBeam[33] = Convert.ToString(arrMrebar[4]);
+            arrBeam[34] = Convert.ToString(arrMrebar[5]);
+            arrBeam[35] = Convert.ToString(arrMrebar[6]);
+            arrBeam[36] = Convert.ToString(arrMrebar[7]);
+            arrBeam[37] = Convert.ToString(arrMrebar[8]);
+            arrBeam[38] = Convert.ToString(arrMrebar[9]);
+            arrBeam[39] = Convert.ToString(arrMrebar[10]);
 
         }
 

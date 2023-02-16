@@ -164,12 +164,12 @@ namespace CrossStruc.ConcreteColumn
                 add[1] = item.Item1[1]; // Section
                 add[2] = item.Item1[2]; // Shape
 
-                double maxDC = item.Item2.Max(t => t.Item1[15]); // Position in array
-                double maxDCs = item.Item2.Max(t => t.Item1[24]); // Position in array
-                double maxved = item.Item2.Max(t => t.Item1[26]); // Position in array
-                string caseDC = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[15] == maxDC).Item1[0]);
-                string caseDCs = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[24] == maxDCs).Item1[0]);
-                string caseved = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[26] == maxved).Item1[0]);
+                double maxDC = item.Item2.Max(t => t.Item1[17]); // Position in array
+                double maxDCs = item.Item2.Max(t => t.Item1[26]); // Position in array
+                double maxved = item.Item2.Max(t => t.Item1[28]); // Position in array
+                string caseDC = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[17] == maxDC).Item1[0]);
+                string caseDCs = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[26] == maxDCs).Item1[0]);
+                string caseved = Convert.ToString(item.Item2.FirstOrDefault(t => t.Item1[28] == maxved).Item1[0]);
 
                 add[4] = Convert.ToString(maxDC);
                 add[5] = Convert.ToString(maxDCs);

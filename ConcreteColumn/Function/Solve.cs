@@ -73,13 +73,14 @@ namespace CrossStruc.ConcreteColumn.Function
                     int Mxup; int Myup;
                     double e0x; double e0y;
                     double etax; double etay;
+                    double Ncrx; double Ncry;
                     if (shape == "Rec")
                     {
-                        (e0x, e0y, etax, etay, Mxup, Myup) = UpperMoment.RecSect(P, Mx, My, Cx, Cy, Lx, Ly, Eb, kx, ky);
+                        (e0x, e0y, Ncrx, Ncry, etax, etay, Mxup, Myup) = UpperMoment.RecSect(P, Mx, My, Cx, Cy, Lx, Ly, Eb, kx, ky);
                     }
                     else
                     {
-                        (e0x, e0y, etax, etay, Mxup, Myup) = UpperMoment.CirSect(P, Mx, My, Cx, Lx, Ly, Eb, kx, ky);
+                        (e0x, e0y, Ncrx, Ncry, etax, etay, Mxup, Myup) = UpperMoment.CirSect(P, Mx, My, Cx, Lx, Ly, Eb, kx, ky);
                     }
                     // Flexural
                     int Muxy = Convert.ToInt32(Math.Sqrt(Math.Pow(Mxup, 2) + Math.Pow(Myup, 2)));
@@ -107,7 +108,7 @@ namespace CrossStruc.ConcreteColumn.Function
                     }
 
                     // Paste result into array
-                    double[] calData = new double[27];
+                    double[] calData = new double[29];
                     calData[0] = comb;
                     calData[1] = P;
                     calData[2] = Qx;
@@ -116,25 +117,27 @@ namespace CrossStruc.ConcreteColumn.Function
                     calData[5] = My;
                     calData[6] = e0x;
                     calData[7] = e0y;
-                    calData[8] = etax;
-                    calData[9] = etay;
-                    calData[10] = Mxup;
-                    calData[11] = Myup;
-                    calData[12] = Muxy;
-                    calData[13] = Pnxy;
-                    calData[14] = Mnxy;
-                    calData[15] = DC;
-                    calData[16] = sigma;
-                    calData[17] = phin;
-                    calData[18] = cx;
-                    calData[19] = cy;
-                    calData[20] = Qbx;
-                    calData[21] = Qsx;
-                    calData[22] = Qby;
-                    calData[23] = Qsy;
-                    calData[24] = DCs;
-                    calData[25] = fcd;
-                    calData[26] = ved;
+                    calData[8] = Ncrx;
+                    calData[9] = Ncry;
+                    calData[10] = etax;
+                    calData[11] = etay;
+                    calData[12] = Mxup;
+                    calData[13] = Myup;
+                    calData[14] = Muxy;
+                    calData[15] = Pnxy;
+                    calData[16] = Mnxy;
+                    calData[17] = DC;
+                    calData[18] = sigma;
+                    calData[19] = phin;
+                    calData[20] = cx;
+                    calData[21] = cy;
+                    calData[22] = Qbx;
+                    calData[23] = Qsx;
+                    calData[24] = Qby;
+                    calData[25] = Qsy;
+                    calData[26] = DCs;
+                    calData[27] = fcd;
+                    calData[28] = ved;
 
                     listTemp.Add((calData, vercheck, hozcheck));
                 }

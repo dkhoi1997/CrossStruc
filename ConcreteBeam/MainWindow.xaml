@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="RC Beam Design" 
         SizeToContent="WidthAndHeight"
-        ResizeMode="CanMinimize" Height="623">
+        ResizeMode="CanMinimize" Height="613">
     <Window.Resources>
         <local:ConvertResult x:Key="ConvertDC"/>
         <Style TargetType="{x:Type ComboBox}">
@@ -21,7 +21,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid ShowGridLines="False" Height="608">
+    <Grid ShowGridLines="False" Height="598">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="285"/>
             <ColumnDefinition Width="488"/>
@@ -110,12 +110,12 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="113"/>
-                <RowDefinition Height="243"/>
-                <RowDefinition Height="217"/>
+                <RowDefinition Height="238"/>
+                <RowDefinition Height="212"/>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <GroupBox Header="MATERIAL" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Row="0" >
-                <Grid Margin="5,0,5,0" Height="78" Grid.Row="0">
+                <Grid Margin="5,-2.5,5,0" Height="78" Grid.Row="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -155,8 +155,8 @@
                     </ComboBox>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="BEAM PROPERTY" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Row="1">
-                <Grid Margin="5,0,5,0" Height="208">
+            <GroupBox Header="BEAM PROPERTY" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Row="1">
+                <Grid Margin="5,-2.5,5,0" Height="208">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -196,8 +196,8 @@
                     <TextBox x:Name="acv_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="25" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="7" Height="22" PreviewTextInput="OnlyNumber"/>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="OTHER" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Row="2">
-                <Grid Margin="5,0,5,0" Height="182">
+            <GroupBox Header="OTHER" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Row="2">
+                <Grid Margin="5,-2.5,5,0" Height="182">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -276,14 +276,14 @@
         <Grid Grid.Column="1" ShowGridLines="False">
             <Grid.RowDefinitions>
                 <RowDefinition Height="454"/>
-                <RowDefinition Height="87"/>
-                <RowDefinition Height="67"/>
+                <RowDefinition Height="82"/>
+                <RowDefinition Height="62"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="488"/>
             </Grid.ColumnDefinitions>
-            <GroupBox Header="CONTINUOUS MAIN REBAR" Foreground="Blue" FontWeight="Bold" Margin="5,5,5,5" Grid.Row="1">
-                <Grid ShowGridLines="False" Margin="5,0,5,0" Height="52">
+            <GroupBox Header="CONTINUOUS MAIN REBAR" Foreground="Blue" FontWeight="Bold" Margin="5,0,5,5" Grid.Row="1">
+                <Grid ShowGridLines="False" Margin="5,-2.5,5,0" Height="52">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -357,8 +357,8 @@
 
 
 
-            <GroupBox Header="STIRRUP REBAR" Foreground="Blue" FontWeight="Bold" Margin="5,5,5,10" Grid.Row="2">
-                <Grid ShowGridLines="False" Margin="5,0,5,0" Height="26">
+            <GroupBox Header="STIRRUP REBAR" Foreground="Blue" FontWeight="Bold" Margin="5,0,5,10" Grid.Row="2">
+                <Grid ShowGridLines="False" Margin="5,-2.5,5,0" Height="26">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                     </Grid.RowDefinitions>

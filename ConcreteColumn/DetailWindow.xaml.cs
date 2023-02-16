@@ -56,6 +56,43 @@ namespace CrossStruc.ConcreteColumn
 
             double Ab; double As; double u;
 
+            double DC = listSend.Max(t => t.Item1[17]);
+            int Pxy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[1]);
+            int Mx = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[4]);
+            int My = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[5]);
+            double e0x = listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[6];
+            double e0y = listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[7];
+            double Ncrx = listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[8];
+            double Ncry = listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[9];
+            double etax = listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[10];
+            double etay = listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[11];
+            int Mux = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[12]);
+            int Muy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[13]);
+            int Muxy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[14]);
+            int Pnxy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[15]);
+            int Mnxy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[17] == DC).Item1[16]);
+
+            double DCs = listSend.Max(t => t.Item1[26]);
+            int PQ = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[26] == DCs).Item1[1]);
+            int Qx = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[26] == DCs).Item1[2]);
+            int Qy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[26] == DCs).Item1[3]);
+            double sigma = listSend.FirstOrDefault(t => t.Item1[26] == DCs).Item1[18];
+            double phin = listSend.FirstOrDefault(t => t.Item1[26] == DCs).Item1[19];
+            int cx = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[26] == DCs).Item1[20]);
+            int cy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[26] == DCs).Item1[21]);
+            int Qbx = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[26] == DCs).Item1[22]);
+            int Qsx = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[26] == DCs).Item1[23]);
+            int Qby = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[26] == DCs).Item1[24]);
+            int Qsy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[26] == DCs).Item1[25]);
+
+            double ved = listSend.Max(t => t.Item1[28]);
+            int Ped = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[28] == ved).Item1[1]);
+            double fcd = listSend.FirstOrDefault(t => t.Item1[28] == ved).Item1[27];
+
+            double[,] output_PMxy = listSend.FirstOrDefault(t => t.Item1[17] == DC).Item2;
+            double[,] output_MxMy = listSend.FirstOrDefault(t => t.Item1[17] == DC).Item3;
+
+
             // Material data
             material_tb.Inlines.Add("Concrete " + concGrade + ", ");
             material_tb.Inlines.Add("R");
@@ -107,15 +144,23 @@ namespace CrossStruc.ConcreteColumn
             sect_tb.Inlines.Add("L");
             sect_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "x" });
             sect_tb.Inlines.Add(" = " + Lx + " (mm), ");
+            sect_tb.Inlines.Add("k");
+            sect_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "x" });
+            sect_tb.Inlines.Add(" = " + kx + ", ");
+            sect_tb.Inlines.Add("N");
+            sect_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crx" });
+            sect_tb.Inlines.Add(" = " + Ncrx + " (kN)");
+            sect_tb.Inlines.Add(new LineBreak());
+
             sect_tb.Inlines.Add("L");
             sect_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "y" });
             sect_tb.Inlines.Add(" = " + Ly + " (mm), ");
             sect_tb.Inlines.Add("k");
-            sect_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "x" });
-            sect_tb.Inlines.Add(" = " + kx + ", ");
-            sect_tb.Inlines.Add("k");
             sect_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "y" });
-            sect_tb.Inlines.Add(" = " + ky);
+            sect_tb.Inlines.Add(" = " + ky + ", ");
+            sect_tb.Inlines.Add("N");
+            sect_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "cry" });
+            sect_tb.Inlines.Add(" = " + Ncry + " (kN)");
 
             // Rebar arrangement
             As = Math.Round(sumn * Math.PI * Math.Pow(dmain, 2) / 4, 0);
@@ -140,19 +185,6 @@ namespace CrossStruc.ConcreteColumn
             rebar_tb.Inlines.Add(" = " + nsy);
 
             // Flexural check
-            double DC = listSend.Max(t => t.Item1[15]);
-            int Pxy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[1]);
-            int Mx = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[4]);
-            int My = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[5]);
-            double e0x = listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[6];
-            double e0y = listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[7];
-            double etax = listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[8];
-            double etay = listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[9];
-            int Mux = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[10]);
-            int Muy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[11]);
-            int Muxy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[12]);
-            int Pnxy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[13]);
-            int Mnxy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[15] == DC).Item1[14]);
 
             flexural_tb.Inlines.Add("P");
             flexural_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "xy" });
@@ -236,18 +268,6 @@ namespace CrossStruc.ConcreteColumn
             
 
             // Shear check
-            double DCs = listSend.Max(t => t.Item1[24]);
-            int PQ = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[24] == DCs).Item1[1]);
-            int Qx = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[24] == DCs).Item1[2]);
-            int Qy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[24] == DCs).Item1[3]);
-            double sigma = listSend.FirstOrDefault(t => t.Item1[24] == DCs).Item1[16];
-            double phin = listSend.FirstOrDefault(t => t.Item1[24] == DCs).Item1[17];
-            int cx = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[24] == DCs).Item1[18]);
-            int cy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[24] == DCs).Item1[19]);
-            int Qbx = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[24] == DCs).Item1[20]);
-            int Qsx = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[24] == DCs).Item1[21]);
-            int Qby = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[24] == DCs).Item1[22]);
-            int Qsy = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[24] == DCs).Item1[23]);
 
             shear_tb.Inlines.Add("P");
             shear_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "Q" });
@@ -319,11 +339,8 @@ namespace CrossStruc.ConcreteColumn
             }
 
             // ACR check
-            double ved = listSend.Max(t => t.Item1[26]);
             if (ved != 0)
             {
-                int Ped = Convert.ToInt32(listSend.FirstOrDefault(t => t.Item1[26] == ved).Item1[1]);
-                double fcd = listSend.FirstOrDefault(t => t.Item1[26] == ved).Item1[25];
                 acr_tb.Inlines.Add("P");
                 acr_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "ed" });
                 acr_tb.Inlines.Add(" = " + Ped + " (kN), ");
@@ -362,8 +379,6 @@ namespace CrossStruc.ConcreteColumn
             Sect_Plot.DataContext = new ChartSectColumn(secShape, mLayer, tw, Cx, Cy, nx, ny, acv, dmain, dstir);
 
             // ID chart
-            double[,] output_PMxy = listSend.FirstOrDefault(t => t.Item1[15] == DC).Item2;
-            double[,] output_MxMy = listSend.FirstOrDefault(t => t.Item1[15] == DC).Item3;
             IDChartPM_Plot.DataContext = new ChartIDColumn("P-Mxy", output_PMxy, output_MxMy, Muxy, Pxy, Mux, Muy, Cx, Cy);
             IDChartMM_Plot.DataContext = new ChartIDColumn("Mx-My", output_PMxy, output_MxMy, Muxy, Pxy, Mux, Muy, Cx, Cy);
         }

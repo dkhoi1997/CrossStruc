@@ -8,11 +8,11 @@
         mc:Ignorable="d"
         Title="RC Column Design"
         SizeToContent="WidthAndHeight"
-        ResizeMode="CanMinimize" Height="574 ">
+        ResizeMode="CanMinimize" Height="559 ">
     <Window.Resources>
         <local:ConvertResult x:Key="ConvertDC"/>
     </Window.Resources>
-    <Grid ShowGridLines="False" Height="559">
+    <Grid ShowGridLines="False" Height="544">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="285"/>
             <ColumnDefinition Width="280"/>
@@ -97,12 +97,12 @@
                 <ColumnDefinition Width="280"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="259"/>
-                <RowDefinition Height="300"/>
+                <RowDefinition Height="249"/>
+                <RowDefinition Height="295"/>
             </Grid.RowDefinitions>
-            <oxy:PlotView Model="{Binding PlotSect}" Grid.Row="0" Height="259" Margin="10.5,0,10.5,0" IsEnabled="False"/>
-            <GroupBox Header="REBAR ARRANGEMENT" Foreground="Blue" FontWeight="Bold" Margin="5,5,5,10" Grid.Row="1">
-                <Grid Margin="5,0,5,0" Height="260">
+            <oxy:PlotView Model="{Binding PlotSect}" Grid.Row="0" Height="249" Margin="15.5,0,15.5,0" IsEnabled="False"/>
+            <GroupBox Header="REBAR ARRANGEMENT" Foreground="Blue" FontWeight="Bold" Margin="5,0,5,10" Grid.Row="1">
+                <Grid Margin="5,-2.5,5,0" Height="260">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -179,13 +179,13 @@
                 <ColumnDefinition Width="285"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="113"/>
-                <RowDefinition Height="269"/>
-                <RowDefinition Height="139"/>
+                <RowDefinition Height="111"/>
+                <RowDefinition Height="264"/>
+                <RowDefinition Height="134"/>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <GroupBox Header="MATERIAL" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Row="0" >
-                <Grid Margin="5,0,5,0" Height="78" Grid.Row="0">
+                <Grid Margin="5,-2.5,5,0" Height="78" Grid.Row="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -225,8 +225,8 @@
                     </ComboBox>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="COLUMN PROPERTY" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Row="1">
-                <Grid Margin="5,0,5,0" Height="234">
+            <GroupBox Header="COLUMN PROPERTY" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Row="1">
+                <Grid Margin="5,-2.5,5,0" Height="234">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -276,8 +276,8 @@
                     <TextBox x:Name="acv_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="25" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="8" Height="22" PreviewTextInput="OnlyNumber"/>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="OTHER" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Row="2">
-                <Grid Margin="5,0,5,0" Height="104">
+            <GroupBox Header="OTHER" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Row="2">
+                <Grid Margin="5,-2.5,5,0" Height="104">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
