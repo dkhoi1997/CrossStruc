@@ -191,13 +191,13 @@ namespace CrossStruc.ConcreteBeam.Function
                 }
                 if (Math.Abs(sumPc + sumPs) < tolerance)
                 {
+                    double sumSquareCompressionForce = 0;
+                    double sumCompressionForce = 0;
 
                     // Distance of tensile concrete
                     tensDepth = Convert.ToInt32(h - nadepth);
 
-                    // Area of tensile concrete
-                    double sumSquareForceConc = 0;
-                    double sumForceConc = 0;
+                    // Area of tensile concrete & total concrete compression force
                     foreach (double[] item in listConc)
                     {
                         dci = Math.Abs(item[1] + c);
@@ -208,17 +208,16 @@ namespace CrossStruc.ConcreteBeam.Function
                         {
                             tensAreaConc = tensAreaConc + item[2];
                         }
-                        else
+                        else // Compression force of concrete
                         {
-                            // Compression side
                             sigci = StressStrainCurve.Concrete(epci, epb1red, epbt1red, Rbn, Rbtn, Eb);
                             Pci = sigci * item[2] / 1000;
-                            sumSquareForceConc = sumSquareForceConc + Pci * item[1];
-                            sumForceConc = sumForceConc + Pci;
+                            sumSquareCompressionForce = sumSquareCompressionForce + Pci * item[1];
+                            sumCompressionForce = sumCompressionForce + Pci;
                         }
                     }
 
-                    // Area of tensile rebar
+                    // Area of tensile rebar & total rebar compression force
                     double sumAsSquareRebar = 0;
                     double sumAsRebar = 0;
                     foreach (int[] item in listRebar)
@@ -234,10 +233,18 @@ namespace CrossStruc.ConcreteBeam.Function
                             sumAsRebar = sumAsRebar + dre;
                             tensAreaRebar = tensAreaRebar + dre;
                         }
+                        else // Compression force of rebar
+                        {
+                            double dre = Math.PI * Math.Pow(item[2], 2) / 4;
+                            sigsi = StressStrainCurve.Rebar(epsi, Rs, Rsc, Es);
+                            Psi = sigsi * item[2] / 1000;
+                            sumSquareCompressionForce = sumSquareCompressionForce + Psi * item[1];
+                            sumCompressionForce = sumCompressionForce + Psi;
+                        }
                     }
 
                     // Distance from maximum tensile rebar to centroid of compression zone
-                    disTensToComp = Math.Sqrt(Math.Pow(sumSquareForceConc / sumForceConc, 2) + Math.Pow(sumAsSquareRebar / sumAsRebar, 2));
+                    disTensToComp = Math.Sqrt(Math.Pow(sumSquareCompressionForce / sumCompressionForce - sumAsSquareRebar / sumAsRebar, 2));
 
                     break;
                 }

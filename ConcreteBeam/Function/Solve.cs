@@ -154,23 +154,23 @@ namespace CrossStruc.ConcreteBeam.Function
             equivDia[1, 1] = SubExtensions.EquivalentDiaRebar(listMrebarTop, listMrebarBot, false, compressbar);
 
             (tensDepthS[0, 0], tensAreaConcS[0, 0], tensAreaRebarS[0, 0], disTensToCompS[0, 0]) =
-                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[0], listLrebarTop, listLrebarBot, true, compressbar, 0.0015, 0.00008, 0.00015, Rbn, Rbtn, Eb, Rs, Rsc, Es);
+                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[0], listLrebarTop, listLrebarBot, true, compressbar, 0.0015, 0.00008, 0.00015, Rbn, 0, Eb, Rs, Rsc, Es);
             (tensDepthS[0, 1], tensAreaConcS[0, 1], tensAreaRebarS[0, 1], disTensToCompS[0, 1]) =
-                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[1], listLrebarTop, listLrebarBot, false, compressbar, 0.0015, 0.00008, 0.00015, Rbn, Rbtn, Eb, Rs, Rsc, Es);
+                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[1], listLrebarTop, listLrebarBot, false, compressbar, 0.0015, 0.00008, 0.00015, Rbn, 0, Eb, Rs, Rsc, Es);
             (tensDepthS[1, 0], tensAreaConcS[1, 0], tensAreaRebarS[1, 0], disTensToCompS[1, 0]) =
-                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[2], listMrebarTop, listMrebarBot, true, compressbar, 0.0015, 0.00008, 0.00015, Rbn, Rbtn, Eb, Rs, Rsc, Es);
+                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[2], listMrebarTop, listMrebarBot, true, compressbar, 0.0015, 0.00008, 0.00015, Rbn, 0, Eb, Rs, Rsc, Es);
             (tensDepthS[1, 1], tensAreaConcS[1, 1], tensAreaRebarS[1, 1], disTensToCompS[1, 1]) =
-                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[3], listMrebarTop, listMrebarBot, false, compressbar, 0.0015, 0.00008, 0.00015, Rbn, Rbtn, Eb, Rs, Rsc, Es);
+                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[3], listMrebarTop, listMrebarBot, false, compressbar, 0.0015, 0.00008, 0.00015, Rbn, 0, Eb, Rs, Rsc, Es);
 
             // SLS crack width parameter for long-term loading
             (tensDepthL[0, 0], tensAreaConcL[0, 0], tensAreaRebarL[0, 0], disTensToCompL[0, 0]) =
-                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[0], listLrebarTop, listLrebarBot, true, compressbar, epb1red, epbt1red, epbt2, Rbn, Rbtn, Eb, Rs, Rsc, Es);
+                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[0], listLrebarTop, listLrebarBot, true, compressbar, epb1red, epbt1red, epbt2, Rbn, 0, Eb, Rs, Rsc, Es);
             (tensDepthL[0, 1], tensAreaConcL[0, 1], tensAreaRebarL[0, 1], disTensToCompL[0, 1]) =
-                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[1], listLrebarTop, listLrebarBot, false, compressbar, epb1red, epbt1red, epbt2, Rbn, Rbtn, Eb, Rs, Rsc, Es);
+                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[1], listLrebarTop, listLrebarBot, false, compressbar, epb1red, epbt1red, epbt2, Rbn, 0, Eb, Rs, Rsc, Es);
             (tensDepthL[1, 0], tensAreaConcL[1, 0], tensAreaRebarL[1, 0], disTensToCompL[1, 0]) =
-                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[2], listMrebarTop, listMrebarBot, true, compressbar, epb1red, epbt1red, epbt2, Rbn, Rbtn, Eb, Rs, Rsc, Es);
+                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[2], listMrebarTop, listMrebarBot, true, compressbar, epb1red, epbt1red, epbt2, Rbn, 0, Eb, Rs, Rsc, Es);
             (tensDepthL[1, 1], tensAreaConcL[1, 1], tensAreaRebarL[1, 1], disTensToCompL[1, 1]) =
-                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[3], listMrebarTop, listMrebarBot, false, compressbar, epb1red, epbt1red, epbt2, Rbn, Rbtn, Eb, Rs, Rsc, Es);
+                SLSCheck.CrackWidthParameter(b, h, tolerance, listConc[3], listMrebarTop, listMrebarBot, false, compressbar, epb1red, epbt1red, epbt2, Rbn, 0, Eb, Rs, Rsc, Es);
 
             List<(string[], List<double[]>)> listResult = new List<(string[], List<double[]>)>();
 
