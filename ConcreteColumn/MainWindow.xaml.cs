@@ -96,7 +96,7 @@ namespace CrossStruc.ConcreteColumn
 
             double percent = SubExtensions.RebarPercent(secShape, Cx, Cy, rebarlist.Count, dmain);
             percent_txt.Text = Convert.ToString(percent);
-            total_txt.Text = Convert.ToString(rebarlist.Count) + dmain_cbb.Text;
+            total_txt.Text = Convert.ToString(rebarlist.Count) + (dmain_cbb.SelectedItem as ComboBoxItem).Content.ToString();
 
             DataContext = new ChartSectColumn(secShape, mLayer, tw, Cx, Cy, nx, ny, acv, dmain, dstir);
 
