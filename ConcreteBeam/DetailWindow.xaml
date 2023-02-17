@@ -128,16 +128,7 @@
                 <TextBlock x:Name="flexuralSupTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
                 <TextBlock x:Name="flexuralSupBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="1" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
                 <TextBlock x:Name="flexuralMidTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="2" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
-
-                <TextBlock x:Name="flexuralMidBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="3" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                    Mtop = 123 (kNm)
-                    <LineBreak />
-                    xd = 123 (mm)
-                    <LineBreak />
-                    Mntop = 123 (kNm)
-                    <LineBreak />
-                    DCtop = M/Mn = 1
-                </TextBlock>
+                <TextBlock x:Name="flexuralMidBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="3" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
 
             </Grid>
         </GroupBox>
@@ -152,25 +143,8 @@
                     <ColumnDefinition Width="314"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock x:Name="sheartorsionSup_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                        Q = 123 (kNm), T = 123 (kNm)
-                        <LineBreak />
-                        c = 123 (mm), Qb = 123 (kN), Qs = 123 (kN)
-                        <LineBreak />
-                        deltaZ = 123 (mm), Tn = 123 (kNm)
-                        <LineBreak />
-                        DC = Q / (Qb + Qs) + T / Tn = 0.5
-                </TextBlock>
-
-                <TextBlock x:Name="sheartorsionMid_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="1" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                        Q = 123 (kNm), T = 123 (kNm)
-                        <LineBreak />
-                        c = 123 (mm), Qb = 123 (kN), Qs = 123 (kN)
-                        <LineBreak />
-                        deltaZ = 123 (mm), Tn = 123 (kNm)
-                        <LineBreak />
-                        DC = Q / (Qb + Qs) + T / Tn = 0.5
-                </TextBlock>
+                <TextBlock x:Name="sheartorsionSup_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
+                <TextBlock x:Name="sheartorsionMid_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="1" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
             </Grid>
         </GroupBox>
 
@@ -186,53 +160,10 @@
                     <ColumnDefinition Width="157"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock x:Name="crackSupTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                        Ms_top = 123 (kNm)
-                        <LineBreak />
-                        Ml_top = 123 (kNm)
-                        <LineBreak />
-                        Mcrc_top = 1233 (kNm)
-                        <LineBreak />
-                        acrc = 0.3 (mm)
-                        <LineBreak />
-                        acrc,1 = 0.44 = (mm)
-                </TextBlock>
-
-                <TextBlock x:Name="crackSupBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="1" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                        Ms_top = 123 (kNm)
-                        <LineBreak />
-                        Ml_top = 123 (kNm)
-                        <LineBreak />
-                        Mcrc_top = 1233 (kNm)
-                        <LineBreak />
-                        acrc = 0.3 (mm)
-                        <LineBreak />
-                        acrc,1 = 0.44 = (mm)
-                </TextBlock>
-
-                <TextBlock x:Name="crackMidTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="2" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                        Ms_top = 123 (kNm)
-                        <LineBreak />
-                        Ml_top = 123 (kNm)
-                        <LineBreak />
-                        Mcrc_top = 1233 (kNm)
-                        <LineBreak />
-                        acrc = 0.3 (mm)
-                        <LineBreak />
-                        acrc,1 = 0.44 = (mm)
-                </TextBlock>
-
-                <TextBlock x:Name="crackMidBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="3" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5">
-                        Ms_top = 123 (kNm)
-                        <LineBreak />
-                        Ml_top = 123 (kNm)
-                        <LineBreak />
-                        Mcrc_top = 1233 (kNm)
-                        <LineBreak />
-                        acrc = 0.3 (mm)
-                        <LineBreak />
-                        acrc,1 = 0.44 = (mm)
-                </TextBlock>
+                <TextBlock x:Name="crackSupTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="0" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
+                <TextBlock x:Name="crackSupBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="1" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
+                <TextBlock x:Name="crackMidTop_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="2" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
+                <TextBlock x:Name="crackMidBot_tb" TextWrapping="Wrap" LineStackingStrategy="MaxHeight" LineHeight="25" Foreground="Black" Grid.Column="3" Grid.Row="0" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,5,5,5"/>
 
             </Grid>
         </GroupBox>

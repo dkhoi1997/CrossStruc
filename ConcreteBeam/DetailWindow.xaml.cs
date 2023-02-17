@@ -79,6 +79,92 @@ namespace CrossStruc.ConcreteBeam
             int Mns = Convert.ToInt32(arrBeam[38]);
             int Msw = Convert.ToInt32(arrBeam[39]);
 
+
+            int[,] M = new int[2, 2];
+            double[,] naDepth = new double[2, 2];
+            int[,] Mn = new int[2, 2];
+            double[,] DC = new double[2, 2];
+
+            M[0, 0] = Convert.ToInt32(listSend[0][0]);
+            M[0, 1] = Convert.ToInt32(listSend[0][1]);
+            M[1, 0] = Convert.ToInt32(listSend[1][0]);
+            M[1, 1] = Convert.ToInt32(listSend[1][1]);
+
+            naDepth[0, 0] = listSend[0][8];
+            naDepth[0, 1] = listSend[0][9];
+            naDepth[1, 0] = listSend[1][8];
+            naDepth[1, 1] = listSend[1][9];
+
+            Mn[0, 0] = Convert.ToInt32(listSend[0][10]);
+            Mn[0, 1] = Convert.ToInt32(listSend[0][11]);
+            Mn[1, 0] = Convert.ToInt32(listSend[1][10]);
+            Mn[1, 1] = Convert.ToInt32(listSend[1][11]);
+
+            DC[0, 0] = listSend[0][49];
+            DC[0, 1] = listSend[0][50];
+            DC[1, 0] = listSend[1][49];
+            DC[1, 1] = listSend[1][50];
+
+            int[] Q = new int[2];
+            int[] T = new int[2];
+            double[] c = new double[2];
+            int[] Qb = new int[2];
+            int[] Qs = new int[2];
+            double[] torCap = new double[2];
+            int[] Tn = new int[2];
+            double[] DCs = new double[2];
+
+            Q[0] = Convert.ToInt32(listSend[0][6]);
+            Q[1] = Convert.ToInt32(listSend[1][6]);
+            T[0] = Convert.ToInt32(listSend[0][7]);
+            T[1] = Convert.ToInt32(listSend[1][7]);
+
+            c[0] = listSend[0][12];
+            c[1] = listSend[1][12];
+            Qb[0] = Convert.ToInt32(listSend[0][13]);
+            Qb[1] = Convert.ToInt32(listSend[1][13]);
+            Qs[0] = Convert.ToInt32(listSend[0][14]);
+            Qs[1] = Convert.ToInt32(listSend[1][14]);
+
+            torCap[0] = listSend[0][15];
+            torCap[1] = listSend[1][15];
+            Tn[0] = Convert.ToInt32(listSend[0][16]);
+            Tn[1] = Convert.ToInt32(listSend[1][16]);
+
+            DCs[0] = listSend[0][51];
+            DCs[1] = listSend[1][51];
+
+            int[,] Ms = new int[2, 2];
+            int[,] Ml = new int[2, 2];
+            int[,] Mcrc = new int[2, 2];
+            double[,] acrcS = new double[2, 2];
+            double[,] acrcL = new double[2, 2];
+
+            Ms[0, 0] = Convert.ToInt32(listSend[0][2]);
+            Ms[0, 1] = Convert.ToInt32(listSend[0][3]);
+            Ms[1, 0] = Convert.ToInt32(listSend[1][2]);
+            Ms[1, 1] = Convert.ToInt32(listSend[1][3]);
+
+            Ml[0, 0] = Convert.ToInt32(listSend[0][4]);
+            Ml[0, 1] = Convert.ToInt32(listSend[0][5]);
+            Ml[1, 0] = Convert.ToInt32(listSend[1][4]);
+            Ml[1, 1] = Convert.ToInt32(listSend[1][5]);
+
+            Mcrc[0, 0] = Convert.ToInt32(listSend[0][17]);
+            Mcrc[0, 1] = Convert.ToInt32(listSend[0][18]);
+            Mcrc[1, 0] = Convert.ToInt32(listSend[1][17]);
+            Mcrc[1, 1] = Convert.ToInt32(listSend[1][18]);
+
+            acrcS[0, 0] = listSend[0][39];
+            acrcS[0, 1] = listSend[0][42];
+            acrcS[1, 0] = listSend[1][39];
+            acrcS[1, 1] = listSend[1][42];
+
+            acrcL[0, 0] = listSend[0][45];
+            acrcL[0, 1] = listSend[0][48];
+            acrcL[1, 0] = listSend[1][45];
+            acrcL[1, 1] = listSend[1][48];
+
             // Material data
             material_tb.Inlines.Add("Concrete " + concGrade + ", ");
             material_tb.Inlines.Add("R");
@@ -103,6 +189,7 @@ namespace CrossStruc.ConcreteBeam
             material_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "swn" });
             material_tb.Inlines.Add(" = " + Rswn + " (MPa)");
 
+
             // Section parameter
             sect_tb.Inlines.Add("b");
             sect_tb.Inlines.Add(" × ");
@@ -118,9 +205,6 @@ namespace CrossStruc.ConcreteBeam
                 sect_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "f" });
                 sect_tb.Inlines.Add(" = " + bf + " × " + tf + " (mm)");
             }
-
-
-
 
 
             // Rebar arrangement at support - Top
@@ -172,10 +256,6 @@ namespace CrossStruc.ConcreteBeam
             rebarStirSup_tb.Inlines.Add(" = " + Lns);
 
 
-
-
-
-
             // Rebar arrangement at mid - Top
             u[2] = SubExtensions.RebarProperty(b, h, acv, tw, n1top, d1top, Mn2top, Md2top, Mn3top, Md3top, Mds).Item2;
             u[3] = SubExtensions.RebarProperty(b, h, acv, tw, n1bot, d1bot, Mn2bot, Md2bot, Mn3bot, Md3bot, Mds).Item2;
@@ -225,9 +305,321 @@ namespace CrossStruc.ConcreteBeam
             rebarStirMid_tb.Inlines.Add(" = " + Mns);
 
 
+            // Flexural check support - Top
+            flexuralSupTop_tb.Inlines.Add("M");
+            flexuralSupTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "t" });
+            flexuralSupTop_tb.Inlines.Add(" = " + M[0, 0] + " (kNm)");
+            if (M[0, 0] != 0)
+            {
+                flexuralSupTop_tb.Inlines.Add(new LineBreak());
+                flexuralSupTop_tb.Inlines.Add("x");
+                flexuralSupTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "dt" });
+                flexuralSupTop_tb.Inlines.Add(" = " + naDepth[0, 0] + " (mm)");
+                flexuralSupTop_tb.Inlines.Add(new LineBreak());
+                flexuralSupTop_tb.Inlines.Add("M");
+                flexuralSupTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "nt" });
+                flexuralSupTop_tb.Inlines.Add(" = " + Mn[0, 0] + " (kNm)");
+                flexuralSupTop_tb.Inlines.Add(new LineBreak());
+                flexuralSupTop_tb.Inlines.Add("DC");
+                flexuralSupTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "t" });
+                flexuralSupTop_tb.Inlines.Add(" = ");
+                flexuralSupTop_tb.Inlines.Add("M");
+                flexuralSupTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "t" });
+                flexuralSupTop_tb.Inlines.Add(" / ");
+                flexuralSupTop_tb.Inlines.Add("M");
+                flexuralSupTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "nt" });
+                flexuralSupTop_tb.Inlines.Add(" = ");
+
+                if (DC[0, 0] <= 1)
+                {
+                    flexuralSupTop_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(DC[0, 0]) });
+                }
+                else
+                {
+                    flexuralSupTop_tb.Inlines.Add(new Run() { Foreground = Brushes.Red, Text = Convert.ToString(DC[0, 0]) });
+                }
+            }
+
+            // Flexural check support - Bot
+            flexuralSupBot_tb.Inlines.Add("M");
+            flexuralSupBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "b" });
+            flexuralSupBot_tb.Inlines.Add(" = " + M[0, 1] + " (kNm)");
+            if (M[0, 1] != 0)
+            {
+                flexuralSupBot_tb.Inlines.Add(new LineBreak());
+                flexuralSupBot_tb.Inlines.Add("x");
+                flexuralSupBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "db" });
+                flexuralSupBot_tb.Inlines.Add(" = " + naDepth[0, 1] + " (mm)");
+                flexuralSupBot_tb.Inlines.Add(new LineBreak());
+                flexuralSupBot_tb.Inlines.Add("M");
+                flexuralSupBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "nb" });
+                flexuralSupBot_tb.Inlines.Add(" = " + Mn[0, 1] + " (kNm)");
+                flexuralSupBot_tb.Inlines.Add(new LineBreak());
+                flexuralSupBot_tb.Inlines.Add("DC");
+                flexuralSupBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "b" });
+                flexuralSupBot_tb.Inlines.Add(" = ");
+                flexuralSupBot_tb.Inlines.Add("M");
+                flexuralSupBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "b" });
+                flexuralSupBot_tb.Inlines.Add(" / ");
+                flexuralSupBot_tb.Inlines.Add("M");
+                flexuralSupBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "nb" });
+                flexuralSupBot_tb.Inlines.Add(" = ");
+
+                if (DC[0, 1] <= 1)
+                {
+                    flexuralSupBot_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(DC[0, 1]) });
+                }
+                else
+                {
+                    flexuralSupBot_tb.Inlines.Add(new Run() { Foreground = Brushes.Red, Text = Convert.ToString(DC[0, 1]) });
+                }
+            }
+
+            // Flexural check mid - Top
+            flexuralMidTop_tb.Inlines.Add("M");
+            flexuralMidTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "t" });
+            flexuralMidTop_tb.Inlines.Add(" = " + M[1, 0] + " (kNm)");
+            if (M[1, 0] != 0)
+            {
+                flexuralMidTop_tb.Inlines.Add(new LineBreak());
+                flexuralMidTop_tb.Inlines.Add("x");
+                flexuralMidTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "dt" });
+                flexuralMidTop_tb.Inlines.Add(" = " + naDepth[1, 0] + " (mm)");
+                flexuralMidTop_tb.Inlines.Add(new LineBreak());
+                flexuralMidTop_tb.Inlines.Add("M");
+                flexuralMidTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "nt" });
+                flexuralMidTop_tb.Inlines.Add(" = " + Mn[1, 0] + " (kNm)");
+                flexuralMidTop_tb.Inlines.Add(new LineBreak());
+                flexuralMidTop_tb.Inlines.Add("DC");
+                flexuralMidTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "t" });
+                flexuralMidTop_tb.Inlines.Add(" = ");
+                flexuralMidTop_tb.Inlines.Add("M");
+                flexuralMidTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "t" });
+                flexuralMidTop_tb.Inlines.Add(" / ");
+                flexuralMidTop_tb.Inlines.Add("M");
+                flexuralMidTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "nt" });
+                flexuralMidTop_tb.Inlines.Add(" = ");
+
+                if (DC[1, 0] <= 1)
+                {
+                    flexuralMidTop_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(DC[1, 0]) });
+                }
+                else
+                {
+                    flexuralMidTop_tb.Inlines.Add(new Run() { Foreground = Brushes.Red, Text = Convert.ToString(DC[1, 0]) });
+                }
+            }
+
+            // Flexural check mid - Bot
+            flexuralMidBot_tb.Inlines.Add("M");
+            flexuralMidBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "b" });
+            flexuralMidBot_tb.Inlines.Add(" = " + M[1, 1] + " (kNm)");
+            if (M[1, 1] != 0)
+            {
+                flexuralMidBot_tb.Inlines.Add(new LineBreak());
+                flexuralMidBot_tb.Inlines.Add("x");
+                flexuralMidBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "db" });
+                flexuralMidBot_tb.Inlines.Add(" = " + naDepth[1, 1] + " (mm)");
+                flexuralMidBot_tb.Inlines.Add(new LineBreak());
+                flexuralMidBot_tb.Inlines.Add("M");
+                flexuralMidBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "nb" });
+                flexuralMidBot_tb.Inlines.Add(" = " + Mn[1, 1] + " (kNm)");
+                flexuralMidBot_tb.Inlines.Add(new LineBreak());
+                flexuralMidBot_tb.Inlines.Add("DC");
+                flexuralMidBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "b" });
+                flexuralMidBot_tb.Inlines.Add(" = ");
+                flexuralMidBot_tb.Inlines.Add("M");
+                flexuralMidBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "b" });
+                flexuralMidBot_tb.Inlines.Add(" / ");
+                flexuralMidBot_tb.Inlines.Add("M");
+                flexuralMidBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "nb" });
+                flexuralMidBot_tb.Inlines.Add(" = ");
+
+                if (DC[1, 1] <= 1)
+                {
+                    flexuralMidBot_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(DC[1, 1]) });
+                }
+                else
+                {
+                    flexuralMidBot_tb.Inlines.Add(new Run() { Foreground = Brushes.Red, Text = Convert.ToString(DC[1, 1]) });
+                }
+            }
 
 
-            // Flexural check
+            // Shear check support
+            sheartorsionSup_tb.Inlines.Add("Q");
+            sheartorsionSup_tb.Inlines.Add(" = " + Q[0] + " (kN), ");
+            sheartorsionSup_tb.Inlines.Add("T");
+            sheartorsionSup_tb.Inlines.Add(" = " + T[0] + " (kNm)");
+            sheartorsionSup_tb.Inlines.Add(new LineBreak());
+            sheartorsionSup_tb.Inlines.Add("c");
+            sheartorsionSup_tb.Inlines.Add(" = " + c[0] + " (mm), ");
+            sheartorsionSup_tb.Inlines.Add("Q");
+            sheartorsionSup_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "b" });
+            sheartorsionSup_tb.Inlines.Add(" = " + Qb[0] + " (kN), ");
+            sheartorsionSup_tb.Inlines.Add("Q");
+            sheartorsionSup_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "s" });
+            sheartorsionSup_tb.Inlines.Add(" = " + Qs[0] + " (kN)");
+            sheartorsionSup_tb.Inlines.Add(new LineBreak());
+            sheartorsionSup_tb.Inlines.Add("N");
+            sheartorsionSup_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "s" });
+            sheartorsionSup_tb.Inlines.Add(" = " + torCap[0] + " (kN), ");
+            sheartorsionSup_tb.Inlines.Add("T");
+            sheartorsionSup_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "n" });
+            sheartorsionSup_tb.Inlines.Add(" = " + Tn[0] + " (kN)");
+            sheartorsionSup_tb.Inlines.Add(new LineBreak());
+            sheartorsionSup_tb.Inlines.Add("DC");
+            sheartorsionSup_tb.Inlines.Add(" = ");
+            sheartorsionSup_tb.Inlines.Add("Q / ");
+            sheartorsionSup_tb.Inlines.Add("(Q");
+            sheartorsionSup_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "b" });
+            sheartorsionSup_tb.Inlines.Add(" + ");
+            sheartorsionSup_tb.Inlines.Add("Q");
+            sheartorsionSup_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "s" });
+            sheartorsionSup_tb.Inlines.Add(") +");
+            sheartorsionSup_tb.Inlines.Add("T / ");
+            sheartorsionSup_tb.Inlines.Add("T");
+            sheartorsionSup_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "n" });
+            sheartorsionSup_tb.Inlines.Add(" = ");
+
+            if (DCs[0] <= 1)
+            {
+                sheartorsionSup_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(DCs[0]) });
+            }
+            else
+            {
+                sheartorsionSup_tb.Inlines.Add(new Run() { Foreground = Brushes.Red, Text = Convert.ToString(DCs[0]) });
+            }
+
+            // Shear check mid
+            sheartorsionMid_tb.Inlines.Add("Q");
+            sheartorsionMid_tb.Inlines.Add(" = " + Q[1] + " (kN), ");
+            sheartorsionMid_tb.Inlines.Add("T");
+            sheartorsionMid_tb.Inlines.Add(" = " + T[1] + " (kNm)");
+            sheartorsionMid_tb.Inlines.Add(new LineBreak());
+            sheartorsionMid_tb.Inlines.Add("c");
+            sheartorsionMid_tb.Inlines.Add(" = " + c[1] + " (mm), ");
+            sheartorsionMid_tb.Inlines.Add("Q");
+            sheartorsionMid_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "b" });
+            sheartorsionMid_tb.Inlines.Add(" = " + Qb[1] + " (kN), ");
+            sheartorsionMid_tb.Inlines.Add("Q");
+            sheartorsionMid_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "s" });
+            sheartorsionMid_tb.Inlines.Add(" = " + Qs[1] + " (kN)");
+            sheartorsionMid_tb.Inlines.Add(new LineBreak());
+            sheartorsionMid_tb.Inlines.Add("N");
+            sheartorsionMid_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "s" });
+            sheartorsionMid_tb.Inlines.Add(" = " + torCap[1] + " (kN), ");
+            sheartorsionMid_tb.Inlines.Add("T");
+            sheartorsionMid_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "n" });
+            sheartorsionMid_tb.Inlines.Add(" = " + Tn[1] + " (kN)");
+            sheartorsionMid_tb.Inlines.Add(new LineBreak());
+            sheartorsionMid_tb.Inlines.Add("DC");
+            sheartorsionMid_tb.Inlines.Add(" = ");
+            sheartorsionMid_tb.Inlines.Add("Q / ");
+            sheartorsionMid_tb.Inlines.Add("(Q");
+            sheartorsionMid_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "b" });
+            sheartorsionMid_tb.Inlines.Add(" + ");
+            sheartorsionMid_tb.Inlines.Add("Q");
+            sheartorsionMid_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "s" });
+            sheartorsionMid_tb.Inlines.Add(") +");
+            sheartorsionMid_tb.Inlines.Add("T / ");
+            sheartorsionMid_tb.Inlines.Add("T");
+            sheartorsionMid_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "n" });
+            sheartorsionMid_tb.Inlines.Add(" = ");
+
+            if (DCs[1] <= 1)
+            {
+                sheartorsionMid_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(DCs[1]) });
+            }
+            else
+            {
+                sheartorsionMid_tb.Inlines.Add(new Run() { Foreground = Brushes.Red, Text = Convert.ToString(DCs[1]) });
+            }
+
+
+            // Crack width support - Top
+            crackSupTop_tb.Inlines.Add("M");
+            crackSupTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "st" });
+            crackSupTop_tb.Inlines.Add(" = " + Ms[0, 0] + " (kNm)");
+            crackSupTop_tb.Inlines.Add(new LineBreak());
+            crackSupTop_tb.Inlines.Add("M");
+            crackSupTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "lt" });
+            crackSupTop_tb.Inlines.Add(" = " + Ml[0, 0] + " (kNm)");
+            crackSupTop_tb.Inlines.Add(new LineBreak());
+            crackSupTop_tb.Inlines.Add("M");
+            crackSupTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crct" });
+            crackSupTop_tb.Inlines.Add(" = " + Mcrc[0, 0] + " (kNm)");
+            crackSupTop_tb.Inlines.Add(new LineBreak());
+            crackSupTop_tb.Inlines.Add("a");
+            crackSupTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crct" });
+            crackSupTop_tb.Inlines.Add(" = " + acrcS[0, 0] + " (mm)");
+            crackSupTop_tb.Inlines.Add(new LineBreak());
+            crackSupTop_tb.Inlines.Add("a");
+            crackSupTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crct,1" });
+            crackSupTop_tb.Inlines.Add(" = " + acrcL[0, 0] + " (mm)");
+
+            // Crack width support - Bot
+            crackSupBot_tb.Inlines.Add("M");
+            crackSupBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "sb" });
+            crackSupBot_tb.Inlines.Add(" = " + Ms[0, 1] + " (kNm)");
+            crackSupBot_tb.Inlines.Add(new LineBreak());
+            crackSupBot_tb.Inlines.Add("M");
+            crackSupBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "lb" });
+            crackSupBot_tb.Inlines.Add(" = " + Ml[0, 1] + " (kNm)");
+            crackSupBot_tb.Inlines.Add(new LineBreak());
+            crackSupBot_tb.Inlines.Add("M");
+            crackSupBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crcb" });
+            crackSupBot_tb.Inlines.Add(" = " + Mcrc[0, 1] + " (kNm)");
+            crackSupBot_tb.Inlines.Add(new LineBreak());
+            crackSupBot_tb.Inlines.Add("a");
+            crackSupBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crcb" });
+            crackSupBot_tb.Inlines.Add(" = " + acrcS[0, 1] + " (mm)");
+            crackSupBot_tb.Inlines.Add(new LineBreak());
+            crackSupBot_tb.Inlines.Add("a");
+            crackSupBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crcb,1" });
+            crackSupBot_tb.Inlines.Add(" = " + acrcL[0, 1] + " (mm)");
+
+            // Crack width mid - Top
+            crackMidTop_tb.Inlines.Add("M");
+            crackMidTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "st" });
+            crackMidTop_tb.Inlines.Add(" = " + Ms[1, 0] + " (kNm)");
+            crackMidTop_tb.Inlines.Add(new LineBreak());
+            crackMidTop_tb.Inlines.Add("M");
+            crackMidTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "lt" });
+            crackMidTop_tb.Inlines.Add(" = " + Ml[1, 0] + " (kNm)");
+            crackMidTop_tb.Inlines.Add(new LineBreak());
+            crackMidTop_tb.Inlines.Add("M");
+            crackMidTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crct" });
+            crackMidTop_tb.Inlines.Add(" = " + Mcrc[1, 0] + " (kNm)");
+            crackMidTop_tb.Inlines.Add(new LineBreak());
+            crackMidTop_tb.Inlines.Add("a");
+            crackMidTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crct" });
+            crackMidTop_tb.Inlines.Add(" = " + acrcS[1, 0] + " (mm)");
+            crackMidTop_tb.Inlines.Add(new LineBreak());
+            crackMidTop_tb.Inlines.Add("a");
+            crackMidTop_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crct,1" });
+            crackMidTop_tb.Inlines.Add(" = " + acrcL[1, 0] + " (mm)");
+
+            // Crack width mid - Bot
+            crackMidBot_tb.Inlines.Add("M");
+            crackMidBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "sb" });
+            crackMidBot_tb.Inlines.Add(" = " + Ms[1, 1] + " (kNm)");
+            crackMidBot_tb.Inlines.Add(new LineBreak());
+            crackMidBot_tb.Inlines.Add("M");
+            crackMidBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "lb" });
+            crackMidBot_tb.Inlines.Add(" = " + Ml[1, 1] + " (kNm)");
+            crackMidBot_tb.Inlines.Add(new LineBreak());
+            crackMidBot_tb.Inlines.Add("M");
+            crackMidBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crcb" });
+            crackMidBot_tb.Inlines.Add(" = " + Mcrc[1, 1] + " (kNm)");
+            crackMidBot_tb.Inlines.Add(new LineBreak());
+            crackMidBot_tb.Inlines.Add("a");
+            crackMidBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crcb" });
+            crackMidBot_tb.Inlines.Add(" = " + acrcS[1, 1] + " (mm)");
+            crackMidBot_tb.Inlines.Add(new LineBreak());
+            crackMidBot_tb.Inlines.Add("a");
+            crackMidBot_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "crcb,1" });
+            crackMidBot_tb.Inlines.Add(" = " + acrcL[1, 1] + " (mm)");
 
 
 

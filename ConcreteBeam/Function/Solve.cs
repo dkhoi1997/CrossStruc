@@ -60,6 +60,7 @@ namespace CrossStruc.ConcreteBeam.Function
             int[] nstir = { arrLrebar[9], arrMrebar[9] };
             int[] swstir = { arrLrebar[10], arrMrebar[10] };
 
+
             // Mesh section and rebar coordinate
             (List<int[]> listLrebarTop, List<int[]> listLrebarBot) =
                 ElementPosition.Rebar(b, h, acv, tw, Lds, n1top, d1top, Ln2top, Ld2top, Ln3top, Ld3top, n1bot, d1bot, Ln2bot, Ld2bot, Ln3bot, Ld3bot);
@@ -68,7 +69,7 @@ namespace CrossStruc.ConcreteBeam.Function
                 ElementPosition.Rebar(b, h, acv, tw, Mds, n1top, d1top, Mn2top, Md2top, Mn3top, Md3top, n1bot, d1bot, Mn2bot, Md2bot, Mn3bot, Md3bot);
 
             // Handle for T-section consider
-            // If calculate with T-sect, equilibrium usually cannot established when neutral axis scan from bot to top
+            // If calculate with T-section, equilibrium equation usually cannot be established when neutral axis scan from bot to top
             // When this case happend, only consider rectangular section
 
             List<double[]> listConcGeneral =
@@ -83,7 +84,7 @@ namespace CrossStruc.ConcreteBeam.Function
                 listConc.Add(listConcGeneral);
             }
 
-            int tolerance = 5;
+            int tolerance = 10;
 
             // ULS output
             double[,] naDepth = new double[2, 2];
@@ -108,35 +109,37 @@ namespace CrossStruc.ConcreteBeam.Function
 
             // ULS bending calc
             (naDepth[0, 0], totalP[0, 0], totalM[0, 0]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[0], listLrebarTop, listLrebarBot, true, compressbar, Rb, Eb, Rs, Rsc, Es);
+            (naDepth[0, 1], totalP[0, 1], totalM[0, 1]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[1], listLrebarTop, listLrebarBot, false, compressbar, Rb, Eb, Rs, Rsc, Es);
+            (naDepth[1, 0], totalP[1, 0], totalM[1, 0]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[2], listMrebarTop, listMrebarBot, true, compressbar, Rb, Eb, Rs, Rsc, Es);
+            (naDepth[1, 1], totalP[1, 1], totalM[1, 1]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[3], listMrebarTop, listMrebarBot, false, compressbar, Rb, Eb, Rs, Rsc, Es);
+
             if (naDepth[0, 0] == 0)
             {
                 listConc[0] = listConcRec;
                 (naDepth[0, 0], totalP[0, 0], totalM[0, 0]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[0], listLrebarTop, listLrebarBot, true, compressbar, Rb, Eb, Rs, Rsc, Es);
             }
 
-            (naDepth[0, 1], totalP[0, 1], totalM[0, 1]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[1], listLrebarTop, listLrebarBot, false, compressbar, Rb, Eb, Rs, Rsc, Es);
             if (naDepth[0, 1] == 0)
             {
                 listConc[1] = listConcRec;
                 (naDepth[0, 1], totalP[0, 1], totalM[0, 1]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[1], listLrebarTop, listLrebarBot, false, compressbar, Rb, Eb, Rs, Rsc, Es);
             }
 
-            (naDepth[1, 0], totalP[1, 0], totalM[1, 0]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[2], listMrebarTop, listMrebarBot, true, compressbar, Rb, Eb, Rs, Rsc, Es);
+
             if (naDepth[1, 0] == 0)
             {
                 listConc[2] = listConcRec;
                 (naDepth[1, 0], totalP[1, 0], totalM[1, 0]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[2], listMrebarTop, listMrebarBot, true, compressbar, Rb, Eb, Rs, Rsc, Es);
             }
 
-            (naDepth[1, 1], totalP[1, 1], totalM[1, 1]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[3], listMrebarTop, listMrebarBot, false, compressbar, Rb, Eb, Rs, Rsc, Es);
             if (naDepth[1, 1] == 0)
             {
                 listConc[3] = listConcRec;
                 (naDepth[1, 1], totalP[1, 1], totalM[1, 1]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[3], listMrebarTop, listMrebarBot, false, compressbar, Rb, Eb, Rs, Rsc, Es);
             }
 
-            sideAs[0] = SubExtensions.SideAsForTorsional(listLrebarTop, listLrebarBot);
-            sideAs[1] = SubExtensions.SideAsForTorsional(listMrebarTop, listMrebarBot);
+            sideAs[0] = SubExtensions.SideAsForTorsional(d1top, Ld2top, Ld3top, d1bot, Ld2bot, Ld3bot);
+            sideAs[1] = SubExtensions.SideAsForTorsional(d1top, Md2top, Md3top, d1bot, Md2bot, Md3bot);
 
             // SLS Mcrc calc
             Mcrc[0, 0] = SLSCheck.BeamMcrc(b, h, tolerance, listConc[0], listLrebarTop, listLrebarBot, true, compressbar, Rbn, Rbtn, Eb, Rs, Rsc, Es);
@@ -177,7 +180,7 @@ namespace CrossStruc.ConcreteBeam.Function
                 // Note for i varible => 0 - Support, 1 - Mid
                 for (int i = 0; i < item.Item2.Count; i++)
                 {
-                    double[] temp = new double[55];
+                    double[] temp = new double[56];
                     int Mtop = item.Item2[i][0];
                     int Mbot = item.Item2[i][1];
                     int MtopS = item.Item2[i][2];
@@ -191,7 +194,7 @@ namespace CrossStruc.ConcreteBeam.Function
                     double bendingRatioBot = Math.Round(Mbot / Math.Max(totalM[i, 1], 1), 2);
 
                     (double c, double Qb, double Qs, double shearRatio) = ULSCheck.ShearCheck(b, h, Q, dstir[i], nstir[i], swstir[i], Rb, Rbt, Rsw);
-                    (double deltaZ, double Tn, double torRatio) = ULSCheck.TorsionCheck(b, h, T, dstir[i], nstir[i], swstir[i], sideAs[i], Rb, Rs, Rsw);
+                    (double torCap, double Tn, double torRatio) = ULSCheck.TorsionCheck(b, h, T, dstir[i], nstir[i], swstir[i], sideAs[i], Rb, Rs, Rsw);
                     
                     // ULS
                     temp[0] = Mtop; // Mtop
@@ -207,32 +210,33 @@ namespace CrossStruc.ConcreteBeam.Function
                     temp[9] = naDepth[i, 1]; // Neutral axis depth bot
                     temp[10] = totalM[i, 0]; // Bending capacity top
                     temp[11] = totalM[i, 1]; // Bending capacity bot
-                    temp[12] = Qb + Qs; // Section shear capacity
-                    temp[13] = c;
-                    temp[14] = deltaZ;
-                    temp[15] = Tn; // Section torsinal capacity
+                    temp[12] = c;
+                    temp[13] = Qb; // Concrete shear capacity
+                    temp[14] = Qs; // Stirrup shear capacity
+                    temp[15] = torCap;
+                    temp[16] = Tn; // Section torsinal capacity
 
                     // SLS
-                    temp[16] = Mcrc[i, 0]; // Crack moment top
-                    temp[17] = Mcrc[i, 1]; // Crack moment bot
-                    temp[18] = equivDia[i, 0];// Equivalent rebar top
-                    temp[19] = equivDia[i, 1];// Equivalent rebar bot
-                    temp[20] = tensDepthS[i, 0]; // Tension depth top (short-term)
-                    temp[21] = tensDepthS[i, 1]; // Tension depth bot (short-term)
-                    temp[22] = tensAreaConcS[i, 0];// Tension concrete area top (short-term)
-                    temp[23] = tensAreaConcS[i, 1];// Tension concrete area bot (short-term)
-                    temp[24] = tensAreaRebarS[i, 0];// Tension rebar area top (short-term)
-                    temp[25] = tensAreaRebarS[i, 1];// Tension rebar area bot (short-term)
-                    temp[26] = disTensToCompS[i, 0];// Distance from tension rebar to compression centroid top (short-term)
-                    temp[27] = disTensToCompS[i, 1];// Distance from tension rebar to compression centroid bot (short-term)
-                    temp[28] = tensDepthL[i, 0]; // Tension depth top (long-term)
-                    temp[29] = tensDepthL[i, 1]; // Tension depth bot (long-term)
-                    temp[30] = tensAreaConcL[i, 0];// Tension concrete area top (long-term)
-                    temp[31] = tensAreaConcL[i, 1];// Tension concrete area bot (long-term)
-                    temp[32] = tensAreaRebarL[i, 0];// Tension rebar area top (long-term)
-                    temp[33] = tensAreaRebarL[i, 1];// Tension rebar area bot (long-term)
-                    temp[34] = disTensToCompL[i, 0];// Distance from tension rebar to compression centroid top (long-term)
-                    temp[35] = disTensToCompL[i, 1];// Distance from tension rebar to compression centroid bot (long-term)
+                    temp[17] = Mcrc[i, 0]; // Crack moment top
+                    temp[18] = Mcrc[i, 1]; // Crack moment bot
+                    temp[19] = equivDia[i, 0];// Equivalent rebar top
+                    temp[20] = equivDia[i, 1];// Equivalent rebar bot
+                    temp[21] = tensDepthS[i, 0]; // Tension depth top (short-term)
+                    temp[22] = tensDepthS[i, 1]; // Tension depth bot (short-term)
+                    temp[23] = tensAreaConcS[i, 0];// Tension concrete area top (short-term)
+                    temp[24] = tensAreaConcS[i, 1];// Tension concrete area bot (short-term)
+                    temp[25] = tensAreaRebarS[i, 0];// Tension rebar area top (short-term)
+                    temp[26] = tensAreaRebarS[i, 1];// Tension rebar area bot (short-term)
+                    temp[27] = disTensToCompS[i, 0];// Distance from tension rebar to compression centroid top (short-term)
+                    temp[28] = disTensToCompS[i, 1];// Distance from tension rebar to compression centroid bot (short-term)
+                    temp[29] = tensDepthL[i, 0]; // Tension depth top (long-term)
+                    temp[30] = tensDepthL[i, 1]; // Tension depth bot (long-term)
+                    temp[31] = tensAreaConcL[i, 0];// Tension concrete area top (long-term)
+                    temp[32] = tensAreaConcL[i, 1];// Tension concrete area bot (long-term)
+                    temp[33] = tensAreaRebarL[i, 0];// Tension rebar area top (long-term)
+                    temp[34] = tensAreaRebarL[i, 1];// Tension rebar area bot (long-term)
+                    temp[35] = disTensToCompL[i, 0];// Distance from tension rebar to compression centroid top (long-term)
+                    temp[36] = disTensToCompL[i, 1];// Distance from tension rebar to compression centroid bot (long-term)
 
                     (double LcrcTopS, double psiTopS, double sigrTopS) = SLSCheck.SigTensionCrack(Mcrc[i, 0], MtopS, Rsn, tensAreaConcS[i, 0], tensAreaRebarS[i, 0], equivDia[i, 0], disTensToCompS[i, 0]);
                     (double LcrcBotS, double psiBotS, double sigrBotS) = SLSCheck.SigTensionCrack(Mcrc[i, 1], MbotS, Rsn, tensAreaConcS[i, 1], tensAreaRebarS[i, 1], equivDia[i, 1], disTensToCompS[i, 1]);
@@ -243,19 +247,19 @@ namespace CrossStruc.ConcreteBeam.Function
                     (double acrcTopS, double acrcTopL) = SLSCheck.CrackWidth(LcrcTopS, psiTopS, sigrTopS, LcrcTopL, psiTopL, sigrTopL, Es);
                     (double acrcBotS, double acrcBotL) = SLSCheck.CrackWidth(LcrcBotS, psiBotS, sigrBotS, LcrcBotL, psiBotL, sigrBotL, Es);
 
-                    temp[36] = sigrTopS;
-                    temp[37] = LcrcTopS;
-                    temp[38] = acrcTopS;
-                    temp[39] = sigrBotS;
-                    temp[40] = LcrcBotS;
-                    temp[41] = acrcBotS;
+                    temp[37] = sigrTopS;
+                    temp[38] = LcrcTopS;
+                    temp[39] = acrcTopS;
+                    temp[40] = sigrBotS;
+                    temp[41] = LcrcBotS;
+                    temp[42] = acrcBotS;
 
-                    temp[42] = sigrTopL;
-                    temp[43] = LcrcTopL;
-                    temp[44] = acrcTopL;
-                    temp[45] = sigrBotL;
-                    temp[46] = LcrcBotL;
-                    temp[47] = acrcBotL;
+                    temp[43] = sigrTopL;
+                    temp[44] = LcrcTopL;
+                    temp[45] = acrcTopL;
+                    temp[46] = sigrBotL;
+                    temp[47] = LcrcBotL;
+                    temp[48] = acrcBotL;
 
                     double acrcTopSRatio = Math.Round(acrcTopS / acrcSlim, 2);
                     double acrcBotSRatio = Math.Round(acrcBotS / acrcSlim, 2);
@@ -264,13 +268,13 @@ namespace CrossStruc.ConcreteBeam.Function
                     double acrcBotLRatio = Math.Round(acrcBotL / acrcLlim, 2);
 
                     // Ratio check
-                    temp[48] = bendingRatioTop;
-                    temp[49] = bendingRatioBot;
-                    temp[50] = Math.Round(shearRatio + torRatio, 2);
-                    temp[51] = acrcTopSRatio;
-                    temp[52] = acrcBotSRatio;
-                    temp[53] = acrcTopLRatio;
-                    temp[54] = acrcBotLRatio;
+                    temp[49] = bendingRatioTop;
+                    temp[50] = bendingRatioBot;
+                    temp[51] = Math.Round(shearRatio + torRatio, 2);
+                    temp[52] = acrcTopSRatio;
+                    temp[53] = acrcBotSRatio;
+                    temp[54] = acrcTopLRatio;
+                    temp[55] = acrcBotLRatio;
 
                     listTemp.Add(temp);
                 }

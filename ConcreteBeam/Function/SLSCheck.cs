@@ -246,7 +246,7 @@ namespace CrossStruc.ConcreteBeam.Function
         }
 
         public static (double, double, double) SigTensionCrack (double Mcrc, double Mterm, double Rsn,
-            double tensAreaConc, double tensAreaRebar, double equivDia, double disTensToComp) // Calc base crack length and tension stress crack;;
+            double tensAreaConc, double tensAreaRebar, double equivDia, double disTensToComp) // Calc base crack length and tension stress crack;
         {
             double Lcrc = 0;
             double sig = 0;
@@ -283,7 +283,7 @@ namespace CrossStruc.ConcreteBeam.Function
             double psi3 = 1;
             double acrc1 = psi1L * psi2 * psi3 * psisL * sigL / Es * LcrcL;
             double acrc2 = psi1S * psi2 * psi3 * psisS * sigS / Es * LcrcS;
-            double acrc3 = psi1S * psi2 * psi3 * psisS * sigL / Es * LcrcS;
+            double acrc3 = psi1S * psi2 * psi3 * psisL * sigL / Es * LcrcL;
             double acrcS = Math.Round(acrc1 + acrc2 - acrc3, 2);
             double acrcL = Math.Round(acrc1, 2);
 

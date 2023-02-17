@@ -170,21 +170,11 @@ namespace CrossStruc.ConcreteBeam.Function
             return equivDia;
         }
 
-        public static double SideAsForTorsional(List<int[]> listRebarT, List<int[]> listRebarB)
+        public static double SideAsForTorsional(int d1top, int d2top, int d3top, int d1bot, int d2bot, int d3bot)
         {
-            List<int[]> listRebar = listRebarB.Concat(listRebarT).ToList();
 
-            double sideAs = 0;
+            double sideAs = Math.PI / 4 * (Math.Pow(d1top, 2) + Math.Pow(d2top, 2) + Math.Pow(d3top, 2) + Math.Pow(d1bot, 2) + Math.Pow(d2bot, 2) + Math.Pow(d3bot, 2));
 
-            // Find rebar which have maximum X-axis coordinate
-            int xCoor = listRebar.Max(t => t[0]);
-            foreach (int[] item in listRebar)
-            {
-                if (item[0] == xCoor)
-                {
-                    sideAs = sideAs + Math.PI * Math.Pow(item[2], 2) / 4;
-                }
-            }
             return sideAs;
 
         }

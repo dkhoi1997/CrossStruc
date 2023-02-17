@@ -156,6 +156,7 @@ namespace CrossStruc.ConcreteBeam.Function
                 {
                     Qb = 2.5 * Rbt * b * (h - att);
                 }
+                c = Math.Round(c, 0);
                 Qb = Convert.ToInt32(Qb / 1000);
                 Qs = Convert.ToInt32(0.75 * Qsw * c / 1000);
                 Qn = Convert.ToInt32(Qb + Qs);
@@ -184,10 +185,10 @@ namespace CrossStruc.ConcreteBeam.Function
             goto nextstep;
         endstep:
             {
-                deltaZ = 0;
+                torCap = 0;
                 Tn = 0;
                 DC = ushort.MaxValue;
-                return (deltaZ, Tn, DC);
+                return (torCap, Tn, DC);
             }
         nextstep:
             {
@@ -208,7 +209,8 @@ namespace CrossStruc.ConcreteBeam.Function
                 }
                 Tn = Math.Round(Tn / 1000000, 2);
                 DC = Math.Round(Math.Abs(T) / Tn, 2);
-                return (deltaZ, Tn, DC);
+                torCap = Convert.ToInt32(torCap / 1000);
+                return (torCap, Tn, DC);
             }
         }
     }

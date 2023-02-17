@@ -85,7 +85,7 @@ namespace CrossStruc.ConcreteBeam
 
             Mds_cbb.SelectionChanged += DynamicChange;
             Mns_txt.TextChanged += DynamicChange;
-            Lsw_txt.TextChanged += DynamicChange;
+            Msw_txt.TextChanged += DynamicChange;
         }
 
         public void OnWindowClosing(object sender, CancelEventArgs e)
@@ -403,11 +403,11 @@ namespace CrossStruc.ConcreteBeam
                         add[3] = "Mid";
                     }
 
-                    double maxDC = Math.Max(item.Item2[i][48], item.Item2[i][49]);
-                    double maxDCs = item.Item2[i][50];
+                    double maxDC = Math.Max(item.Item2[i][49], item.Item2[i][50]);
+                    double maxDCs = item.Item2[i][51];
 
-                    double maxDCacrcS = Math.Max(item.Item2[i][51], item.Item2[i][52]);
-                    double maxDCacrcL = Math.Max(item.Item2[i][53], item.Item2[i][54]);
+                    double maxDCacrcS = Math.Max(item.Item2[i][52], item.Item2[i][53]);
+                    double maxDCacrcL = Math.Max(item.Item2[i][54], item.Item2[i][55]);
 
                     add[4] = Convert.ToString(maxDC);
                     add[5] = Convert.ToString(maxDCs);
