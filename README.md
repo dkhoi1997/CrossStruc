@@ -11,5 +11,5 @@
 - Steel Beam module (Not yet) <br />
 - Steel Column module (Not yet) <br />
 
-![pic1](https://user-images.githubusercontent.com/6324007/219550731-c82eebc7-9850-4909-8b1c-b43b997dbcb1.png)
+![pic1](https://user-images.githubusercontent.com/6324007/219551858-d925fb1d-3808-465a-aa74-777cc18c7a74.png)
 ![pic2](https://user-images.githubusercontent.com/6324007/219545632-926b712c-4ac0-4766-9afa-e9b4840a6b15.png)
