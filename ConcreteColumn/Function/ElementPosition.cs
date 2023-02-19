@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CrossStruc.ConcreteColumn.Function
 {
-    public class ElementPosition
+    public static class ElementPosition
     {
         public static List<double[]> Concrete(string secShape, double Cx, double Cy, int di) // Mesh concrete column section
         {

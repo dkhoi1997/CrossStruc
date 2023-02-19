@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace CrossStruc.ConcreteBeam.Function
 {
-    public class ULSCheck
+    public static class ULSCheck
     {
         public static (double, double, double) BeamCapacity(double b, double h, int tolerance, List<double[]> listConc, List<int[]> listRebarT, List<int[]> listRebarB,
             bool revertScan, bool compressBar, double Rb, double Eb, double Rs, double Rsc, double Es) // ULS beam calc function

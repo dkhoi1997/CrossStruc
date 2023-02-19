@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CrossStruc.Extensions
 {
-    public class Other
+    public static class Other
     {
         public static List<int> ExtractCombRobot(string comb) // Extract combo Robot from string input
         {
@@ -42,10 +42,16 @@ namespace CrossStruc.Extensions
             }
         }
 
+        public static string ZeroIfEmpty(this string s)
+        {
+            return string.IsNullOrEmpty(s) ? "0" : s;
+        }
+
         public static double ConvertRebar(int dmain) // Optimize rebar size for drawing chart
         {
             double dmainconvert = Convert.ToInt32(0.6 * dmain + 3.08);
             return dmainconvert;
         }
+
     }
 }

@@ -5,7 +5,7 @@ using System.Windows.Threading;
 
 namespace CrossStruc.Extensions
 {
-    public class RobotInteractive
+    public static class RobotInteractive
     {
         public static (HashSet<int>, List<int[]>) ExtractBarResult(string comb)  // Get internal force bar element in Robot
         {

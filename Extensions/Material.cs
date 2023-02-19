@@ -2,7 +2,7 @@
 
 namespace CrossStruc.Extensions
 {
-    public class Material
+    public static class Material
     {
         public static (double, double, double) GetConcrete(string grade) // Get concrete parameter (characteristic)
         {

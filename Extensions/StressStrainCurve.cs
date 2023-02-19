@@ -2,7 +2,7 @@
 
 namespace CrossStruc.Extensions
 {
-    public class StressStrainCurve
+    public static class StressStrainCurve
     {
         public static double Concrete(double strain, double epb1red, double epbt1red, double Rbn, double Rbtn, double Eb) // Stress-strain concrete
         {

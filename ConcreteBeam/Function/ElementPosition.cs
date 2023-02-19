@@ -4,9 +4,8 @@ using ExtOther = CrossStruc.Extensions.Other;
 
 namespace CrossStruc.ConcreteBeam.Function
 {
-    public class ElementPosition
+    public static class ElementPosition
     {
-
         public static List<double[]> Concrete(double b, double h, double tf, double bs, bool secT, bool secTrevert) // Mesh concrete column section (Rec, T, Inverted-T)
         {
             List<double[]> listconc = new List<double[]>();

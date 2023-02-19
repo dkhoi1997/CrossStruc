@@ -8,12 +8,12 @@ namespace CrossStruc.ConcreteBeam.Function
 {
     public class SubExtensions
     {
-        public static List<(string[], List<int[]>)> FilterBeamForce(List<(string[], List<int[]>)> listBeam, bool enveDesign,
+        public static List<(string[], List<int[]>)> FilterBeamForce(List<(string[], List<int[]>)> listBeamForce, 
             List<int> ULScomb, List<int> SLScomb) // Filter beam force
         {
             List<(string[], List<int[]>)> listFilter = new List<(string[], List<int[]>)>();
 
-            foreach ((string[], List<int[]>) item in listBeam)
+            foreach ((string[], List<int[]>) item in listBeamForce)
             {
                 // Initial parameter
                 int[,] force = new int[2, 6]; // In order to Mtop, Mbot, Q, T
@@ -85,43 +85,45 @@ namespace CrossStruc.ConcreteBeam.Function
                 listFilter.Add((item.Item1, temp));
             }
 
-            // Handle for envelop all beam
-            if (enveDesign == true)
+            return listFilter;
+        }
+
+        public static List<(string[], List<int[]>)> FilterEnveBeamForce(List<(string[], List<int[]>)> listBeamForce) // Filter envelop beam force
+        {
+            List<(string[], List<int[]>)> listFilter = new List<(string[], List<int[]>)>();
+            List<int[]> temp = new List<int[]>();
+            int[] enveSup = new int[6];
+            int[] enveMid = new int[6];
+
+            foreach ((string[], List<int[]>) item in listBeamForce)
             {
-                List<int[]> temp = new List<int[]>();
-                int[] enveSup = new int[6];
-                int[] enveMid = new int[6];
+                if (enveSup[0] > item.Item2[0][0]) enveSup[0] = item.Item2[0][0]; // Mtop sup
+                if (enveSup[1] < item.Item2[0][1]) enveSup[1] = item.Item2[0][1]; // Mbot sup
 
-                foreach ((string[], List<int[]>) item in listFilter)
-                {
-                    if (enveSup[0] > item.Item2[0][0]) enveSup[0] = item.Item2[0][0]; // Mtop sup
-                    if (enveSup[1] < item.Item2[0][1]) enveSup[1] = item.Item2[0][1]; // Mbot sup
+                if (enveSup[2] > item.Item2[0][2]) enveSup[2] = item.Item2[0][2]; // MtopSLS sup
+                if (enveSup[3] < item.Item2[0][3]) enveSup[3] = item.Item2[0][3]; // MbotSLS sup
 
-                    if (enveSup[2] > item.Item2[0][2]) enveSup[2] = item.Item2[0][2]; // MtopSLS sup
-                    if (enveSup[3] < item.Item2[0][3]) enveSup[3] = item.Item2[0][3]; // MbotSLS sup
+                if (enveSup[4] > item.Item2[0][4]) enveSup[4] = item.Item2[0][4]; // Q sup
+                if (enveSup[5] < item.Item2[0][5]) enveSup[5] = item.Item2[0][5]; // T sup
 
-                    if (enveSup[4] > item.Item2[0][4]) enveSup[4] = item.Item2[0][4]; // Q sup
-                    if (enveSup[5] < item.Item2[0][5]) enveSup[5] = item.Item2[0][5]; // T sup
+                if (enveMid[0] > item.Item2[1][0]) enveMid[0] = item.Item2[1][0]; // Mtop mid
+                if (enveMid[1] < item.Item2[1][1]) enveMid[1] = item.Item2[1][1]; // Mbot mid
 
-                    if (enveMid[0] > item.Item2[1][0]) enveMid[0] = item.Item2[1][0]; // Mtop mid
-                    if (enveMid[1] < item.Item2[1][1]) enveMid[1] = item.Item2[1][1]; // Mbot mid
+                if (enveMid[2] > item.Item2[1][2]) enveMid[2] = item.Item2[1][2]; // MtopSLS mid
+                if (enveMid[3] < item.Item2[1][3]) enveMid[3] = item.Item2[1][3]; // MbotSLS mid
 
-                    if (enveMid[2] > item.Item2[1][2]) enveMid[2] = item.Item2[1][2]; // MtopSLS mid
-                    if (enveMid[3] < item.Item2[1][3]) enveMid[3] = item.Item2[1][3]; // MbotSLS mid
-
-                    if (enveMid[4] > item.Item2[1][4]) enveMid[4] = item.Item2[1][4]; // Q mid
-                    if (enveMid[5] < item.Item2[1][5]) enveMid[5] = item.Item2[1][5]; // T mid
-                }
-
-                temp.Add(enveSup);
-                temp.Add(enveMid);
-
-                string[] arrNull = new string[6];
-                arrNull[0] = "Enve";
-
-                listFilter.Clear();
-                listFilter.Add((arrNull, temp));
+                if (enveMid[4] > item.Item2[1][4]) enveMid[4] = item.Item2[1][4]; // Q mid
+                if (enveMid[5] < item.Item2[1][5]) enveMid[5] = item.Item2[1][5]; // T mid
             }
+
+            temp.Add(enveSup);
+            temp.Add(enveMid);
+
+            string[] arrNull = new string[6];
+            arrNull[0] = "Enve";
+
+            listFilter.Add((arrNull, temp));
+
             return listFilter;
         }
 

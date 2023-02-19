@@ -47,37 +47,37 @@ namespace CrossStruc.ConcreteBeam
             int tf = Convert.ToInt32(arrBeam[9]);
             double acv = Convert.ToDouble(arrBeam[10]);
             double tw = Convert.ToDouble(arrBeam[11]);
-            double acrcSlim = Convert.ToDouble(arrBeam[12]);
-            double acrcLlim = Convert.ToDouble(arrBeam[13]);
+            double acrcSlim = Convert.ToDouble(arrBeam[14]);
+            double acrcLlim = Convert.ToDouble(arrBeam[15]);
 
-            int n1top = Convert.ToInt32(arrBeam[14]);
-            int d1top = Convert.ToInt32(arrBeam[15]);
-            int n1bot = Convert.ToInt32(arrBeam[16]);
-            int d1bot = Convert.ToInt32(arrBeam[17]);
+            int n1top = Convert.ToInt32(arrBeam[16]);
+            int d1top = Convert.ToInt32(arrBeam[17]);
+            int n1bot = Convert.ToInt32(arrBeam[18]);
+            int d1bot = Convert.ToInt32(arrBeam[19]);
 
-            int Ln2top = Convert.ToInt32(arrBeam[18]);
-            int Ld2top = Convert.ToInt32(arrBeam[19]);
-            int Ln3top = Convert.ToInt32(arrBeam[20]);
-            int Ld3top = Convert.ToInt32(arrBeam[21]);
-            int Ln2bot = Convert.ToInt32(arrBeam[22]);
-            int Ld2bot = Convert.ToInt32(arrBeam[23]);
-            int Ln3bot = Convert.ToInt32(arrBeam[24]);
-            int Ld3bot = Convert.ToInt32(arrBeam[25]);
-            int Lds = Convert.ToInt32(arrBeam[26]);
-            int Lns = Convert.ToInt32(arrBeam[27]);
-            int Lsw = Convert.ToInt32(arrBeam[28]);
+            int Ln2top = Convert.ToInt32(arrBeam[20]);
+            int Ld2top = Convert.ToInt32(arrBeam[21]);
+            int Ln3top = Convert.ToInt32(arrBeam[22]);
+            int Ld3top = Convert.ToInt32(arrBeam[23]);
+            int Ln2bot = Convert.ToInt32(arrBeam[24]);
+            int Ld2bot = Convert.ToInt32(arrBeam[25]);
+            int Ln3bot = Convert.ToInt32(arrBeam[26]);
+            int Ld3bot = Convert.ToInt32(arrBeam[27]);
+            int Lds = Convert.ToInt32(arrBeam[28]);
+            int Lns = Convert.ToInt32(arrBeam[29]);
+            int Lsw = Convert.ToInt32(arrBeam[30]);
 
-            int Mn2top = Convert.ToInt32(arrBeam[29]);
-            int Md2top = Convert.ToInt32(arrBeam[30]);
-            int Mn3top = Convert.ToInt32(arrBeam[31]);
-            int Md3top = Convert.ToInt32(arrBeam[32]);
-            int Mn2bot = Convert.ToInt32(arrBeam[33]);
-            int Md2bot = Convert.ToInt32(arrBeam[34]);
-            int Mn3bot = Convert.ToInt32(arrBeam[35]);
-            int Md3bot = Convert.ToInt32(arrBeam[36]);
-            int Mds = Convert.ToInt32(arrBeam[37]);
-            int Mns = Convert.ToInt32(arrBeam[38]);
-            int Msw = Convert.ToInt32(arrBeam[39]);
+            int Mn2top = Convert.ToInt32(arrBeam[31]);
+            int Md2top = Convert.ToInt32(arrBeam[32]);
+            int Mn3top = Convert.ToInt32(arrBeam[33]);
+            int Md3top = Convert.ToInt32(arrBeam[34]);
+            int Mn2bot = Convert.ToInt32(arrBeam[35]);
+            int Md2bot = Convert.ToInt32(arrBeam[36]);
+            int Mn3bot = Convert.ToInt32(arrBeam[37]);
+            int Md3bot = Convert.ToInt32(arrBeam[38]);
+            int Mds = Convert.ToInt32(arrBeam[39]);
+            int Mns = Convert.ToInt32(arrBeam[40]);
+            int Msw = Convert.ToInt32(arrBeam[41]);
 
 
             int[,] M = new int[2, 2];
@@ -468,7 +468,7 @@ namespace CrossStruc.ConcreteBeam
                 sheartorsionSup_tb.Inlines.Add(" = " + torCap[0] + " (kN), ");
                 sheartorsionSup_tb.Inlines.Add("T");
                 sheartorsionSup_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "n" });
-                sheartorsionSup_tb.Inlines.Add(" = " + Tn[0] + " (kN)");
+                sheartorsionSup_tb.Inlines.Add(" = " + Tn[0] + " (kNm)");
                 sheartorsionSup_tb.Inlines.Add(new LineBreak());
                 sheartorsionSup_tb.Inlines.Add("DC");
                 sheartorsionSup_tb.Inlines.Add(" = ");
@@ -516,7 +516,7 @@ namespace CrossStruc.ConcreteBeam
                 sheartorsionMid_tb.Inlines.Add(" = " + torCap[1] + " (kN), ");
                 sheartorsionMid_tb.Inlines.Add("T");
                 sheartorsionMid_tb.Inlines.Add(new Run() { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10, Text = "n" });
-                sheartorsionMid_tb.Inlines.Add(" = " + Tn[1] + " (kN)");
+                sheartorsionMid_tb.Inlines.Add(" = " + Tn[1] + " (kNm)");
                 sheartorsionMid_tb.Inlines.Add(new LineBreak());
                 sheartorsionMid_tb.Inlines.Add("DC");
                 sheartorsionMid_tb.Inlines.Add(" = ");

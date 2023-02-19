@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CrossStruc.ConcreteBeam.Function
 {
-    public class SLSCheck
+    public static class SLSCheck
     {
         public static double BeamMcrc(double b, double h, int tolerance, List<double[]> listConc, List<int[]> listRebarT, List<int[]> listRebarB,
             bool revertScan, bool compressBar, double Rbn, double Rbtn, double Eb,

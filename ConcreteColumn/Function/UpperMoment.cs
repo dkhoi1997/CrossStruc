@@ -2,7 +2,7 @@
 
 namespace CrossStruc.ConcreteColumn.Function
 {
-    public class UpperMoment
+    public static class UpperMoment
     {
         public static (double, double, double, double, double, double, int, int) RecSect(int P, int Mx, int My, double Cx,
             double Cy, double Lx, double Ly, double Eb, double kx, double ky) // Design moment for rectangle section

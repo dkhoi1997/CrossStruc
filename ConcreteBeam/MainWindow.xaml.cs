@@ -1,11 +1,9 @@
 ﻿using CrossStruc.ConcreteBeam.Function;
 using CrossStruc.Extensions;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -17,13 +15,12 @@ namespace CrossStruc.ConcreteBeam
 {
     public partial class MainWindow : Window
     {
-        public static List<(string[], List<int[]>)> listBeam;
-        public static List<(string[], List<int[]>)> listSub;
-        public static List<(string[], List<double[]>)> listResult;
-        public static string[] arrBeam = new string[40];
-        public static int[] arrCTrebar = new int[4];
-        public static int[] arrLrebar = new int[11];
-        public static int[] arrMrebar = new int[11];
+        public List<(string[], List<int[]>)> listBeam;
+        public List<(string[], List<double[]>)> listResult;
+        public string[] arrBeam = new string[42];
+        public int[] arrCTrebar = new int[4];
+        public int[] arrLrebar = new int[11];
+        public int[] arrMrebar = new int[11];
 
 
 
@@ -47,35 +44,27 @@ namespace CrossStruc.ConcreteBeam
             n1bot_txt.TextChanged += DynamicChange;
             d1bot_cbb.SelectionChanged += DynamicChange;
 
-            Lc2top_cb.Click += DynamicChange;
             Ln2top_txt.TextChanged += DynamicChange;
             Ld2top_cbb.SelectionChanged += DynamicChange;
 
-            Lc3top_cb.Click += DynamicChange;
             Ln3top_txt.TextChanged += DynamicChange;
             Ld3top_cbb.SelectionChanged += DynamicChange;
 
-            Lc2bot_cb.Click += DynamicChange;
             Ln2bot_txt.TextChanged += DynamicChange;
             Ld2bot_cbb.SelectionChanged += DynamicChange;
 
-            Lc3bot_cb.Click += DynamicChange;
             Ln3bot_txt.TextChanged += DynamicChange;
             Ld3bot_cbb.SelectionChanged += DynamicChange;
 
-            Mc2top_cb.Click += DynamicChange;
             Mn2top_txt.TextChanged += DynamicChange;
             Md2top_cbb.SelectionChanged += DynamicChange;
 
-            Mc3top_cb.Click += DynamicChange;
             Mn3top_txt.TextChanged += DynamicChange;
             Md3top_cbb.SelectionChanged += DynamicChange;
 
-            Mc2bot_cb.Click += DynamicChange;
             Mn2bot_txt.TextChanged += DynamicChange;
             Md2bot_cbb.SelectionChanged += DynamicChange;
 
-            Mc3bot_cb.Click += DynamicChange;
             Mn3bot_txt.TextChanged += DynamicChange;
             Md3bot_cbb.SelectionChanged += DynamicChange;
 
@@ -122,11 +111,11 @@ namespace CrossStruc.ConcreteBeam
         {
 
             // Section parameter
-            int b = Convert.ToInt32(b_txt.Text);
-            int h = Convert.ToInt32(h_txt.Text);
+            int b = Convert.ToInt32(b_txt.Text.ZeroIfEmpty());
+            int h = Convert.ToInt32(h_txt.Text.ZeroIfEmpty());
             int hs = 0;
-            double tw = Convert.ToDouble(tw_txt.Text);
-            double acv = Convert.ToDouble(acv_txt.Text);
+            double tw = Convert.ToDouble(tw_txt.Text.ZeroIfEmpty());
+            double acv = Convert.ToDouble(acv_txt.Text.ZeroIfEmpty());
             bool Tsect = false; bool revertTsect = false;
             if (Tsect_cb.IsChecked == true)
             {
@@ -134,7 +123,7 @@ namespace CrossStruc.ConcreteBeam
                 tf_txt.IsEnabled = true;
                 TsectRev_cb.IsEnabled = true;
                 bs_txt.IsEnabled = true;
-                hs = Convert.ToInt32(tf_txt.Text);
+                hs = Convert.ToInt32(tf_txt.Text.ZeroIfEmpty());
                 if (TsectRev_cb.IsChecked == true)
                 {
                     revertTsect = true;
@@ -149,157 +138,43 @@ namespace CrossStruc.ConcreteBeam
             }
 
             // Main rebar top layer
-            int n1top = Convert.ToInt32(n1top_txt.Text);
+            int n1top = Convert.ToInt32(n1top_txt.Text.ZeroIfEmpty());
             int d1top = Convert.ToInt32((d1top_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-
-            // Main rebar bot layer
-            int n1bot = Convert.ToInt32(n1bot_txt.Text);
+            int n1bot = Convert.ToInt32(n1bot_txt.Text.ZeroIfEmpty());
             int d1bot = Convert.ToInt32((d1bot_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
 
+
             // Extra rebar top layer (support)
-            int Ln2top = 0;
-            int Ld2top = 0;
-            int Ln3top = 0;
-            int Ld3top = 0;
-            if (Lc2top_cb.IsChecked == true)
-            {
-                Ln2top_txt.IsEnabled = true;
-                Ld2top_cbb.IsEnabled = true;
-                Ln2top = Convert.ToInt32(Ln2top_txt.Text);
-                Ld2top = Convert.ToInt32((Ld2top_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-                Lc3top_cb.IsEnabled = true;
-                if (Lc3top_cb.IsChecked == true)
-                {
-                    Ln3top_txt.IsEnabled = true;
-                    Ld3top_cbb.IsEnabled = true;
-                    Ln3top = Convert.ToInt32(Ln3top_txt.Text);
-                    Ld3top = Convert.ToInt32((Ld3top_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-                }
-                else
-                {
-                    Ln3top_txt.IsEnabled = false;
-                    Ld3top_cbb.IsEnabled = false;
-                }
-            }
-            else
-            {
-                Ln2top_txt.IsEnabled = false;
-                Ld2top_cbb.IsEnabled = false;
-                Lc3top_cb.IsEnabled = false;
-                Ln3top_txt.IsEnabled = false;
-                Ld3top_cbb.IsEnabled = false;
-            }
+            int Ln2top = Convert.ToInt32(Ln2top_txt.Text.ZeroIfEmpty());
+            int Ld2top = Convert.ToInt32((Ld2top_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
+            int Ln3top = Convert.ToInt32(Ln3top_txt.Text.ZeroIfEmpty());
+            int Ld3top = Convert.ToInt32((Ld3top_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
 
             // Extra rebar bot layer (support)
-            int Ln2bot = 0;
-            int Ld2bot = 0;
-            int Ln3bot = 0;
-            int Ld3bot = 0;
-            if (Lc2bot_cb.IsChecked == true)
-            {
-                Ln2bot_txt.IsEnabled = true;
-                Ld2bot_cbb.IsEnabled = true;
-                Ln2bot = Convert.ToInt32(Ln2bot_txt.Text);
-                Ld2bot = Convert.ToInt32((Ld2bot_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-                Lc3bot_cb.IsEnabled = true;
-                if (Lc3bot_cb.IsChecked == true)
-                {
-                    Ln3bot_txt.IsEnabled = true;
-                    Ld3bot_cbb.IsEnabled = true;
-                    Ln3bot = Convert.ToInt32(Ln3bot_txt.Text);
-                    Ld3bot = Convert.ToInt32((Ld3bot_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-                }
-                else
-                {
-                    Ln3bot_txt.IsEnabled = false;
-                    Ld3bot_cbb.IsEnabled = false;
-                }
-            }
-            else
-            {
-                Ln2bot_txt.IsEnabled = false;
-                Ld2bot_cbb.IsEnabled = false;
-                Lc3bot_cb.IsEnabled = false;
-                Ln3bot_txt.IsEnabled = false;
-                Ld3bot_cbb.IsEnabled = false;
-            }
+            int Ln2bot = Convert.ToInt32(Ln2bot_txt.Text.ZeroIfEmpty());
+            int Ld2bot = Convert.ToInt32((Ld2bot_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
+            int Ln3bot = Convert.ToInt32(Ln3bot_txt.Text.ZeroIfEmpty());
+            int Ld3bot = Convert.ToInt32((Ld3bot_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
 
             // Extra rebar top layer (mid)
-            int Mn2top = 0;
-            int Md2top = 0;
-            int Mn3top = 0;
-            int Md3top = 0;
-            if (Mc2top_cb.IsChecked == true)
-            {
-                Mn2top_txt.IsEnabled = true;
-                Md2top_cbb.IsEnabled = true;
-                Mn2top = Convert.ToInt32(Mn2top_txt.Text);
-                Md2top = Convert.ToInt32((Md2top_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-                Mc3top_cb.IsEnabled = true;
-                if (Mc3top_cb.IsChecked == true)
-                {
-                    Mn3top_txt.IsEnabled = true;
-                    Md3top_cbb.IsEnabled = true;
-                    Mn3top = Convert.ToInt32(Mn3top_txt.Text);
-                    Md3top = Convert.ToInt32((Md3top_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-                }
-                else
-                {
-                    Mn3top_txt.IsEnabled = false;
-                    Md3top_cbb.IsEnabled = false;
-                }
-            }
-            else
-            {
-                Mn2top_txt.IsEnabled = false;
-                Md2top_cbb.IsEnabled = false;
-                Mc3top_cb.IsEnabled = false;
-                Mn3top_txt.IsEnabled = false;
-                Md3top_cbb.IsEnabled = false;
-            }
+            int Mn2top = Convert.ToInt32(Mn2top_txt.Text.ZeroIfEmpty());
+            int Md2top = Convert.ToInt32((Md2top_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
+            int Mn3top = Convert.ToInt32(Mn3top_txt.Text.ZeroIfEmpty());
+            int Md3top = Convert.ToInt32((Md3top_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
 
             // Extra rebar bot layer (mid)
-            int Mn2bot = 0;
-            int Md2bot = 0;
-            int Mn3bot = 0;
-            int Md3bot = 0;
-            if (Mc2bot_cb.IsChecked == true)
-            {
-                Mn2bot_txt.IsEnabled = true;
-                Md2bot_cbb.IsEnabled = true;
-                Mn2bot = Convert.ToInt32(Mn2bot_txt.Text);
-                Md2bot = Convert.ToInt32((Md2bot_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-                Mc3bot_cb.IsEnabled = true;
-                if (Mc3bot_cb.IsChecked == true)
-                {
-                    Mn3bot_txt.IsEnabled = true;
-                    Md3bot_cbb.IsEnabled = true;
-                    Mn3bot = Convert.ToInt32(Mn3bot_txt.Text);
-                    Md3bot = Convert.ToInt32((Md3bot_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-                }
-                else
-                {
-                    Mn3bot_txt.IsEnabled = false;
-                    Md3bot_cbb.IsEnabled = false;
-                }
-            }
-            else
-            {
-                Mn2bot_txt.IsEnabled = false;
-                Md2bot_cbb.IsEnabled = false;
-                Mc3bot_cb.IsEnabled = false;
-                Mn3bot_txt.IsEnabled = false;
-                Md3bot_cbb.IsEnabled = false;
-            }
-
+            int Mn2bot = Convert.ToInt32(Mn2bot_txt.Text.ZeroIfEmpty());
+            int Md2bot = Convert.ToInt32((Md2bot_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
+            int Mn3bot = Convert.ToInt32(Mn3bot_txt.Text.ZeroIfEmpty());
+            int Md3bot = Convert.ToInt32((Md3bot_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
 
             // Stirrup
             int Lds = Convert.ToInt32((Lds_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-            int Lns = Convert.ToInt32(Lns_txt.Text);
-            int Lsw = Convert.ToInt32(Lsw_txt.Text);
+            int Lns = Convert.ToInt32(Lns_txt.Text.ZeroIfEmpty());
+            int Lsw = Convert.ToInt32(Lsw_txt.Text.ZeroIfEmpty());
             int Mds = Convert.ToInt32((Mds_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-            int Mns = Convert.ToInt32(Mns_txt.Text);
-            int Msw = Convert.ToInt32(Msw_txt.Text);
+            int Mns = Convert.ToInt32(Mns_txt.Text.ZeroIfEmpty());
+            int Msw = Convert.ToInt32(Msw_txt.Text.ZeroIfEmpty());
 
             // Section chart
             SectL_Plot.DataContext = new ChartSectBeam(b, h, Tsect, revertTsect, hs, acv, tw,
@@ -323,7 +198,7 @@ namespace CrossStruc.ConcreteBeam
             arrMrebar = new int[] { Mn2top, Md2top, Mn3top, Md3top, Mn2bot, Md2bot, Mn3bot, Md3bot, Mds, Mns, Msw };
         }
 
-        private void Recalculate()
+        private void ReCalculate()
         {
             string concGrade = (concGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
             string lRebarGrade = (longituGrade_cbb.SelectedItem as ComboBoxItem).Content.ToString();
@@ -331,25 +206,26 @@ namespace CrossStruc.ConcreteBeam
             string hmClass = (Humidity_cbb.SelectedItem as ComboBoxItem).Content.ToString();
 
             // Section property
-            double b = Convert.ToInt32(b_txt.Text);
-            double h = Convert.ToInt32(h_txt.Text);
+            double b = Convert.ToInt32(b_txt.Text.ZeroIfEmpty());
+            double h = Convert.ToInt32(h_txt.Text.ZeroIfEmpty());
             double tf = 0;
             double bs = 0;
-            double tw = Convert.ToDouble(tw_txt.Text);
-            double acv = Convert.ToDouble(acv_txt.Text);
+            double tw = Convert.ToDouble(tw_txt.Text.ZeroIfEmpty());
+            double acv = Convert.ToDouble(acv_txt.Text.ZeroIfEmpty());
             bool Tsect = false;
             bool revertTsect = false;
             bool compressBar = false;
+            bool enveDesign = false;
 
             // Crack width parameter check
-            double acrcSlim = Convert.ToDouble(ast_txt.Text);
-            double acrcLlim = Convert.ToDouble(alt_txt.Text);
+            double acrcSlim = Convert.ToDouble(ast_txt.Text.ZeroIfEmpty());
+            double acrcLlim = Convert.ToDouble(alt_txt.Text.ZeroIfEmpty());
 
             if (Tsect_cb.IsChecked == true)
             {
                 Tsect = true;
-                tf = Convert.ToInt32(tf_txt.Text);
-                bs = Convert.ToInt32(bs_txt.Text);
+                tf = Convert.ToInt32(tf_txt.Text.ZeroIfEmpty());
+                bs = Convert.ToInt32(bs_txt.Text.ZeroIfEmpty());
                 if (TsectRev_cb.IsChecked == true)
                 {
                     revertTsect = true;
@@ -361,18 +237,14 @@ namespace CrossStruc.ConcreteBeam
                 compressBar = true;
             }
 
-            string ULScomb = combULS_txt.Text;
-            string SLScomb = combSLS_txt.Text;
-            bool enveDesign = false;
-            List<int> listULScomb = Other.ExtractCombRobot(ULScomb);
-            List<int> listSLScomb = Other.ExtractCombRobot(SLScomb);
+            List<(string[], List<int[]>)> listBeamForce = listBeam;
 
             if (enveCheck_cb.IsChecked == true)
             {
                 enveDesign = true;
+                listBeamForce = SubExtensions.FilterEnveBeamForce(listBeam);
             }
-            listSub = SubExtensions.FilterBeamForce(listBeam, enveDesign, listULScomb, listSLScomb);
-            listResult = Solve.GetResultBeam(listSub, concGrade, lRebarGrade, sRebarGrade, hmClass, b, h, tf, bs, Tsect,
+            listResult = Solve.GetResultBeam(listBeamForce, concGrade, lRebarGrade, sRebarGrade, hmClass, b, h, tf, bs, Tsect,
                 revertTsect, compressBar, acv, tw, acrcSlim, acrcLlim, arrCTrebar, arrLrebar, arrMrebar);
 
             DataTable dtcol = new DataTable();
@@ -433,88 +305,177 @@ namespace CrossStruc.ConcreteBeam
             arrBeam[9] = Convert.ToString(tf);
             arrBeam[10] = Convert.ToString(acv);
             arrBeam[11] = Convert.ToString(tw);
-            arrBeam[12] = Convert.ToString(acrcSlim);
-            arrBeam[13] = Convert.ToString(acrcLlim);
+            arrBeam[12] = Convert.ToString(hmClass);
+            arrBeam[13] = Convert.ToString(enveDesign);
+            arrBeam[14] = Convert.ToString(acrcSlim);
+            arrBeam[15] = Convert.ToString(acrcLlim);
 
-            arrBeam[14] = Convert.ToString(arrCTrebar[0]);
-            arrBeam[15] = Convert.ToString(arrCTrebar[1]);
-            arrBeam[16] = Convert.ToString(arrCTrebar[2]);
-            arrBeam[17] = Convert.ToString(arrCTrebar[3]);
+            arrBeam[16] = Convert.ToString(arrCTrebar[0]);
+            arrBeam[17] = Convert.ToString(arrCTrebar[1]);
+            arrBeam[18] = Convert.ToString(arrCTrebar[2]);
+            arrBeam[19] = Convert.ToString(arrCTrebar[3]);
 
-            arrBeam[18] = Convert.ToString(arrLrebar[0]);
-            arrBeam[19] = Convert.ToString(arrLrebar[1]);
-            arrBeam[20] = Convert.ToString(arrLrebar[2]);
-            arrBeam[21] = Convert.ToString(arrLrebar[3]);
-            arrBeam[22] = Convert.ToString(arrLrebar[4]);
-            arrBeam[23] = Convert.ToString(arrLrebar[5]);
-            arrBeam[24] = Convert.ToString(arrLrebar[6]);
-            arrBeam[25] = Convert.ToString(arrLrebar[7]);
-            arrBeam[26] = Convert.ToString(arrLrebar[8]);
-            arrBeam[27] = Convert.ToString(arrLrebar[9]);
-            arrBeam[28] = Convert.ToString(arrLrebar[10]);
+            arrBeam[20] = Convert.ToString(arrLrebar[0]);
+            arrBeam[21] = Convert.ToString(arrLrebar[1]);
+            arrBeam[22] = Convert.ToString(arrLrebar[2]);
+            arrBeam[23] = Convert.ToString(arrLrebar[3]);
+            arrBeam[24] = Convert.ToString(arrLrebar[4]);
+            arrBeam[25] = Convert.ToString(arrLrebar[5]);
+            arrBeam[26] = Convert.ToString(arrLrebar[6]);
+            arrBeam[27] = Convert.ToString(arrLrebar[7]);
+            arrBeam[28] = Convert.ToString(arrLrebar[8]);
+            arrBeam[29] = Convert.ToString(arrLrebar[9]);
+            arrBeam[30] = Convert.ToString(arrLrebar[10]);
 
-            arrBeam[29] = Convert.ToString(arrMrebar[0]);
-            arrBeam[30] = Convert.ToString(arrMrebar[1]);
-            arrBeam[31] = Convert.ToString(arrMrebar[2]);
-            arrBeam[32] = Convert.ToString(arrMrebar[3]);
-            arrBeam[33] = Convert.ToString(arrMrebar[4]);
-            arrBeam[34] = Convert.ToString(arrMrebar[5]);
-            arrBeam[35] = Convert.ToString(arrMrebar[6]);
-            arrBeam[36] = Convert.ToString(arrMrebar[7]);
-            arrBeam[37] = Convert.ToString(arrMrebar[8]);
-            arrBeam[38] = Convert.ToString(arrMrebar[9]);
-            arrBeam[39] = Convert.ToString(arrMrebar[10]);
+            arrBeam[31] = Convert.ToString(arrMrebar[0]);
+            arrBeam[32] = Convert.ToString(arrMrebar[1]);
+            arrBeam[33] = Convert.ToString(arrMrebar[2]);
+            arrBeam[34] = Convert.ToString(arrMrebar[3]);
+            arrBeam[35] = Convert.ToString(arrMrebar[4]);
+            arrBeam[36] = Convert.ToString(arrMrebar[5]);
+            arrBeam[37] = Convert.ToString(arrMrebar[6]);
+            arrBeam[38] = Convert.ToString(arrMrebar[7]);
+            arrBeam[39] = Convert.ToString(arrMrebar[8]);
+            arrBeam[40] = Convert.ToString(arrMrebar[9]);
+            arrBeam[41] = Convert.ToString(arrMrebar[10]);
 
         }
+
+        // Button
 
         private void GetForceClick(object sender, RoutedEventArgs e)
         {
             string ULScomb = combULS_txt.Text;
             string SLScomb = combSLS_txt.Text;
-            string combine = ULScomb + " " + SLScomb;
+            if (string.IsNullOrEmpty(ULScomb) || string.IsNullOrEmpty(SLScomb))
+            {
 
-            listBeam = RobotInteractive.GetConcBeamForceRobot(combine);
-
-            Recalculate();
+            }
+            else
+            {
+                string combine = ULScomb + " " + SLScomb;
+                List<int> listULScomb = Other.ExtractCombRobot(ULScomb);
+                List<int> listSLScomb = Other.ExtractCombRobot(SLScomb);
+                List<(string[], List<int[]>)> listSub = RobotInteractive.GetConcBeamForceRobot(combine);
+                listBeam = SubExtensions.FilterBeamForce(listSub, listULScomb, listSLScomb);
+            }
+            ReCalculate();
         }
 
         private void CheckClick(object sender, RoutedEventArgs e)
         {
-            Recalculate();
+            ReCalculate();
         }
 
         private void SaveClick(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog()
-            {
-                RestoreDirectory = true,
-                Filter = "Text Files (*.csv)|*.csv",
-            };
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                string title1 = "/// Beam Data & Internal Force ///";
-                string space = default;
-                string title2 = "/// Design Data ///";
-                using (StreamWriter sw = File.CreateText(saveFileDialog.FileName))
-                {
-                    sw.WriteLine(title2);
-                    sw.WriteLine(space);
-                    sw.WriteLine(title1);
-                    foreach (var item in listResult)
-                    {
-                        sw.WriteLine(string.Join(",", item.Item1));
-                        for (int i = 0; i < item.Item2.Count; i++)
-                        {
-                            sw.WriteLine(string.Join(",", item.Item2[i]));
-                        }
-                    }
-                }
-            }
+            ImportExport.SaveFile(listBeam, arrBeam);
         }
 
         private void LoadClick(object sender, RoutedEventArgs e)
         {
+            (listBeam, arrBeam) = ImportExport.LoadFile();
 
+            if (listBeam.Count > 0)
+            {
+                concGrade_cbb.Text = arrBeam[0];
+                longituGrade_cbb.Text = arrBeam[1];
+                stirrupGrade_cbb.Text = arrBeam[2];
+
+                b_txt.Text = arrBeam[3];
+                h_txt.Text = arrBeam[4];
+
+                acv_txt.Text = arrBeam[10];
+                tw_txt.Text = arrBeam[11];
+                Humidity_cbb.Text = arrBeam[12];
+
+                ast_txt.Text = arrBeam[14];
+                alt_txt.Text = arrBeam[15];
+
+                // T-sect data
+                if (arrBeam[5] == "True")
+                {
+                    Tsect_cb.IsChecked = true;
+                    tf_txt.IsEnabled = true;
+                    bs_txt.IsEnabled = true;
+                    if (arrBeam[6] == "True")
+                    {
+                        TsectRev_cb.IsEnabled = true;
+                        TsectRev_cb.IsChecked = true;
+                    }
+                    else
+                    {
+                        TsectRev_cb.IsEnabled = false;
+                        TsectRev_cb.IsChecked = false;
+                    }
+                    bs_txt.Text = arrBeam[8];
+                    tf_txt.Text = arrBeam[9];
+                }
+                else
+                {
+                    Tsect_cb.IsChecked = false;
+                    tf_txt.IsEnabled = false;
+                    bs_txt.IsEnabled = false;
+                }
+
+                // Consider compress rebar
+                if (arrBeam[7] == "True")
+                {
+                    compRebar_cb.IsChecked = true;
+                }
+                else
+                {
+                    compRebar_cb.IsChecked = false;
+                }
+
+                // Envelop design style
+                if (arrBeam[13] == "True")
+                {
+                    enveCheck_cb.IsChecked = true;
+                }
+                else
+                {
+                    enveCheck_cb.IsChecked = false;
+                }
+
+                // Main rebar
+                n1top_txt.Text = arrBeam[16];
+                d1top_cbb.Text = "Ø" + arrBeam[17];
+                n1bot_txt.Text = arrBeam[18];
+                d1bot_cbb.Text = "Ø" + arrBeam[19];
+
+                // Extra rebar top
+                Ln2top_txt.Text = arrBeam[20];
+                Ld2top_cbb.Text = "Ø" + arrBeam[21];
+                Ln3top_txt.Text = arrBeam[22];
+                Ld3top_cbb.Text = "Ø" + arrBeam[23];
+                Ln2bot_txt.Text = arrBeam[24];
+                Ld2bot_cbb.Text = "Ø" + arrBeam[25];
+                Ln3bot_txt.Text = arrBeam[26];
+                Ld3bot_cbb.Text = "Ø" + arrBeam[27];
+
+                // Stirrup - Support
+                Lds_cbb.Text = "Ø" + arrBeam[28];
+                Lns_txt.Text = arrBeam[29];
+                Lsw_txt.Text = arrBeam[30];
+
+                // Extra rebar bot
+                Mn2top_txt.Text = arrBeam[31];
+                Md2top_cbb.Text = "Ø" + arrBeam[32];
+                Mn3top_txt.Text = arrBeam[33];
+                Md3top_cbb.Text = "Ø" + arrBeam[34];
+                Mn2bot_txt.Text = arrBeam[35];
+                Md2bot_cbb.Text = "Ø" + arrBeam[36];
+                Mn3bot_txt.Text = arrBeam[37];
+                Md3bot_cbb.Text = "Ø" + arrBeam[38];
+
+                // Stirrup - Mid
+                Mds_cbb.Text = "Ø" + arrBeam[39];
+                Mns_txt.Text = arrBeam[40];
+                Msw_txt.Text = arrBeam[41];
+
+                ReCalculate();
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using ExtMaterial = CrossStruc.Extensions.Material;
 
 namespace CrossStruc.ConcreteColumn.Function
 {
-    public class Solve
+    public static class Solve
     {
         public static List<(string[], List<(double[], double[,], double[,])>)> GetResultColumn(List<(string[], List<int[]>)> listCol,
             string concGrade, string lRebarGrade, string sRebarGrade,

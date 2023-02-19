@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CrossStruc.ConcreteColumn.Function
 {
-    public class SubExtensions
+    public static class SubExtensions
     {
         public static double RebarPercent(string shape, double Cx, double Cy, int sumn, int dmain) // Cacl rebar percent of section
         {

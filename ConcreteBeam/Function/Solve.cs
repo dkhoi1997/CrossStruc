@@ -1,14 +1,10 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Windows;
-using System.Windows.Documents;
 using ExtMaterial = CrossStruc.Extensions.Material;
 
 namespace CrossStruc.ConcreteBeam.Function
 {
-    public class Solve
+    public static class Solve
     {
         public static List<(string[], List<double[]>)> GetResultBeam(List<(string[], List<int[]>)> listbeamforce,
             string concgrade, string lRebargrade, string sRebargrade, string hmClass, double b, double h, double tf, double bs,

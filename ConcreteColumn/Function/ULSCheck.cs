@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CrossStruc.ConcreteColumn.Function
 {
-    public class ULSCheck
+    public static class ULSCheck
     {
         public static (int, int, double, double[,], double[,]) InteractionDiagramCheck(int P, int Mxup, int Myup, int nver, int nhoz,
             double[,] vervalue, double[,] hozvalue) // Flexual check use interaction diagram

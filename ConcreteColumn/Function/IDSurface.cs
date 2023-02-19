@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CrossStruc.ConcreteColumn.Function
 {
-    public class IDSurface
+    public static class IDSurface
     {
         public static (double[,], double[,]) RecSect(List<double[]> concreteElement, List<int[]> rebarElement, double Cx, double Cy,
             double Rb, double Eb, double Rs, double Rsc, double Es, int nver, int nhoz) // ID Surface for rectangle section

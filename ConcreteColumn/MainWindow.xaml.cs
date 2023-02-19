@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ExtRobot = CrossStruc.Extensions.RobotInteractive;
 using ExtMaterial = CrossStruc.Extensions.Material;
+using CrossStruc.Extensions;
 
 namespace CrossStruc.ConcreteColumn
 {
@@ -83,12 +84,12 @@ namespace CrossStruc.ConcreteColumn
                 ny_lbl.Content = null;
             }
 
-            int tw = Convert.ToInt32(tw_txt.Text);
-            double Cx = Convert.ToInt32(Cx_txt.Text);
-            double Cy = Convert.ToInt32(Cy_txt.Text);
-            int nx = Convert.ToInt32(nx_txt.Text);
-            int ny = Convert.ToInt32(ny_txt.Text);
-            double acv = Convert.ToInt32(acv_txt.Text);
+            int tw = Convert.ToInt32(tw_txt.Text.ZeroIfEmpty());
+            double Cx = Convert.ToInt32(Cx_txt.Text.ZeroIfEmpty());
+            double Cy = Convert.ToInt32(Cy_txt.Text.ZeroIfEmpty());
+            int nx = Convert.ToInt32(nx_txt.Text.ZeroIfEmpty());
+            int ny = Convert.ToInt32(ny_txt.Text.ZeroIfEmpty());
+            double acv = Convert.ToInt32(acv_txt.Text.ZeroIfEmpty());
             int dmain = Convert.ToInt32((dmain_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
             int dstir = Convert.ToInt32((dstir_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
 
@@ -126,22 +127,22 @@ namespace CrossStruc.ConcreteColumn
             {
                 localAxis = true;
             }
-            double Cx = Convert.ToDouble(Cx_txt.Text);
-            double Cy = Convert.ToDouble(Cy_txt.Text);
-            double Lx = Convert.ToDouble(Lx_txt.Text);
-            double Ly = Convert.ToDouble(Ly_txt.Text);
-            double kx = Convert.ToDouble(kx_txt.Text);
-            double ky = Convert.ToDouble(ky_txt.Text);
-            double acv = Convert.ToDouble(acv_txt.Text);
+            double Cx = Convert.ToDouble(Cx_txt.Text.ZeroIfEmpty());
+            double Cy = Convert.ToDouble(Cy_txt.Text.ZeroIfEmpty());
+            double Lx = Convert.ToDouble(Lx_txt.Text.ZeroIfEmpty());
+            double Ly = Convert.ToDouble(Ly_txt.Text.ZeroIfEmpty());
+            double kx = Convert.ToDouble(kx_txt.Text.ZeroIfEmpty());
+            double ky = Convert.ToDouble(ky_txt.Text.ZeroIfEmpty());
+            double acv = Convert.ToDouble(acv_txt.Text.ZeroIfEmpty());
 
-            int nx = Convert.ToInt32(nx_txt.Text);
-            int ny = Convert.ToInt32(ny_txt.Text);
+            int nx = Convert.ToInt32(nx_txt.Text.ZeroIfEmpty());
+            int ny = Convert.ToInt32(ny_txt.Text.ZeroIfEmpty());
             int dmain = Convert.ToInt32((dmain_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
             int dstir = Convert.ToInt32((dstir_cbb.SelectedItem as ComboBoxItem).Content.ToString().TrimStart('Ø'));
-            int tw = Convert.ToInt32(tw_txt.Text);
-            int sw = Convert.ToInt32(sw_txt.Text);
-            int nsx = Convert.ToInt32(nsx_txt.Text);
-            int nsy = Convert.ToInt32(nsy_txt.Text);
+            int tw = Convert.ToInt32(tw_txt.Text.ZeroIfEmpty());
+            int sw = Convert.ToInt32(sw_txt.Text.ZeroIfEmpty());
+            int nsx = Convert.ToInt32(nsx_txt.Text.ZeroIfEmpty());
+            int nsy = Convert.ToInt32(nsy_txt.Text.ZeroIfEmpty());
             string vedlimit = limitACR_txt.Text;
             string combACR = combACR_txt.Text.Replace(" q", "");
 
@@ -259,31 +260,31 @@ namespace CrossStruc.ConcreteColumn
             if (listCol.Count > 0)
             {
                 concGrade_cbb.Text = arrCol[0];
-                longituGrade_cbb.Text = arrCol[5];
-                stirrupGrade_cbb.Text = arrCol[8];
+                longituGrade_cbb.Text = arrCol[1];
+                stirrupGrade_cbb.Text = arrCol[2];
 
-                shapeSect_cbb.Text = arrCol[10];
-                mLayer_cbb.Text = arrCol[11];
-                Cx_txt.Text = arrCol[12];
-                Cy_txt.Text = arrCol[13];
-                Lx_txt.Text = arrCol[14];
-                Ly_txt.Text = arrCol[15];
-                kx_txt.Text = arrCol[16];
-                ky_txt.Text = arrCol[17];
-                acv_txt.Text = arrCol[18];
+                shapeSect_cbb.Text = arrCol[3];
+                mLayer_cbb.Text = arrCol[4];
+                Cx_txt.Text = arrCol[5];
+                Cy_txt.Text = arrCol[6];
+                Lx_txt.Text = arrCol[7];
+                Ly_txt.Text = arrCol[8];
+                kx_txt.Text = arrCol[9];
+                ky_txt.Text = arrCol[10];
+                acv_txt.Text = arrCol[11];
 
-                nx_txt.Text = arrCol[19];
-                ny_txt.Text = arrCol[20];
-                dmain_cbb.Text = "Ø" + arrCol[21];
-                dstir_cbb.Text = "Ø" + arrCol[22];
-                tw_txt.Text = arrCol[23];
-                sw_txt.Text = arrCol[24];
-                nsx_txt.Text = arrCol[25];
-                nsy_txt.Text = arrCol[26];
+                nx_txt.Text = arrCol[12];
+                ny_txt.Text = arrCol[13];
+                dmain_cbb.Text = "Ø" + arrCol[14];
+                dstir_cbb.Text = "Ø" + arrCol[15];
+                tw_txt.Text = arrCol[16];
+                sw_txt.Text = arrCol[17];
+                nsx_txt.Text = arrCol[18];
+                nsy_txt.Text = arrCol[19];
 
-                combACR_txt.Text = arrCol[28];
-                limitACR_txt.Text = arrCol[29];
-                if (arrCol[30] == "TRUE")
+                combACR_txt.Text = arrCol[21];
+                limitACR_txt.Text = arrCol[22];
+                if (arrCol[23] == "True")
                 {
                     rotateAxis_cb.IsChecked = true;
                 }

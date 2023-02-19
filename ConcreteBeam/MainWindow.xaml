@@ -486,9 +486,8 @@
                                 <ColumnDefinition Width="53"/>
                                 <ColumnDefinition Width="13"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="Lc2top_cb" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Grid.Column="0" Width="16"/>
-                            <TextBox x:Name="Ln2top_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="3" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" IsEnabled="False" PreviewTextInput="OnlyNumber"/>
-                            <ComboBox Name = "Ld2top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" IsEnabled="False">
+                            <TextBox x:Name="Ln2top_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                            <ComboBox Name = "Ld2top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22">
                                 <ComboBoxItem Content="Ø12"/>
                                 <ComboBoxItem Content="Ø14"/>
                                 <ComboBoxItem Content="Ø16"/>
@@ -525,9 +524,8 @@
                                 <ColumnDefinition Width="53"/>
                                 <ColumnDefinition Width="23"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="Lc3top_cb" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Grid.Column="0" Width="16"/>
-                            <TextBox x:Name="Ln3top_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="3" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" IsEnabled="False" PreviewTextInput="OnlyNumber"/>
-                            <ComboBox Name = "Ld3top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" IsEnabled="False">
+                            <TextBox x:Name="Ln3top_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                            <ComboBox Name = "Ld3top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22">
                                 <ComboBoxItem Content="Ø12"/>
                                 <ComboBoxItem Content="Ø14"/>
                                 <ComboBoxItem Content="Ø16"/>
@@ -564,9 +562,8 @@
                                 <ColumnDefinition Width="53"/>
                                 <ColumnDefinition Width="23"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="Lc3bot_cb" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Grid.Column="0" Width="16"/>
-                            <TextBox x:Name="Ln3bot_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="3" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" IsEnabled="False" PreviewTextInput="OnlyNumber"/>
-                            <ComboBox Name = "Ld3bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" IsEnabled="False">
+                            <TextBox x:Name="Ln3bot_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                            <ComboBox Name = "Ld3bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22">
                                 <ComboBoxItem Content="Ø12"/>
                                 <ComboBoxItem Content="Ø14"/>
                                 <ComboBoxItem Content="Ø16"/>
@@ -603,9 +600,8 @@
                                 <ColumnDefinition Width="53"/>
                                 <ColumnDefinition Width="23"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="Lc2bot_cb" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Grid.Column="0" Width="16"/>
-                            <TextBox x:Name="Ln2bot_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="3" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" IsEnabled="False" PreviewTextInput="OnlyNumber"/>
-                            <ComboBox Name = "Ld2bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" IsEnabled="False">
+                            <TextBox x:Name="Ln2bot_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                            <ComboBox Name = "Ld2bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22">
                                 <ComboBoxItem Content="Ø12"/>
                                 <ComboBoxItem Content="Ø14"/>
                                 <ComboBoxItem Content="Ø16"/>
@@ -663,9 +659,8 @@
                                 <ColumnDefinition Width="53"/>
                                 <ColumnDefinition Width="13"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="Mc2top_cb" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Grid.Column="0" Width="16"/>
-                            <TextBox x:Name="Mn2top_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="3" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" IsEnabled="False" PreviewTextInput="OnlyNumber"/>
-                            <ComboBox Name = "Md2top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" IsEnabled="False">
+                            <TextBox x:Name="Mn2top_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                            <ComboBox Name = "Md2top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22">
                                 <ComboBoxItem Content="Ø12"/>
                                 <ComboBoxItem Content="Ø14"/>
                                 <ComboBoxItem Content="Ø16"/>
@@ -702,9 +697,8 @@
                                 <ColumnDefinition Width="53"/>
                                 <ColumnDefinition Width="23"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="Mc3top_cb" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Grid.Column="0" Width="16"/>
-                            <TextBox x:Name="Mn3top_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="3" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" IsEnabled="False" PreviewTextInput="OnlyNumber"/>
-                            <ComboBox Name = "Md3top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" IsEnabled="False">
+                            <TextBox x:Name="Mn3top_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                            <ComboBox Name = "Md3top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22">
                                 <ComboBoxItem Content="Ø12"/>
                                 <ComboBoxItem Content="Ø14"/>
                                 <ComboBoxItem Content="Ø16"/>
@@ -741,9 +735,8 @@
                                 <ColumnDefinition Width="53"/>
                                 <ColumnDefinition Width="23"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="Mc3bot_cb" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Grid.Column="0" Width="16"/>
-                            <TextBox x:Name="Mn3bot_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="3" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" IsEnabled="False" PreviewTextInput="OnlyNumber"/>
-                            <ComboBox Name = "Md3bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" IsEnabled="False">
+                            <TextBox x:Name="Mn3bot_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                            <ComboBox Name = "Md3bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22">
                                 <ComboBoxItem Content="Ø12"/>
                                 <ComboBoxItem Content="Ø14"/>
                                 <ComboBoxItem Content="Ø16"/>
@@ -780,9 +773,8 @@
                                 <ColumnDefinition Width="53"/>
                                 <ColumnDefinition Width="23"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="Mc2bot_cb" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Grid.Column="0" Width="16"/>
-                            <TextBox x:Name="Mn2bot_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="3" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" IsEnabled="False" PreviewTextInput="OnlyNumber"/>
-                            <ComboBox Name = "Md2bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" IsEnabled="False">
+                            <TextBox x:Name="Mn2bot_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                            <ComboBox Name = "Md2bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22">
                                 <ComboBoxItem Content="Ø12"/>
                                 <ComboBoxItem Content="Ø14"/>
                                 <ComboBoxItem Content="Ø16"/>
