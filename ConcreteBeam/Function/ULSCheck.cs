@@ -123,18 +123,13 @@ namespace CrossStruc.ConcreteBeam.Function
             att = 0.15 * h;
             if (0.3 * Rb * b * (h - att) / 1000 < Q)
             {
-                goto endstep;
-            }
-            goto nextstep;
-        endstep:
-            {
                 c = 0;
                 Qb = 0;
                 Qs = 0;
                 DC = ushort.MaxValue;
                 return (c, Qb, Qs, DC);
             }
-        nextstep:
+            else
             {
                 Qsw = Rsw * ns * Math.PI * Math.Pow(dstir, 2) / 4 / sw;
                 c = Math.Sqrt(1.5 * Rbt * b * Math.Pow(h - att, 2) / (0.75 * Qsw));
@@ -180,17 +175,12 @@ namespace CrossStruc.ConcreteBeam.Function
 
             if (0.1 * Rb * Math.Pow(b, 2) * h / 1000000 < T)
             {
-                goto endstep;
-            }
-            goto nextstep;
-        endstep:
-            {
                 torCap = 0;
                 Tn = 0;
                 DC = ushort.MaxValue;
                 return (torCap, Tn, DC);
             }
-        nextstep:
+            else
             {
                 Qsw = Rsw * ns * Math.PI * Math.Pow(dstir, 2) / 4 / sw;
                 deltaZ = h / (2 * b + h);

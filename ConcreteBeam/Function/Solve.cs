@@ -134,8 +134,8 @@ namespace CrossStruc.ConcreteBeam.Function
                 (naDepth[1, 1], totalP[1, 1], totalM[1, 1]) = ULSCheck.BeamCapacity(b, h, tolerance, listConc[3], listMrebarTop, listMrebarBot, false, compressbar, Rb, Eb, Rs, Rsc, Es);
             }
 
-            sideAs[0] = SubExtensions.SideAsForTorsional(d1top, Ld2top, Ld3top, d1bot, Ld2bot, Ld3bot);
-            sideAs[1] = SubExtensions.SideAsForTorsional(d1top, Md2top, Md3top, d1bot, Md2bot, Md3bot);
+            sideAs[0] = SubExtensions.SideAsForTorsional(n1top, d1top, Ln2top, Ld2top, Ln3top, Ld3top, n1bot, d1bot, Ln2bot, Ld2bot, Ln3bot, Ld3bot);
+            sideAs[1] = SubExtensions.SideAsForTorsional(n1top, d1top, Mn2top, Md2top, Mn3top, Md3top, n1bot, d1bot, Mn2bot, Md2bot, Mn3bot, Md3bot);
 
             // SLS Mcrc calc
             Mcrc[0, 0] = SLSCheck.BeamMcrc(b, h, tolerance, listConc[0], listLrebarTop, listLrebarBot, true, compressbar, Rbn, Rbtn, Eb, Rs, Rsc, Es);

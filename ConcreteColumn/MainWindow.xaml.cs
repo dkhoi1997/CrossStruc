@@ -17,9 +17,9 @@ namespace CrossStruc.ConcreteColumn
 
     public partial class MainWindow : Window
     {
-        public static List<(string[], List<int[]>)> listCol;
-        public static List<(string[], List<(double[], double[,], double[,])>)> listResult;
-        public static string[] arrCol = new string[24];
+        public List<(string[], List<int[]>)> listCol;
+        public List<(string[], List<(double[], double[,], double[,])>)> listResult;
+        public string[] arrCol = new string[24];
 
         public MainWindow()
         {

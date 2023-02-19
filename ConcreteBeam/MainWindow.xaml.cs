@@ -22,8 +22,6 @@ namespace CrossStruc.ConcreteBeam
         public int[] arrLrebar = new int[11];
         public int[] arrMrebar = new int[11];
 
-
-
         public MainWindow()
         {
             InitializeComponent();

@@ -172,10 +172,20 @@ namespace CrossStruc.ConcreteBeam.Function
             return equivDia;
         }
 
-        public static double SideAsForTorsional(int d1top, int d2top, int d3top, int d1bot, int d2bot, int d3bot)
+        public static double SideAsForTorsional(int n1top, int d1top, int n2top, int d2top, int n3top, int d3top, 
+            int n1bot, int d1bot, int n2bot, int d2bot, int n3bot, int d3bot)
         {
+            if (n1top > 0) n1top = 1;
+            if (n2top > 0) n2top = 1;
+            if (n3top > 0) n3top = 1;
 
-            double sideAs = Math.PI / 4 * (Math.Pow(d1top, 2) + Math.Pow(d2top, 2) + Math.Pow(d3top, 2) + Math.Pow(d1bot, 2) + Math.Pow(d2bot, 2) + Math.Pow(d3bot, 2));
+            if (n1bot > 0) n1bot = 1;
+            if (n2bot > 0) n2bot = 1;
+            if (n3bot > 0) n3bot = 1;
+
+            double sideAsTop = Math.PI / 4 * (n1top * Math.Pow(d1top, 2) + n2top * Math.Pow(d2top, 2) + n3top * Math.Pow(d3top, 2));
+            double sideAsBot = Math.PI / 4 * (n1bot * Math.Pow(d1bot, 2) + n2bot * Math.Pow(d2bot, 2) + n3bot * Math.Pow(d3bot, 2));
+            double sideAs = sideAsTop + sideAsBot;
 
             return sideAs;
 
