@@ -5,30 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CrossStruc"
         mc:Ignorable="d"
-        Title="CrossStruc - Alpha version" Height="450" Width="800"
+        Title="CrossStruc" Height="144" Width="235"
+        SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize">
     <TabControl Grid.Column="2" Grid.Row="2">
-        <TabItem Header="RC Module Design">
-            <Grid Background="#FFE5E5E5" ShowGridLines="True">
+        <TabItem Header="RC Design">
+            <Grid Background="#FFE5E5E5" ShowGridLines="False">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="115"/>
+                    <ColumnDefinition Width="115"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="RC Column" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Height="87" Width="160" Grid.Row="1" Click="ConcreteColumnClick"/>
-                <Button Content="RC Beam" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Height="87" Width="160" Grid.Row="1" Click="ConcreteBeamClick"/>
+                <Button Content="RC COLUMN" Foreground="Blue" Background="Wheat" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Height="40" Width="100" Grid.Row="0" Click="ConcreteColumnClick" Margin="10,5,5,5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Content="RC BEAM" Foreground="Blue" Background="Wheat" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Height="40" Width="100" Grid.Row="0" Click="ConcreteBeamClick" Margin="5,5,10,5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </Grid>
         </TabItem>
-        <TabItem Header="Steel Module Design">
+        <TabItem Header="Steel Design">
             <Grid Background="#FFE5E5E5"/>
         </TabItem>
         <TabItem Header="Other">
