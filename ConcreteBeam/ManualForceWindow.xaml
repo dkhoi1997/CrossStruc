@@ -1,9 +1,9 @@
-﻿<Window x:Class="CrossStruc.ConcreteColumn.ManualForceWindow"
+﻿<Window x:Class="CrossStruc.ConcreteBeam.ManualForceWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CrossStruc.ConcreteColumn"
+        xmlns:local="clr-namespace:CrossStruc.ConcreteBeam"
         mc:Ignorable="d"
         Title="Manual Input Force" 
         SizeToContent="WidthAndHeight" Width="475" Height="400"
@@ -45,24 +45,38 @@
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="P" Binding="{Binding Path=P}">
+                <DataGridTextColumn x:Name="Mt" Binding="{Binding Path=Mb}">
                     <DataGridTextColumn.Header>
                         <TextBlock>
-                        P (kN)
+                        M<Run BaselineAlignment="Subscript" FontSize="10">t</Run> (kNm)
                         </TextBlock>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn x:Name="Qx" Binding="{Binding Path=Qx}">
+                <DataGridTextColumn x:Name="Mb" Binding="{Binding Path=Mb}">
                     <DataGridTextColumn.Header>
                         <TextBlock>
-                        Q<Run BaselineAlignment="Subscript" FontSize="10">x</Run> (kN)
+                        M<Run BaselineAlignment="Subscript" FontSize="10">b</Run> (kNm)
                         </TextBlock>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn x:Name="Qy" Binding="{Binding Path=Qy}">
+                <DataGridTextColumn x:Name="Mts" Binding="{Binding Path=Mts}">
                     <DataGridTextColumn.Header>
                         <TextBlock>
-                        Q<Run BaselineAlignment="Subscript" FontSize="10">y</Run> (kN)
+                        M<Run BaselineAlignment="Subscript" FontSize="10">ts</Run> (kNm)
+                        </TextBlock>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn x:Name="Mbs" Binding="{Binding Path=Mbs}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock>
+                        M<Run BaselineAlignment="Subscript" FontSize="10">bs</Run> (kNm)
+                        </TextBlock>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn x:Name="Q" Binding="{Binding Path=Q}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock>
+                        Q (kN)
                         </TextBlock>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
@@ -70,20 +84,6 @@
                     <DataGridTextColumn.Header>
                         <TextBlock>
                         T (kNm)
-                        </TextBlock>
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
-                <DataGridTextColumn x:Name="Mx" Binding="{Binding Path=Mx}">
-                    <DataGridTextColumn.Header>
-                        <TextBlock>
-                        M<Run BaselineAlignment="Subscript" FontSize="10">x</Run> (kNm)
-                        </TextBlock>
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
-                <DataGridTextColumn x:Name="My" Binding="{Binding Path=My}">
-                    <DataGridTextColumn.Header>
-                        <TextBlock>
-                        M<Run BaselineAlignment="Subscript" FontSize="10">y</Run> (kNm)
                         </TextBlock>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
