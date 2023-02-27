@@ -451,7 +451,7 @@ namespace CrossStruc.ConcreteBeam
             sheartorsionSup_tb.Inlines.Add(" = " + Q[0] + " (kN), ");
             sheartorsionSup_tb.Inlines.Add("T");
             sheartorsionSup_tb.Inlines.Add(" = " + T[0] + " (kNm)");
-            if (Q[0] != 0 && T[0] != 0)
+            if (Q[0] != 0 || T[0] != 0)
             {
                 sheartorsionSup_tb.Inlines.Add(new LineBreak());
                 sheartorsionSup_tb.Inlines.Add("c");
@@ -499,7 +499,7 @@ namespace CrossStruc.ConcreteBeam
             sheartorsionMid_tb.Inlines.Add(" = " + Q[1] + " (kN), ");
             sheartorsionMid_tb.Inlines.Add("T");
             sheartorsionMid_tb.Inlines.Add(" = " + T[1] + " (kNm)");
-            if (Q[1] != 0 && T[1] != 0)
+            if (Q[1] != 0 || T[1] != 0)
             {
                 sheartorsionMid_tb.Inlines.Add(new LineBreak());
                 sheartorsionMid_tb.Inlines.Add("c");
