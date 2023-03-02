@@ -347,7 +347,9 @@ namespace CrossStruc.ConcreteBeam
             string SLScomb = combSLS_txt.Text;
             if (string.IsNullOrEmpty(ULScomb) || string.IsNullOrEmpty(SLScomb))
             {
-
+                ManualForceWindow mywindow = new();
+                mywindow.ShowDialog();
+                listBeam = mywindow.SendBack();
             }
             else
             {

@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:CrossStruc.ConcreteColumn"
         mc:Ignorable="d"
         Title="Manual Input Force" 
-        SizeToContent="WidthAndHeight" Width="475" Height="400"
+        SizeToContent="WidthAndHeight" Width="525" Height="400"
         ResizeMode="CanMinimize">
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="475"/>
+            <ColumnDefinition Width="525"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="384"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="dataGridForce" SelectionUnit="Cell" Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" CanUserAddRows="True" CanUserResizeRows="False" ColumnWidth="*" AutoGenerateColumns="False" RowHeight="25" GridLinesVisibility="None">
+        <DataGrid x:Name="dataGridForce" SelectionUnit="Cell" Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" CanUserSortColumns="False" CanUserAddRows="True" CanUserResizeRows="False" ColumnWidth="*" AutoGenerateColumns="False" RowHeight="25" GridLinesVisibility="None">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Clear Data" Click="Clear_Click"/>

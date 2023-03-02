@@ -60,6 +60,7 @@ namespace CrossStruc.ConcreteColumn
                     dataInputForceColumn.Add(temp);
                 }
             }
+            dataGridForce.ItemsSource = dataInputForceColumn;
         }
 
         public List<(string[], List<int[]>)> SendBack()
