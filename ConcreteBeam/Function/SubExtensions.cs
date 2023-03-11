@@ -13,11 +13,18 @@ namespace CrossStruc.ConcreteBeam.Function
         {
             List<(string[], List<int[]>)> listFilter = new List<(string[], List<int[]>)>();
 
+            // Number of point along bar is divied in RobotInteractive.cs, default is 24
+            // Below is set position for filter
+            // Rule for filter is L/4 - 2/4 - L/4
+
+            byte maxPos = 23;
+            byte L1 = 6; byte L2 = 17;
+
             foreach ((string[], List<int[]>) item in listBeamForce)
             {
                 // Initial parameter
                 int[,] force = new int[2, 6]; // In order to Mtop, Mbot, Q, T
-                int pos = 0;
+                byte currentPos = 0;
 
                 for (int i = 0; i < item.Item2.Count; i++)
                 {
@@ -31,19 +38,19 @@ namespace CrossStruc.ConcreteBeam.Function
                     {
                         if (comb == ULScomb[j])
                         {
-                            if (pos < 8 || pos > 15) // Support position
+                            if (currentPos < L1 || currentPos > L2) // Support position
                             {
-                                if (force[0, 0] > Mcurrent) force[0, 0] = Mcurrent;
-                                if (force[0, 1] < Mcurrent) force[0, 1] = Mcurrent;
-                                if (Math.Abs(force[0, 4]) < Math.Abs(Qcurrent)) force[0, 4] = Qcurrent;
-                                if (Math.Abs(force[0, 5]) < Math.Abs(Tcurrent)) force[0, 5] = Tcurrent;
+                                if (force[0, 0] > Mcurrent) force[0, 0] = Mcurrent; // Mtop
+                                if (force[0, 1] < Mcurrent) force[0, 1] = Mcurrent; // Mbot
+                                if (Math.Abs(force[0, 4]) < Math.Abs(Qcurrent)) force[0, 4] = Qcurrent; // Q
+                                if (Math.Abs(force[0, 5]) < Math.Abs(Tcurrent)) force[0, 5] = Tcurrent; // T
                             }
                             else // Mid position
                             {
-                                if (force[1, 0] > Mcurrent) force[1, 0] = Mcurrent;
-                                if (force[1, 1] < Mcurrent) force[1, 1] = Mcurrent;
-                                if (Math.Abs(force[1, 4]) < Math.Abs(Qcurrent)) force[1, 4] = Qcurrent;
-                                if (Math.Abs(force[1, 5]) < Math.Abs(Tcurrent)) force[1, 5] = Tcurrent;
+                                if (force[1, 0] > Mcurrent) force[1, 0] = Mcurrent; // Mtop
+                                if (force[1, 1] < Mcurrent) force[1, 1] = Mcurrent; // Mbot
+                                if (Math.Abs(force[1, 4]) < Math.Abs(Qcurrent)) force[1, 4] = Qcurrent; // Q
+                                if (Math.Abs(force[1, 5]) < Math.Abs(Tcurrent)) force[1, 5] = Tcurrent; // T
                             }
                         }
                     }
@@ -53,21 +60,21 @@ namespace CrossStruc.ConcreteBeam.Function
                     {
                         if (comb == SLScomb[j])
                         {
-                            if (pos < 8 || pos > 15)
+                            if (currentPos < L1 || currentPos > L2)
                             {
-                                if (force[0, 2] > Mcurrent) force[0, 2] = Mcurrent;
-                                if (force[0, 3] < Mcurrent) force[0, 3] = Mcurrent;
+                                if (force[0, 2] > Mcurrent) force[0, 2] = Mcurrent; // Mtop
+                                if (force[0, 3] < Mcurrent) force[0, 3] = Mcurrent; // Mbot
                             }
                             else
                             {
-                                if (force[1, 2] > Mcurrent) force[1, 2] = Mcurrent;
-                                if (force[1, 3] < Mcurrent) force[1, 3] = Mcurrent;
+                                if (force[1, 2] > Mcurrent) force[1, 2] = Mcurrent; // Mtop
+                                if (force[1, 3] < Mcurrent) force[1, 3] = Mcurrent; // Mbot
                             }
                         }
                     }
 
-                    if (pos < 23) pos++;
-                    else pos = 0;
+                    if (currentPos < maxPos) currentPos++;
+                    else currentPos = 0;
                 }
 
                 // Refill data into list
