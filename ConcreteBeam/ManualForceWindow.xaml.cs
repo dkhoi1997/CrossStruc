@@ -87,7 +87,6 @@ namespace CrossStruc.ConcreteBeam
 
             foreach (InputForceBeam item in dataInputForceBeam)
             {
-                MessageBox.Show(Convert.ToString(item.Mt));
                 int[] force = new int[6] { item.Mt, item.Mb, item.Mts, item.Mbs, item.Q, item.T };
                 listForce.Add(force);
             }
