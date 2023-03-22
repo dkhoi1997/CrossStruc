@@ -1,7 +1,9 @@
 ﻿using RobotOM;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CrossStruc.Extensions
 {
@@ -64,6 +66,62 @@ namespace CrossStruc.Extensions
             }
 
             return (hashBar, listQuery);
+        }
+
+        public static (HashSet<int>, List<int[]>) ExtractPanelResult(string comb)  // Get internal force panel element in Robot
+        {
+            List<int[]> listQuery = new List<int[]>();
+            IRobotApplication myRobot = new RobotApplication();
+            IRobotStructure myStructure = myRobot.Project.Structure;
+
+            // Get selected panel
+            RobotSelection selectObject = myStructure.Selections.Get(IRobotObjectType.I_OT_PANEL);
+            RobotSelection SelCas = myStructure.Selections.Create(IRobotObjectType.I_OT_CASE);
+            SelCas.AddText(comb);
+
+            // Use query method
+            RobotResultRowSet RobResRowSet = new RobotResultRowSet();
+
+            RobotResultQueryParams RobResQueryParams = myRobot.CmpntFactory.Create(IRobotComponentType.I_CT_RESULT_QUERY_PARAMS);
+            RobResQueryParams.SetParam(IRobotResultParamType.I_RPT_MULTI_THREADS, true);
+            RobResQueryParams.SetParam(IRobotResultParamType.I_RPT_THREAD_COUNT, 4);
+            RobResQueryParams.SetParam(IRobotResultParamType.I_RPT_SMOOTHING, IRobotFeResultSmoothing.I_FRS_SMOOTHING_WITHIN_A_PANEL);
+            RobResQueryParams.SetParam(IRobotResultParamType.I_RPT_LAYER, IRobotFeLayerType.I_FLT_MIDDLE);
+            RobResQueryParams.SetParam(IRobotResultParamType.I_RPT_RESULT_POINT_COORDINATES, 1);
+            RobResQueryParams.Selection.Set(IRobotObjectType.I_OT_PANEL, selectObject);
+            RobResQueryParams.Selection.Set(IRobotObjectType.I_OT_CASE, SelCas);
+
+            RobResQueryParams.ResultIds.SetSize(4);
+            RobResQueryParams.ResultIds.Set(1, (int)IRobotFeResultType.I_FRT_DETAILED_MXX);
+            RobResQueryParams.ResultIds.Set(2, (int)IRobotFeResultType.I_FRT_DETAILED_MYY);
+            RobResQueryParams.ResultIds.Set(3, (int)IRobotFeResultType.I_FRT_DETAILED_MXY);
+            RobResQueryParams.ResultIds.Set(4, (int)IRobotFeResultType.I_FRT_DETAILED_WNORM);
+
+            IRobotResultQueryReturnType Res = myStructure.Results.Query(RobResQueryParams, RobResRowSet);
+
+            HashSet<int> hashPanel = new HashSet<int>();
+
+            bool ok = RobResRowSet.MoveFirst();
+            while (ok)
+            {
+                int[] temp = new int[6];
+                temp[0] = RobResRowSet.CurrentRow.GetParam(IRobotResultParamType.I_RPT_PANEL);
+                temp[1] = RobResRowSet.CurrentRow.GetParam(IRobotResultParamType.I_RPT_LOAD_CASE);
+                temp[2] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(1)) / 1000);
+                temp[3] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(2)) / 1000);
+                temp[4] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(3)) / 1000);
+                temp[5] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(4)) * 1000);
+
+                if (hashPanel.Contains(temp[0]) == false)
+                {
+                    hashPanel.Add(temp[0]);
+                }
+                listQuery.Add(temp);
+
+                ok = RobResRowSet.MoveNext();
+            }
+
+            return (hashPanel, listQuery);
         }
 
         public static List<(string[], List<int[]>)> GetConcColumnForceRobot(string comb) // Get RC column force from Robot

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using ConcColumn = CrossStruc.ConcreteColumn;
 using ConcBeam = CrossStruc.ConcreteBeam;
+using ConcSlab = CrossStruc.ConcreteSlab;
 
 namespace CrossStruc
 {
@@ -19,6 +20,12 @@ namespace CrossStruc
         private void ConcreteBeamClick(object sender, RoutedEventArgs e)
         {
             ConcBeam.MainWindow mywindows = new();
+            mywindows.ShowDialog();
+        }
+
+        private void ConcreteSlabClick(object sender, RoutedEventArgs e)
+        {
+            ConcSlab.MainWindow mywindows = new();
             mywindows.ShowDialog();
         }
 

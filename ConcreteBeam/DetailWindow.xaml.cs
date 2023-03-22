@@ -722,11 +722,11 @@ namespace CrossStruc.ConcreteBeam
                     crackMidBot_tb.Inlines.Add(" = ");
                     if (acrcS[1, 1] <= acrcSlim)
                     {
-                        crackMidBot_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(acrcS[0, 1]) });
+                        crackMidBot_tb.Inlines.Add(new Run() { Foreground = Brushes.Green, Text = Convert.ToString(acrcS[1, 1]) });
                     }
                     else
                     {
-                        crackMidBot_tb.Inlines.Add(new Run() { Foreground = Brushes.Red, Text = Convert.ToString(acrcS[0, 1]) });
+                        crackMidBot_tb.Inlines.Add(new Run() { Foreground = Brushes.Red, Text = Convert.ToString(acrcS[1, 1]) });
                     }
                     crackMidBot_tb.Inlines.Add(" (mm)");
                 }

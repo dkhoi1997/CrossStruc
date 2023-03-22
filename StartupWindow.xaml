@@ -40,7 +40,7 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Content="RC SLAB" Foreground="Blue" Background="Wheat" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Height="50" Width="120" Grid.Row="1" Margin="5,5,10,5">
+                <Button Content="RC SLAB" Foreground="Blue" Background="Wheat" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Height="50" Width="120" Grid.Row="1" Click="ConcreteSlabClick" Margin="5,5,10,5">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="15"/>
