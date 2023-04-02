@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Manual Input Force" 
         SizeToContent="WidthAndHeight" Width="525" Height="150"
-        ResizeMode="CanMinimize">
+        ResizeMode="CanMinimize" FontSize="12">
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="525"/>

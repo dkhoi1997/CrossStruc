@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="CrossStruc" Height="184" Width="275"
         SizeToContent="WidthAndHeight"
-        ResizeMode="CanMinimize">
+        ResizeMode="CanMinimize" FontSize="12">
     <TabControl Grid.Column="2" Grid.Row="2" >
         <TabItem Header="RC Design">
             <Grid ShowGridLines="False">

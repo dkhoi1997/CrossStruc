@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
-        Title="RC Column Detail" Height="791" Width="660">
+        Title="RC Column Detail" Height="791" Width="660" FontSize="12">
 
     <Grid ShowGridLines="False">
         <Grid ShowGridLines="False">

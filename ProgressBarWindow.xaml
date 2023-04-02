@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="Getting data" Height="75" Width="230"
         SizeToContent="WidthAndHeight"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" FontSize="12">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="15"/>

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="RC Beam Design" 
         SizeToContent="WidthAndHeight"
-        ResizeMode="CanMinimize" Height="613">
+        ResizeMode="CanMinimize" Height="613" FontSize="12">
     <Window.Resources>
         <local:ConvertResult x:Key="ConvertDC"/>
         <Style TargetType="{x:Type ComboBox}">

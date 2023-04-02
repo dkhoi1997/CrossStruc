@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CrossStruc.ConcreteSlab"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Window1" Height="450" Width="800" FontSize="12">
     <Grid>
         <Button Name="GetForce" Content="GET" Foreground="Blue" Background="Wheat" HorizontalAlignment="Center" VerticalAlignment="Center" Width="65" Height="25" Grid.Column = "0" Grid.Row = "0" FontWeight="Bold" Click="GetForceClick">
             <Button.Resources>
