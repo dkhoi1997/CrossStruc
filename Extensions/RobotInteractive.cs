@@ -1,9 +1,8 @@
-﻿using RobotOM;
+﻿using Microsoft.VisualBasic;
+using RobotOM;
 using System;
 using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Threading;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CrossStruc.Extensions
 {
@@ -87,15 +86,16 @@ namespace CrossStruc.Extensions
             RobResQueryParams.SetParam(IRobotResultParamType.I_RPT_THREAD_COUNT, 4);
             RobResQueryParams.SetParam(IRobotResultParamType.I_RPT_SMOOTHING, IRobotFeResultSmoothing.I_FRS_SMOOTHING_WITHIN_A_PANEL);
             RobResQueryParams.SetParam(IRobotResultParamType.I_RPT_LAYER, IRobotFeLayerType.I_FLT_MIDDLE);
-            RobResQueryParams.SetParam(IRobotResultParamType.I_RPT_RESULT_POINT_COORDINATES, 1);
             RobResQueryParams.Selection.Set(IRobotObjectType.I_OT_PANEL, selectObject);
             RobResQueryParams.Selection.Set(IRobotObjectType.I_OT_CASE, SelCas);
 
-            RobResQueryParams.ResultIds.SetSize(4);
+            RobResQueryParams.ResultIds.SetSize(6);
             RobResQueryParams.ResultIds.Set(1, (int)IRobotFeResultType.I_FRT_DETAILED_MXX);
             RobResQueryParams.ResultIds.Set(2, (int)IRobotFeResultType.I_FRT_DETAILED_MYY);
             RobResQueryParams.ResultIds.Set(3, (int)IRobotFeResultType.I_FRT_DETAILED_MXY);
-            RobResQueryParams.ResultIds.Set(4, (int)IRobotFeResultType.I_FRT_DETAILED_WNORM);
+            RobResQueryParams.ResultIds.Set(4, (int)IRobotFeResultType.I_FRT_DETAILED_QXX);
+            RobResQueryParams.ResultIds.Set(5, (int)IRobotFeResultType.I_FRT_DETAILED_QYY);
+            RobResQueryParams.ResultIds.Set(6, (int)IRobotFeResultType.I_FRT_DETAILED_WNORM);
 
             IRobotResultQueryReturnType Res = myStructure.Results.Query(RobResQueryParams, RobResRowSet);
 
@@ -104,13 +104,15 @@ namespace CrossStruc.Extensions
             bool ok = RobResRowSet.MoveFirst();
             while (ok)
             {
-                int[] temp = new int[6];
+                int[] temp = new int[8];
                 temp[0] = RobResRowSet.CurrentRow.GetParam(IRobotResultParamType.I_RPT_PANEL);
                 temp[1] = RobResRowSet.CurrentRow.GetParam(IRobotResultParamType.I_RPT_LOAD_CASE);
                 temp[2] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(1)) / 1000);
                 temp[3] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(2)) / 1000);
                 temp[4] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(3)) / 1000);
-                temp[5] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(4)) * 1000);
+                temp[5] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(4)) / 1000);
+                temp[6] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(5)) / 1000);
+                temp[7] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(6)) * 1000);
 
                 if (hashPanel.Contains(temp[0]) == false)
                 {
@@ -253,5 +255,61 @@ namespace CrossStruc.Extensions
             progressBar.Close();
             return listBeam;
         }
+
+        public static List<(string[], List<int[]>)> GetConcSlabForceRobot(string comb) // Get RC slab force from Robot
+        {
+            List<(string[], List<int[]>)> listPanel = new List<(string[], List<int[]>)>();
+
+            List<string[]> listItem = new List<string[]>();
+            (HashSet<int> hashPanel, List<int[]> listQuery) = ExtractPanelResult(comb);
+
+            // Show progress bar
+            ProgressBarWindow progressBar = new();
+            progressBar.Show();
+
+            // Merge list FE result and list panel info
+            IRobotApplication myRobot = new RobotApplication();
+            IRobotStructure myStructure = myRobot.Project.Structure;
+            IRobotObjObjectServer panelSer = myStructure.Objects;
+
+            foreach (int item in hashPanel)
+            {
+                double curpercent = (double)item / hashPanel.Count * 100; // Update progress bar
+                progressBar.Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => { progressBar.UpdateProgress(curpercent); }));
+                RobotObjObject panelObject = (RobotObjObject)panelSer.Get(item);
+                string panelLabel = panelObject.GetLabelName(IRobotLabelType.I_LT_PANEL_THICKNESS);
+                IRobotLabel secLabel = myStructure.Labels.Get(IRobotLabelType.I_LT_PANEL_THICKNESS, panelLabel);
+                IRobotThicknessData dataLabel = secLabel.Data;
+                RobotThicknessHomoData thkData = dataLabel.Data;
+                double thk = thkData.ThickConst;
+
+                string[] panelDefine = new string[4];
+                panelDefine[0] = Convert.ToString(item); // Panel name
+                panelDefine[1] = panelLabel; //  Panel section
+                panelDefine[2] = "Homogeneous"; // Panel type
+                panelDefine[3] = Convert.ToString(thk); // Thickness
+                List<int[]> listForce = new List<int[]>();
+                foreach (int[] force in listQuery)
+                {
+                    if (force[0] == item)
+                    {
+                        int[] temp = new int[7];
+                        temp[0] = force[1];
+                        temp[1] = force[2];
+                        temp[2] = force[3];
+                        temp[3] = force[4];
+                        temp[4] = force[5];
+                        temp[5] = force[6];
+                        temp[6] = force[7];
+                        listForce.Add(temp);
+                    }
+                }
+                listPanel.Add((panelDefine, listForce));
+            }
+            progressBar.Close();
+            return listPanel;
+        }
+
+
     }
 }

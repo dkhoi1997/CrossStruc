@@ -17,9 +17,6 @@ using ExtRobot = CrossStruc.Extensions.RobotInteractive;
 
 namespace CrossStruc.ConcreteSlab
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -29,10 +26,9 @@ namespace CrossStruc.ConcreteSlab
 
         private void GetForceClick(object sender, RoutedEventArgs e)
         {
-            HashSet<int> hashPanel = new HashSet<int>();
-            List<int[]> listQuery = new List<int[]>();
+            List<(string[], List<int[]>)> listPanel = new List<(string[], List<int[]>)> ();
 
-            (hashPanel, listQuery) = ExtRobot.ExtractPanelResult("100to108");
+            listPanel = ExtRobot.GetConcSlabForceRobot("100to108");
 
             SaveFileDialog saveFileDialog = new SaveFileDialog()
             {
@@ -47,12 +43,16 @@ namespace CrossStruc.ConcreteSlab
                 using (StreamWriter sw = File.CreateText(saveFileDialog.FileName))
                 {
                     sw.WriteLine(title2);
-                    sw.WriteLine(string.Join(",", hashPanel));
+                    sw.WriteLine(string.Join(",", "Haha"));
                     sw.WriteLine(space);
                     sw.WriteLine(title1);
-                    foreach (var item in listQuery)
+                    foreach (var item in listPanel)
                     {
-                        sw.WriteLine(string.Join(",", item));
+                        sw.WriteLine(string.Join(",", item.Item1));
+                        for (int i = 0; i < item.Item2.Count; i++)
+                        {
+                            sw.WriteLine(string.Join(",", item.Item2[i]));
+                        }
                     }
                 }
             }
