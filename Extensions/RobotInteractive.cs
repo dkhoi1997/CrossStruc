@@ -90,16 +90,19 @@ namespace CrossStruc.Extensions
             RobResQueryParams.Selection.Set(IRobotObjectType.I_OT_PANEL, selectObject);
             RobResQueryParams.Selection.Set(IRobotObjectType.I_OT_CASE, SelCas);
 
-            RobResQueryParams.ResultIds.SetSize(9);
-            RobResQueryParams.ResultIds.Set(1, (int)IRobotFeResultType.I_FRT_DETAILED_NXX);
-            RobResQueryParams.ResultIds.Set(2, (int)IRobotFeResultType.I_FRT_DETAILED_NYY);
-            RobResQueryParams.ResultIds.Set(3, (int)IRobotFeResultType.I_FRT_DETAILED_NXY);
-            RobResQueryParams.ResultIds.Set(4, (int)IRobotFeResultType.I_FRT_DETAILED_QXX);
-            RobResQueryParams.ResultIds.Set(5, (int)IRobotFeResultType.I_FRT_DETAILED_QYY);
-            RobResQueryParams.ResultIds.Set(6, (int)IRobotFeResultType.I_FRT_DETAILED_MXX);
-            RobResQueryParams.ResultIds.Set(7, (int)IRobotFeResultType.I_FRT_DETAILED_MYY);
-            RobResQueryParams.ResultIds.Set(8, (int)IRobotFeResultType.I_FRT_DETAILED_MXY);
-            RobResQueryParams.ResultIds.Set(9, (int)IRobotFeResultType.I_FRT_DETAILED_WNORM);
+            RobResQueryParams.ResultIds.SetSize(12);
+            RobResQueryParams.ResultIds.Set(1, (int)IRobotFeResultType.I_FRT_DETAILED_QXX);
+            RobResQueryParams.ResultIds.Set(2, (int)IRobotFeResultType.I_FRT_DETAILED_QYY);
+            RobResQueryParams.ResultIds.Set(3, (int)IRobotFeResultType.I_FRT_DETAILED_MXX);
+            RobResQueryParams.ResultIds.Set(4, (int)IRobotFeResultType.I_FRT_DETAILED_MYY);
+            RobResQueryParams.ResultIds.Set(5, (int)IRobotFeResultType.I_FRT_DETAILED_MXY);
+            RobResQueryParams.ResultIds.Set(6, (int)IRobotFeResultType.I_FRT_DETAILED_WNORM);
+            RobResQueryParams.ResultIds.Set(7, (int)IRobotFeResultType.I_FRT_REDUCED_NX);
+            RobResQueryParams.ResultIds.Set(8, (int)IRobotFeResultType.I_FRT_REDUCED_TY);
+            RobResQueryParams.ResultIds.Set(9, (int)IRobotFeResultType.I_FRT_REDUCED_TZ);
+            RobResQueryParams.ResultIds.Set(10, (int)IRobotFeResultType.I_FRT_REDUCED_T);
+            RobResQueryParams.ResultIds.Set(11, (int)IRobotFeResultType.I_FRT_REDUCED_MY);
+            RobResQueryParams.ResultIds.Set(12, (int)IRobotFeResultType.I_FRT_REDUCED_MZ);
 
             IRobotResultQueryReturnType Res = myStructure.Results.Query(RobResQueryParams, RobResRowSet);
 
@@ -108,18 +111,21 @@ namespace CrossStruc.Extensions
             bool ok = RobResRowSet.MoveFirst();
             while (ok)
             {
-                int[] temp = new int[11];
+                int[] temp = new int[14];
                 temp[0] = RobResRowSet.CurrentRow.GetParam(IRobotResultParamType.I_RPT_PANEL);
                 temp[1] = RobResRowSet.CurrentRow.GetParam(IRobotResultParamType.I_RPT_LOAD_CASE);
-                temp[2] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(1)) / 1000);
-                temp[3] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(2)) / 1000);
-                temp[4] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(3)) / 1000);
-                temp[5] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(4)) / 1000);
-                temp[6] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(5)) / 1000);
-                temp[7] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(6)) / 1000);
-                temp[8] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(7)) / 1000);
-                temp[9] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(8)) / 1000);
-                temp[10] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(9)) * 1000);
+                temp[2] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(1)) / 1000); // Qxx
+                temp[3] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(2)) / 1000); // Qyy
+                temp[4] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(3)) / 1000); // Mxx
+                temp[5] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(4)) / 1000); // Myy
+                temp[6] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(5)) / 1000); // Mxy
+                temp[7] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(6)) * 1000); // Uz
+                temp[8] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(7)) / 1000); // Fx
+                temp[9] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(8)) / 1000); // Fy
+                temp[10] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(9)) / 1000); // Fz
+                temp[11] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(10)) / 1000); // Mx
+                temp[12] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(11)) / 1000); // My
+                temp[13] = Convert.ToInt32(RobResRowSet.CurrentRow.GetValue(RobResRowSet.ResultIds.Get(12)) / 1000); // Mz
 
                 if (hashPanel.Contains(temp[0]) == false)
                 {
@@ -302,15 +308,12 @@ namespace CrossStruc.Extensions
                     {
                         int[] temp = new int[10];
                         temp[0] = force[1]; // Case
-                        temp[1] = force[2]; // Nxx
-                        temp[2] = force[3]; // Nyy
-                        temp[3] = force[4]; // Nxy
-                        temp[4] = force[5]; // Qxx
-                        temp[5] = force[6]; // Qyy
-                        temp[6] = force[7]; // Mxx
-                        temp[7] = force[8]; // Myy
-                        temp[8] = force[9]; // Mxy
-                        temp[9] = force[10]; // Uz
+                        temp[1] = force[2]; // Qxx
+                        temp[2] = force[3]; // Qyy
+                        temp[3] = force[4]; // Mxx
+                        temp[4] = force[5]; // Myy
+                        temp[5] = force[6]; // Mxy
+                        temp[6] = force[7]; // Uz
 
                         listForce.Add(temp);
                     }
