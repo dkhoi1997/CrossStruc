@@ -3,16 +3,387 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="http://oxyplot.org/wpf" 
         xmlns:local="clr-namespace:CrossStruc.ConcreteSlab"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800" FontSize="12">
-    <Grid>
-        <Button Name="GetForce" Content="GET" Foreground="Blue" Background="Wheat" HorizontalAlignment="Center" VerticalAlignment="Center" Width="65" Height="25" Grid.Column = "0" Grid.Row = "0" FontWeight="Bold" Click="GetForceClick">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+        Title="RC Slab Design" 
+        SizeToContent="WidthAndHeight"
+        ResizeMode="CanMinimize" Height="512" FontSize="12">
+    <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="285"/>
+            <ColumnDefinition Width="355"/>
+            <ColumnDefinition Width="637"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid ShowGridLines="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="285"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="113"/>
+                <RowDefinition Height="108"/>
+                <RowDefinition Height="238"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="MATERIAL" Foreground="Blue" FontWeight="Bold" Margin="10,5,5,5" Grid.Row="0" >
+                <Grid Margin="5,-2.5,5,0" Height="78" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Concrete" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="0" Grid.Column="0" Width="160" Height="26"/>
+                    <Label Content="Longitudinal rebar (&lt; Ø10) " HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="1" Grid.Column="0" Width="160" Height="26"/>
+                    <Label Content="Longitudinal rebar (≥ Ø10) " HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Row="2" Grid.Column="0" Width="160" Height="26"/>
+                    <ComboBox Name="concGrade_cbb" FontWeight="Normal" SelectedIndex="3" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="80" Grid.Column="1" Grid.Row="0" Height="22">
+                        <ComboBoxItem Content="B15"/>
+                        <ComboBoxItem Content="B20"/>
+                        <ComboBoxItem Content="B22.5"/>
+                        <ComboBoxItem Content="B25"/>
+                        <ComboBoxItem Content="B30"/>
+                        <ComboBoxItem Content="B35"/>
+                        <ComboBoxItem Content="B40"/>
+                        <ComboBoxItem Content="B45"/>
+                        <ComboBoxItem Content="B50"/>
+                        <ComboBoxItem Content="B55"/>
+                        <ComboBoxItem Content="B60"/>
+                    </ComboBox>
+                    <ComboBox Name="longituGradePlain_cbb" FontWeight="Normal" SelectedIndex="0" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="80" Grid.Column="1" Grid.Row="1" Height="22">
+                        <ComboBoxItem Content="CB240-T"/>
+                        <ComboBoxItem Content="CB300-T"/>
+                    </ComboBox>
+                    <ComboBox Name="longituGradeDeform_cbb" FontWeight="Normal" SelectedIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="80" Grid.Column="1" Grid.Row="2" Height="22">
+                        <ComboBoxItem Content="CB300-V"/>
+                        <ComboBoxItem Content="CB400-V"/>
+                        <ComboBoxItem Content="CB500-V"/>
+                    </ComboBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="SLAB PROPERTY" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Row="1">
+                <Grid Margin="5,-2.5,5,0" Height="78">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Height" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="0" Width="160" Height="26"/>
+                    <Label Content="Concrete cover top" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="1" Width="160" Height="26"/>
+                    <Label Content="Concrete cover bot" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="2" Width="160" Height="26"/>
+
+                    <Label Content="mm" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="2" Grid.Row="0" Width="38" Height="26"/>
+                    <Label Content="mm" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="2" Grid.Row="1" Width="38" Height="26"/>
+                    <Label Content="mm" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="2" Grid.Row="2" Width="38" Height="26"/>
+
+                    <TextBox x:Name="h_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="150" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                    <TextBox x:Name="acvTop_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="25" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="1" Height="22" PreviewTextInput="OnlyNumber"/>
+                    <TextBox x:Name="acvBot_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="25" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="2" Height="22" PreviewTextInput="OnlyNumber"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="OTHER" Foreground="Blue" FontWeight="Bold" Margin="10,0,5,5" Grid.Row="2">
+                <Grid Margin="5,-2.5,5,0" Height="208">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="ULS combination" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="0" Width="160" Height="26"/>
+                    <Label Content="SLS combination" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="1" Width="160" Height="26"/>
+                    <Label Content="Short-term crack width" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="2" Width="160" Height="26"/>
+                    <Label Content="Long-term crack width" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="3" Width="160" Height="26"/>
+                    <Label Content="Long-term deflection limit" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="4" Width="160" Height="26"/>
+                    <Label Content="Humidity class" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="5" Width="160" Height="26"/>
+                    <CheckBox x:Name="compRebar_cb" Content="Compression rebar" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="6" Width="150"/>
+                    <CheckBox x:Name="enveCheck_cb" Content="Envelop design style" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="7" Width="150"/>
+
+                    <TextBox x:Name="combULS_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22"/>
+                    <TextBox x:Name="combSLS_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="1" Height="22"/>
+                    <TextBox x:Name="ast_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="0.4" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="2" Height="22" PreviewTextInput="OnlyNumber"/>
+                    <TextBox x:Name="alt_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="0.3" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="3" Height="22" PreviewTextInput="OnlyNumber"/>
+                    <TextBox x:Name="Uzlt_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" Text="25" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="4" Height="22" PreviewTextInput="OnlyNumber"/>
+                    <ComboBox Name = "Humidity_cbb" FontWeight="Normal" SelectedIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="5" Height="22">
+                        <ComboBoxItem Content="I"/>
+                        <ComboBoxItem Content="II"/>
+                        <ComboBoxItem Content="III"/>
+                    </ComboBox>
+
+                    <Label Content="mm" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="2" Grid.Row="2" Width="38" Height="26"/>
+                    <Label Content="mm" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="2" Grid.Row="3" Width="38" Height="26"/>
+                    <Label Content="mm" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="2" Grid.Row="4" Width="38" Height="26"/>
+                </Grid>
+            </GroupBox>
+            <Grid Grid.Column="0" Grid.Row="3" Margin="10,0,0,10" ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="67.5"/>
+                    <ColumnDefinition Width="67.5"/>
+                    <ColumnDefinition Width="67.5"/>
+                    <ColumnDefinition Width="67.5"/>
+                </Grid.ColumnDefinitions>
+                <Button Name="GetForce" Content="GET" Foreground="Blue" Background="Wheat" HorizontalAlignment="Center" VerticalAlignment="Center" Width="65" Height="25" Grid.Column = "0" Grid.Row = "0" FontWeight="Bold" Click="GetForceClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="Check" Content="CHECK" Foreground="Blue" Background="Wheat" HorizontalAlignment="Center" VerticalAlignment="Center" Width="65" Height="25" Grid.Column = "1" Grid.Row = "0" FontWeight="Bold" Click="CheckClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="Save" Content="SAVE" Foreground="Blue" Background="Wheat" HorizontalAlignment="Center" VerticalAlignment="Center" Width="65" Height="25" Grid.Column = "2" Grid.Row = "0" FontWeight="Bold" Click="SaveClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="Load" Content="IMPORT" Foreground="Blue" Background="Wheat" HorizontalAlignment="Center" VerticalAlignment="Center" Width="65" Height="25" Grid.Column = "3" Grid.Row = "0" FontWeight="Bold" Click="LoadClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1" ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="247"/>
+                <RowDefinition Height="247"/>
+            </Grid.RowDefinitions>
+
+            <GroupBox Header="X-AXIS LOCAL REBAR ARRANGEMENT" Foreground="Blue" FontWeight="Bold" Margin="5,5,5,5" Grid.Row="0">
+                <Grid Margin="5,-2.5,5,0" Height="212">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="108"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                    </Grid.RowDefinitions>
+                    <Grid ShowGridLines="False" Grid.Column="0" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="85"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="5"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Top layer" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="0" Width="90" Height="26"/>
+                        <TextBox x:Name="Xsw1top_txt" FontWeight="Normal" Text="200" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                        <ComboBox Name = "Xd1top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22">
+                            <ComboBoxItem Content="Ø6"/>
+                            <ComboBoxItem Content="Ø8"/>
+                            <ComboBoxItem Content="Ø10"/>
+                            <ComboBoxItem Content="Ø12"/>
+                            <ComboBoxItem Content="Ø14"/>
+                            <ComboBoxItem Content="Ø16"/>
+                            <ComboBoxItem Content="Ø18"/>
+                            <ComboBoxItem Content="Ø20"/>
+                            <ComboBoxItem Content="Ø22"/>
+                            <ComboBoxItem Content="Ø25"/>
+                            <ComboBoxItem Content="Ø28"/>
+                            <ComboBoxItem Content="Ø32"/>
+                        </ComboBox>
+                        <Label Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="3" Grid.Row="0" Width="20" Height="26"/>
+                        <TextBox x:Name="Xsw2top_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="5" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                        <ComboBox Name = "Xd2top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="4" Grid.Row="0" Height="22">
+                            <ComboBoxItem Content="Ø6"/>
+                            <ComboBoxItem Content="Ø8"/>
+                            <ComboBoxItem Content="Ø10"/>
+                            <ComboBoxItem Content="Ø12"/>
+                            <ComboBoxItem Content="Ø14"/>
+                            <ComboBoxItem Content="Ø16"/>
+                            <ComboBoxItem Content="Ø18"/>
+                            <ComboBoxItem Content="Ø20"/>
+                            <ComboBoxItem Content="Ø22"/>
+                            <ComboBoxItem Content="Ø25"/>
+                            <ComboBoxItem Content="Ø28"/>
+                            <ComboBoxItem Content="Ø32"/>
+                        </ComboBox>
+                    </Grid>
+                    <Label Name="XtopPer_lbl" Content="0.00 %" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="1" Width="154" Height="26"/>
+                    <Label Name="XbtoPer_lbl" Content="0.00 %" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="3" Width="154" Height="26"/>
+
+                    <Grid ShowGridLines="False" Grid.Column="0" Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="85"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="5"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Bot layer" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="0" Width="90" Height="26"/>
+                        <TextBox x:Name="Xsw1bot_txt" FontWeight="Normal" Text="200" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                        <ComboBox Name = "Xd1bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22">
+                            <ComboBoxItem Content="Ø6"/>
+                            <ComboBoxItem Content="Ø8"/>
+                            <ComboBoxItem Content="Ø10"/>
+                            <ComboBoxItem Content="Ø12"/>
+                            <ComboBoxItem Content="Ø14"/>
+                            <ComboBoxItem Content="Ø16"/>
+                            <ComboBoxItem Content="Ø18"/>
+                            <ComboBoxItem Content="Ø20"/>
+                            <ComboBoxItem Content="Ø22"/>
+                            <ComboBoxItem Content="Ø25"/>
+                            <ComboBoxItem Content="Ø28"/>
+                            <ComboBoxItem Content="Ø32"/>
+                        </ComboBox>
+                        <Label Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="3" Grid.Row="0" Width="20" Height="26"/>
+                        <TextBox x:Name="Xsw2bot_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="5" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                        <ComboBox Name = "Xd2bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="4" Grid.Row="0" Height="22">
+                            <ComboBoxItem Content="Ø6"/>
+                            <ComboBoxItem Content="Ø8"/>
+                            <ComboBoxItem Content="Ø10"/>
+                            <ComboBoxItem Content="Ø12"/>
+                            <ComboBoxItem Content="Ø14"/>
+                            <ComboBoxItem Content="Ø16"/>
+                            <ComboBoxItem Content="Ø18"/>
+                            <ComboBoxItem Content="Ø20"/>
+                            <ComboBoxItem Content="Ø22"/>
+                            <ComboBoxItem Content="Ø25"/>
+                            <ComboBoxItem Content="Ø28"/>
+                            <ComboBoxItem Content="Ø32"/>
+                        </ComboBox>
+                    </Grid>
+
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Y-AXIS LOCAL REBAR ARRANGEMENT" Foreground="Blue" FontWeight="Bold" Margin="5,5,5,5" Grid.Row="1">
+                <Grid Margin="5,-2.5,5,0" Height="212">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="108"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                    </Grid.RowDefinitions>
+                    <Grid ShowGridLines="False" Grid.Column="0" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="85"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="5"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Top layer" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="0" Width="90" Height="26"/>
+                        <TextBox x:Name="Ysw1top_txt" FontWeight="Normal" Text="200" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                        <ComboBox Name = "Yd1top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22">
+                            <ComboBoxItem Content="Ø6"/>
+                            <ComboBoxItem Content="Ø8"/>
+                            <ComboBoxItem Content="Ø10"/>
+                            <ComboBoxItem Content="Ø12"/>
+                            <ComboBoxItem Content="Ø14"/>
+                            <ComboBoxItem Content="Ø16"/>
+                            <ComboBoxItem Content="Ø18"/>
+                            <ComboBoxItem Content="Ø20"/>
+                            <ComboBoxItem Content="Ø22"/>
+                            <ComboBoxItem Content="Ø25"/>
+                            <ComboBoxItem Content="Ø28"/>
+                            <ComboBoxItem Content="Ø32"/>
+                        </ComboBox>
+                        <Label Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="3" Grid.Row="0" Width="20" Height="26"/>
+                        <TextBox x:Name="Ysw2top_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="5" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                        <ComboBox Name = "Yd2top_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="4" Grid.Row="0" Height="22">
+                            <ComboBoxItem Content="Ø6"/>
+                            <ComboBoxItem Content="Ø8"/>
+                            <ComboBoxItem Content="Ø10"/>
+                            <ComboBoxItem Content="Ø12"/>
+                            <ComboBoxItem Content="Ø14"/>
+                            <ComboBoxItem Content="Ø16"/>
+                            <ComboBoxItem Content="Ø18"/>
+                            <ComboBoxItem Content="Ø20"/>
+                            <ComboBoxItem Content="Ø22"/>
+                            <ComboBoxItem Content="Ø25"/>
+                            <ComboBoxItem Content="Ø28"/>
+                            <ComboBoxItem Content="Ø32"/>
+                        </ComboBox>
+                    </Grid>
+                    <Label Name="YtopPer_lbl" Content="0.00 %" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="1" Width="154" Height="26"/>
+                    <Label Name="YbtoPer_lbl" Content="0.00 %" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="3" Width="154" Height="26"/>
+
+                    <Grid ShowGridLines="False" Grid.Column="0" Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="85"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="53"/>
+                            <ColumnDefinition Width="5"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Bot layer" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="0" Grid.Row="0" Width="90" Height="26"/>
+                        <TextBox x:Name="Ysw1bot_txt" FontWeight="Normal" Text="200" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="2" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                        <ComboBox Name = "Yd1bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="1" Grid.Row="0" Height="22">
+                            <ComboBoxItem Content="Ø6"/>
+                            <ComboBoxItem Content="Ø8"/>
+                            <ComboBoxItem Content="Ø10"/>
+                            <ComboBoxItem Content="Ø12"/>
+                            <ComboBoxItem Content="Ø14"/>
+                            <ComboBoxItem Content="Ø16"/>
+                            <ComboBoxItem Content="Ø18"/>
+                            <ComboBoxItem Content="Ø20"/>
+                            <ComboBoxItem Content="Ø22"/>
+                            <ComboBoxItem Content="Ø25"/>
+                            <ComboBoxItem Content="Ø28"/>
+                            <ComboBoxItem Content="Ø32"/>
+                        </ComboBox>
+                        <Label Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal" Grid.Column="3" Grid.Row="0" Width="20" Height="26"/>
+                        <TextBox x:Name="Ysw2bot_txt" FontWeight="Normal" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="5" Grid.Row="0" Height="22" PreviewTextInput="OnlyNumber"/>
+                        <ComboBox Name = "Yd2bot_cbb" FontWeight="Normal" SelectedIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="50" Grid.Column="4" Grid.Row="0" Height="22">
+                            <ComboBoxItem Content="Ø6"/>
+                            <ComboBoxItem Content="Ø8"/>
+                            <ComboBoxItem Content="Ø10"/>
+                            <ComboBoxItem Content="Ø12"/>
+                            <ComboBoxItem Content="Ø14"/>
+                            <ComboBoxItem Content="Ø16"/>
+                            <ComboBoxItem Content="Ø18"/>
+                            <ComboBoxItem Content="Ø20"/>
+                            <ComboBoxItem Content="Ø22"/>
+                            <ComboBoxItem Content="Ø25"/>
+                            <ComboBoxItem Content="Ø28"/>
+                            <ComboBoxItem Content="Ø32"/>
+                        </ComboBox>
+                    </Grid>
+
+                </Grid>
+            </GroupBox>
+
+
+        </Grid>
+
+
     </Grid>
 </Window>

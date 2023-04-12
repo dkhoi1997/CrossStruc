@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +27,7 @@ namespace CrossStruc.ConcreteSlab
 
         private void GetForceClick(object sender, RoutedEventArgs e)
         {
-            List<(string[], List<int[]>)> listPanel = new List<(string[], List<int[]>)> ();
+            List<(string[], List<int[]>)> listPanel = new List<(string[], List<int[]>)>();
 
             listPanel = ExtRobot.GetConcSlabForceRobot("100to108");
 
@@ -56,6 +57,32 @@ namespace CrossStruc.ConcreteSlab
                     }
                 }
             }
+        }
+
+        private void OnlyNumber(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
+            if (regex.IsMatch(e.Text) && !(e.Text == "-" && ((TextBox)sender).Text.Contains(e.Text)))
+                e.Handled = false;
+
+            else
+                e.Handled = true;
+        }
+
+
+        private void CheckClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LoadClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
